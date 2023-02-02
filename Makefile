@@ -6,16 +6,22 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/02/02 16:19:09 by mforstho      ########   odam.nl          #
+#    Updated: 2023/02/02 18:40:41 by ageels        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := cub
 OBJ_DIR = ./obj
-CFLAG = -Wall -Werror -Wextra -Wno-incompatible-pointer-types-discards-qualifiers
+CFLAG = #-Wall -Werror -Wextra
 LFLAG = -framework Cocoa -framework OpenGL -framework IOKit -I . -lglfw3
 CC = clang
-SRC = src/main.c
+SRC = src/main.c\
+	src/display/background.c\
+	src/display/blokje.c\
+	src/display/display.c\
+	src/parse/parse.c\
+	src/raycast/raycast.c\
+
 OBJ = $(patsubst src/%.c,obj/%.o,$(SRC))
 #Colors:
 GREEN		=	\e[38;5;118m
@@ -33,6 +39,9 @@ libmlx :
 
 obj_folder :
 	@mkdir -pv $(OBJ_DIR)
+	@mkdir -pv $(OBJ_DIR)/display
+	@mkdir -pv $(OBJ_DIR)/parse
+	@mkdir -pv $(OBJ_DIR)/raycast
 
 $(NAME): obj_folder $(OBJ)
 	@$(CC) $(CFLAG) -o $(NAME) $(OBJ) libmlx42.a $(LFLAG)
