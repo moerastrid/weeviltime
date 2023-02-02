@@ -6,7 +6,14 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:33 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/02 14:10:34 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/02 14:12:27 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+
+int main()
+{
+	printf("it's weeviltime!\n");
+	return (0);
+}
