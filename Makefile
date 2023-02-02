@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/02/02 15:02:54 by ageels        ########   odam.nl          #
+#    Updated: 2023/02/02 15:04:08 by ageels        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ _INFO		=	[$(YELLOW)INFO$(RESET)]
 all : $(NAME) libmlx42.a
 
 libmlx42.a :
-	cmake -B build ./MLX42
+	cmake -B ./MLX42/build ./MLX42
 	ln -s MLX42/build/libmlx42.a
 
 obj_folder :
