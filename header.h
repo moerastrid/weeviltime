@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/02 15:23:57 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/02 15:36:56 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <memory.h>
+
+#define WIDTH 512
+#define HEIGHT 512
 
 typedef struct s_player
 {
