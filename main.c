@@ -6,13 +6,13 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:33 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/02 14:12:27 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/02 14:20:56 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-int main()
+int32_t	main(void)
 {
 	printf("it's weeviltime!\n");
 	return (0);
