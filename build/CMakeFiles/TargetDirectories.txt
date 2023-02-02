@@ -1,0 +1,3 @@
+/Users/ageels/Documents/projectsjsjes/weeviltime/build/CMakeFiles/mlx42.dir
+/Users/ageels/Documents/projectsjsjes/weeviltime/build/CMakeFiles/edit_cache.dir
+/Users/ageels/Documents/projectsjsjes/weeviltime/build/CMakeFiles/rebuild_cache.dir
