@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:33 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/02 15:39:01 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/02 16:30:27 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int32_t	main(void)
 	mlx = mlx_init(WIDTH, HEIGHT, "Weevil Time!", true);
 	if (!mlx)
 		return (EXIT_FAILURE);
-	img = mlx_new_image(mlx, 128, 128);
+	img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	memset(img->pixels, 255, img->width * img->height * sizeof(int));
 	mlx_image_to_window(mlx, img, 0, 0);
 	mlx_loop_hook(mlx, &hook, mlx);
