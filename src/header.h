@@ -6,21 +6,18 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/02 15:36:56 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/02 16:27:12 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_H
 # define HEADER_H
 
-# include "MLX42/include/MLX42/MLX42.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <memory.h>
-
-#define WIDTH 512
-#define HEIGHT 512
 
 typedef struct s_player
 {
