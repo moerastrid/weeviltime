@@ -6,21 +6,10 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:33 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/02 14:54:42 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/02 15:23:54 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
-
-//int32_t	main(void)
-//{
-//	printf("it's weeviltime!\n");
-//	return (0);
-//}
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <memory.h>
 #include "../header.h"
 #define WIDTH 512
 #define HEIGHT 512
