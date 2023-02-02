@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/02/02 15:32:25 by mforstho      ########   odam.nl          #
+#    Updated: 2023/02/02 16:19:09 by mforstho      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,7 @@ OBJ_DIR = ./obj
 CFLAG = -Wall -Werror -Wextra -Wno-incompatible-pointer-types-discards-qualifiers
 LFLAG = -framework Cocoa -framework OpenGL -framework IOKit -I . -lglfw3
 CC = clang
-
-SRC = src/main.c\
-
+SRC = src/main.c
 OBJ = $(patsubst src/%.c,obj/%.o,$(SRC))
 #Colors:
 GREEN		=	\e[38;5;118m
@@ -45,11 +43,13 @@ obj/%.o : src/%.c
 
 clean :
 	@test -e obj && rm -fr obj || printf "$(_INFO) No objects to clean \n"
+	@rm -rf ./MLX42/build
 
 fclean : clean
 	@rm -f $(NAME)
+	@rm -f libmlx42.a
 
 re : fclean all
 
-.PHONY: all bonus libft clean fclean re
+.PHONY: all clean fclean re libmlx
 
