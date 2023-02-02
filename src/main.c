@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:33 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/02 16:21:06 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/02 16:31:43 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int32_t	main(void)
 	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
 		return(EXIT_FAILURE);
 
-	texture = mlx_load_png("src/dungeonTileset.png");
+	texture = mlx_load_png("src/dungeonTexture.png");
 	img = mlx_texture_area_to_image(mlx, texture, (uint32_t[2]){0, 80}, (uint32_t[2]){80, 80});
 	mlx_delete_texture(texture);
 	// img = mlx_new_image(mlx, 128, 128);
