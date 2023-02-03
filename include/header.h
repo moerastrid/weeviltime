@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/03 16:32:01 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/03 16:42:39 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	line(mlx_image_t *img, t_line *l);
 unsigned int	make_color(int r, int g, int b);
 //parse
 int		parse(int argc, char **argv, t_data *data);
-int		init_map_data(t_data *data);
+int		init_map_data(int map, t_data *data);
 //utils
 void	wrap_putpixel(mlx_image_t *img, uint32_t x, uint32_t y, uint32_t color);
 #endif
