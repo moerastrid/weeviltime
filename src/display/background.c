@@ -6,17 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 16:48:59 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/03 15:06:57 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/03 16:09:09 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header.h"
-
-void	wrap_putpixel(mlx_image_t *img, uint32_t x, uint32_t y, unsigned int color)
-{
-	if (x < img->width && y < img->height)
-		mlx_put_pixel(img, x, y, color);
-}
 
 unsigned int	make_color(int r, int g, int b)
 {
