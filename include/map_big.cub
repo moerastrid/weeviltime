@@ -1,10 +1,10 @@
 NO ./include/textures/dungeonTexture.png
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+SO ./include/textures/dungeonTexture.png
+WE ./include/textures/dungeonTexture.png
+EA ./include/textures/dungeonTexture.png
 
 F 220,100,0
-C 225,30,0
+C 225,30,255
 
 1111111111111111111111111
 1000000000110000000000001

@@ -6,11 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2023/02/03 15:02:42 by mforstho      ########   odam.nl         */
-=======
-/*   Updated: 2023/02/03 14:50:24 by ageels        ########   odam.nl         */
->>>>>>> 4d57c2904efe68238a458fb7f77c3038d1d437a9
+/*   Updated: 2023/02/03 16:03:57 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +58,10 @@ typedef struct s_data
 	mlx_image_t		*wall;
 	t_skyfl			sky;
 	t_skyfl			floor;
-<<<<<<< HEAD
 	int				camx;
 	int				camy;
 	char			**wall_textures;
 	char			**f_c_color;
-=======
-	float			camx;
-	float			camy;
-	char		**wall_textures;
-	char		**f_c_color;
->>>>>>> 4d57c2904efe68238a458fb7f77c3038d1d437a9
 //	t_player		player;
 // 	t_wall			wall;
 // 	t_list			*map_lines;
@@ -80,12 +69,13 @@ typedef struct s_data
 }	t_data;
 
 //display
-bool	background(t_data *data);
-bool	display(t_data *data);
-bool	build(t_data *data);
+bool			background(t_data *data);
+bool			display(t_data *data);
+bool			build(t_data *data);
+unsigned int	make_color(int r, int g, int b);
 
 //parse
-int		parse(int argc, char **argv, t_data *data);
-int		init_map_data(t_data *data);
+int				parse(int argc, char **argv, t_data *data);
+int				init_map_data(int map, t_data *data);
 
 #endif

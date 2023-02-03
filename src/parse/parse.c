@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 16:49:05 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/03 15:09:34 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/03 16:29:39 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	set_default_values(t_data *data)
 {
 	data->mlx = NULL;
 	data->wall = NULL;
-	data->sky.color = SKYCOLOR;
-	data->floor.color = FLOORCOLOR;
+	// data->sky.color = SKYCOLOR;
+	// data->floor.color = FLOORCOLOR;
 	data->camx = WIDTH / 2;
 	data->camy = HEIGHT / 2;
 }
@@ -30,75 +30,40 @@ int	parse(int argc, char **argv, t_data *data)
 	return (0);
 }
 
-// void	save_map_tmp(int map, t_data *data)
-// {
-// 	int		map_size;
-// 	char	*temp_line;
-
-// 	map_size = 0;
-// 	if (map < 0)
-// 		return ;
-// 	data->map_lines = NULL;
-// 	temp_line = get_next_line(map);
-// 	while (temp_line != NULL)
-// 	{
-// 		if (ft_lstnew_back(&data->map_lines, temp_line) == NULL)
-// 		{
-// 			ft_lstclear(&data->map_lines, &free);
-// 			free(temp_line);
-// 			return (set_error(MALLOC_ERROR));
-// 		}
-// 		temp_line = get_next_line(map);
-// 		map_size++;
-// 	}
-// 	if (map_size < 1)
-// 		return (set_error(SMALL_MAP_ERROR));
-// 	return (OK);
-// }
-
-int	init_map_data(t_data *data)
+int	init_map_data(int map, t_data *data)		//initialiseert de ceiling en floor kleuren + koppelt png bestanden aan de individuele muur-kanten
 {
 	char	*temp_line;
-	int		map;
+	char	**temp_arr;
 
-	map = open("include/map_big.cub", O_RDONLY);
-	if (map == -1)
-	{
-		printf("Error\n");
-		return (-1);
-	}
 	temp_line = get_next_line(map);
-	printf("%s", temp_line);
-	// data->wall_textures = malloc(sizeof(char *) * 4);
-	// data->f_c_color = malloc(sizeof(char *) * 2);
 	while (temp_line != NULL)
 	{
-		// ft_strlcpy(data->wall_textures[0], "test", 4);
-		printf("Test\n");
 		if (ft_strncmp(temp_line, "NO", 2) == 0)
-		{
-			printf("%s\n", ft_strtrim(temp_line, "NO ."));
-			data->walls.wall_north = mlx_texture_to_image(data->mlx, mlx_load_png(ft_strtrim(temp_line, "NO .")));
-			// ft_strlcpy(data->wall_textures[0], temp_line, ft_strlen(temp_line));
-		}
+			data->walls.wall_north = mlx_texture_to_image(data->mlx,
+					mlx_load_png(ft_strtrim(temp_line, "NO ./\n")));
 		else if (ft_strncmp(temp_line, "SO", 2) == 0)
-			ft_strlcpy(data->wall_textures[1], temp_line, ft_strlen(temp_line));
+			data->walls.wall_south = mlx_texture_to_image(data->mlx,
+					mlx_load_png(ft_strtrim(temp_line, "SO ./\n")));
 		else if (ft_strncmp(temp_line, "WE", 2) == 0)
-			ft_strlcpy(data->wall_textures[2], temp_line, ft_strlen(temp_line));
+			data->walls.wall_west = mlx_texture_to_image(data->mlx,
+					mlx_load_png(ft_strtrim(temp_line, "WE ./\n")));
 		else if (ft_strncmp(temp_line, "EA", 2) == 0)
-			ft_strlcpy(data->wall_textures[3], temp_line, ft_strlen(temp_line));
+			data->walls.wall_east = mlx_texture_to_image(data->mlx,
+					mlx_load_png(ft_strtrim(temp_line, "EA ./\n")));
 		else if (ft_strncmp(temp_line, "C", 1) == 0)
-			ft_strlcpy(data->f_c_color[0], temp_line, ft_strlen(temp_line));
+		{
+			temp_arr = ft_split(ft_strtrim(temp_line, "C "), ',');
+			data->sky.color = make_color(ft_atoi(temp_arr[0]),
+					ft_atoi(temp_arr[1]), ft_atoi(temp_arr[2]));
+		}
 		else if (ft_strncmp(temp_line, "F", 1) == 0)
-			ft_strlcpy(data->f_c_color[1], temp_line, ft_strlen(temp_line));
+		{
+			temp_arr = ft_split(ft_strtrim(temp_line, "F "), ',');
+			data->floor.color = make_color(ft_atoi(temp_arr[0]),
+					ft_atoi(temp_arr[1]), ft_atoi(temp_arr[2]));
+		}
 		temp_line = get_next_line(map);
 	}
-	printf("%s\n", data->wall_textures[0]);
-	printf("%s\n", data->wall_textures[1]);
-	printf("%s\n", data->wall_textures[2]);
-	printf("%s\n", data->wall_textures[3]);
-	printf("%s\n", data->f_c_color[0]);
-	printf("%s\n", data->f_c_color[1]);
 	return (0);
 }
 
