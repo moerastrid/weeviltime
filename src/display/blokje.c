@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 18:41:09 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/03 14:47:42 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/03 15:08:18 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,16 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 {
 	t_data	*data;
 
+	(void)keydata;
 	data = (t_data *)param;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_UP))
 		data->wall->instances[0].y -= 15;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_DOWN))
-		data->wall->instances[0].y += 5;
+		data->wall->instances[0].y += 15;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
-		data->wall->instances[0].x -= 5;
+		data->wall->instances[0].x -= 15;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
-		data->wall->instances[0].x += 5;
+		data->wall->instances[0].x += 15;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(data->mlx);
 }
