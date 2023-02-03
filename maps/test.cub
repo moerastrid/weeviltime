@@ -3,8 +3,8 @@ SO ./include/textures/dungeonTexture.png
 WE ./include/textures/dungeonTexture.png
 EA ./include/textures/dungeonTexture.png
 
-C 220,30,0
-F 120,220,0
+C 203,225,239
+F 94,169,190
 
 111111
 100101
