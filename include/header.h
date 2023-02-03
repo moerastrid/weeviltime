@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/03 16:03:57 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/03 16:32:01 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,19 @@ typedef struct s_wall
 	mlx_image_t		*wall_west;
 }	t_wall;
 
+typedef struct s_line
+{
+	int				ax;
+	int				ay;
+	int				bx;
+	int				by;
+	float			dx;
+	float			dy;
+	float			slope;
+	float			contactpoint;
+	unsigned int	color;
+}		t_line;
+
 typedef struct s_data
 {
 	mlx_t			*mlx;
@@ -58,8 +71,8 @@ typedef struct s_data
 	mlx_image_t		*wall;
 	t_skyfl			sky;
 	t_skyfl			floor;
-	int				camx;
-	int				camy;
+	float			camx;
+	float			camy;
 	char			**wall_textures;
 	char			**f_c_color;
 //	t_player		player;
@@ -69,13 +82,15 @@ typedef struct s_data
 }	t_data;
 
 //display
-bool			background(t_data *data);
-bool			display(t_data *data);
-bool			build(t_data *data);
+bool	background(t_data *data);
+bool	display(t_data *data);
+bool	build(t_data *data);
+void	grid(t_data *data);
+void	line(mlx_image_t *img, t_line *l);
 unsigned int	make_color(int r, int g, int b);
-
 //parse
-int				parse(int argc, char **argv, t_data *data);
-int				init_map_data(int map, t_data *data);
-
+int		parse(int argc, char **argv, t_data *data);
+int		init_map_data(t_data *data);
+//utils
+void	wrap_putpixel(mlx_image_t *img, uint32_t x, uint32_t y, uint32_t color);
 #endif

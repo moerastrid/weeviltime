@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/02/03 15:06:16 by ageels        ########   odam.nl          #
+#    Updated: 2023/02/03 16:11:27 by ageels        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,13 @@ SRC = src/main.c\
 	src/display/background.c\
 	src/display/blokje.c\
 	src/display/display.c\
-	src/parse/parse.c\
-	src/raycast/raycast.c\
+	src/display/grid.c\
+	src/display/line.c\
 	src/get_next_line/get_next_line_utils.c\
 	src/get_next_line/get_next_line.c\
+	src/parse/parse.c\
+	src/raycast/raycast.c\
+	src/utils/wraps.c\
 
 OBJ = $(patsubst src/%.c,obj/%.o,$(SRC))
 #Colors:
@@ -48,6 +51,7 @@ obj_folder :
 	mkdir -pv $(OBJ_DIR)/parse
 	mkdir -pv $(OBJ_DIR)/raycast
 	mkdir -pv $(OBJ_DIR)/get_next_line
+	mkdir -pv $(OBJ_DIR)/utils
 
 $(NAME): obj_folder $(OBJ)
 	$(CC) $(CFLAG) -o $(NAME) $(OBJ) ./libft/libft.a libmlx42.a $(LFLAG)
