@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/03 16:09:38 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/03 16:24:33 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,15 @@ typedef struct s_sky_or_floor
 {
 	mlx_image_t		*img;
 	unsigned int	color;
-}		t_skyfl;
+}	t_skyfl;
 
-//typedef struct s_wall
-//{
-//	mlx_image_t		*wall;
-//}		t_wall;
+typedef struct s_wall
+{
+	mlx_image_t		*wall_north;
+	mlx_image_t		*wall_south;
+	mlx_image_t		*wall_east;
+	mlx_image_t		*wall_west;
+}	t_wall;
 
 typedef struct s_line
 {
@@ -64,14 +67,14 @@ typedef struct s_line
 typedef struct s_data
 {
 	mlx_t			*mlx;
-	//t_wall			walls[4];
+	t_wall			walls;
 	mlx_image_t		*wall;
 	t_skyfl			sky;
 	t_skyfl			floor;
 	float			camx;
 	float			camy;
-	char		**wall_textures;
-	char		**f_c_color;
+	char			**wall_textures;
+	char			**f_c_color;
 //	t_player		player;
 // 	t_wall			wall;
 // 	t_list			*map_lines;
@@ -87,7 +90,7 @@ void	line(mlx_image_t *img, t_line *l);
 
 //parse
 int		parse(int argc, char **argv, t_data *data);
-int		init_map_data(int map, t_data *data);
+int		init_map_data(t_data *data);
 
 //utils
 void	wrap_putpixel(mlx_image_t *img, uint32_t x, uint32_t y, uint32_t color);
