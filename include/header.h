@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/03 14:46:01 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/03 15:02:42 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,27 @@ typedef struct s_sky_or_floor
 {
 	mlx_image_t		*img;
 	unsigned int	color;
-}		t_skyfl;
+}	t_skyfl;
 
-//typedef struct s_wall
-//{
-//	mlx_image_t		*wall;
-//}		t_wall;
+typedef struct s_wall
+{
+	mlx_image_t		*wall_north;
+	mlx_image_t		*wall_south;
+	mlx_image_t		*wall_east;
+	mlx_image_t		*wall_west;
+}	t_wall;
 
 typedef struct s_data
 {
 	mlx_t			*mlx;
-	//t_wall			walls[4];
+	t_wall			walls;
 	mlx_image_t		*wall;
 	t_skyfl			sky;
 	t_skyfl			floor;
 	int				camx;
 	int				camy;
-	char		**wall_textures;
-	char		**f_c_color;
+	char			**wall_textures;
+	char			**f_c_color;
 //	t_player		player;
 // 	t_wall			wall;
 // 	t_list			*map_lines;
@@ -72,6 +75,6 @@ bool	build(t_data *data);
 
 //parse
 int		parse(int argc, char **argv, t_data *data);
-int		init_map_data(int map, t_data *data);
+int		init_map_data(t_data *data);
 
 #endif

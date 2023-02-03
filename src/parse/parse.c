@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 16:49:05 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/03 14:47:48 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/03 15:09:34 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,31 @@ int	parse(int argc, char **argv, t_data *data)
 // 	return (OK);
 // }
 
-int	init_map_data(int map, t_data *data)
+int	init_map_data(t_data *data)
 {
 	char	*temp_line;
+	int		map;
 
+	map = open("include/map_big.cub", O_RDONLY);
+	if (map == -1)
+	{
+		printf("Error\n");
+		return (-1);
+	}
 	temp_line = get_next_line(map);
-	data->wall_textures = malloc(sizeof(char *) * 4);
-	data->f_c_color = malloc(sizeof(char *) * 2);
+	printf("%s", temp_line);
+	// data->wall_textures = malloc(sizeof(char *) * 4);
+	// data->f_c_color = malloc(sizeof(char *) * 2);
 	while (temp_line != NULL)
 	{
-		ft_strlcpy(data->wall_textures[0], "test", 4);
+		// ft_strlcpy(data->wall_textures[0], "test", 4);
+		printf("Test\n");
 		if (ft_strncmp(temp_line, "NO", 2) == 0)
-			ft_strlcpy(data->wall_textures[0], temp_line, ft_strlen(temp_line));
+		{
+			printf("%s\n", ft_strtrim(temp_line, "NO ."));
+			data->walls.wall_north = mlx_texture_to_image(data->mlx, mlx_load_png(ft_strtrim(temp_line, "NO .")));
+			// ft_strlcpy(data->wall_textures[0], temp_line, ft_strlen(temp_line));
+		}
 		else if (ft_strncmp(temp_line, "SO", 2) == 0)
 			ft_strlcpy(data->wall_textures[1], temp_line, ft_strlen(temp_line));
 		else if (ft_strncmp(temp_line, "WE", 2) == 0)
