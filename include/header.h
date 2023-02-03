@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/02 22:01:59 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/03 14:44:58 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <memory.h>
+# include <fcntl.h>
+# include "../libft/libft.h"
+# include "../src/get_next_line/get_next_line.h"
 
 #define SKYCOLOR 0xB9D2D6FF
 #define FLOORCOLOR 0xEBBAB9FF
@@ -39,6 +42,8 @@ typedef struct s_data
 	mlx_image_t	*wall;
 	t_skyfl		sky;
 	t_skyfl		floor;
+	char		**wall_textures;
+	char		**f_c_color;
 //	t_player		player;
 // 	t_wall			wall;
 // 	t_list			*map_lines;
@@ -52,5 +57,6 @@ bool	build(t_data *data);
 
 //parse
 int		parse(int argc, char **argv, t_data *data);
+int		init_map_data(int map, t_data *data);
 
 #endif

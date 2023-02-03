@@ -6,14 +6,14 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/02/02 18:40:41 by ageels        ########   odam.nl          #
+#    Updated: 2023/02/03 13:41:42 by mforstho      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := cub
 OBJ_DIR = ./obj
 CFLAG = #-Wall -Werror -Wextra
-LFLAG = -framework Cocoa -framework OpenGL -framework IOKit -I . -lglfw3
+LFLAG = -L libft -framework Cocoa -framework OpenGL -framework IOKit -I . -lglfw3
 CC = clang
 SRC = src/main.c\
 	src/display/background.c\
@@ -21,6 +21,8 @@ SRC = src/main.c\
 	src/display/display.c\
 	src/parse/parse.c\
 	src/raycast/raycast.c\
+	src/get_next_line/get_next_line_utils.c\
+	src/get_next_line/get_next_line.c\
 
 OBJ = $(patsubst src/%.c,obj/%.o,$(SRC))
 #Colors:
@@ -29,6 +31,13 @@ YELLOW		=	\e[38;5;226m
 RESET		=	\e[0m 
 _SUCCESS	=	[$(GREEN)SUCCESS$(RESET)]
 _INFO		=	[$(YELLOW)INFO$(RESET)]
+
+# LIBFT := libft/libft.a
+
+# $(LIBFT) :
+# 	$(MAKE) -C $(dir $(LIBFT))
+
+HEADERS := src/get_next_line/get_next_line.h
 
 all : libmlx $(NAME)
 
@@ -42,9 +51,10 @@ obj_folder :
 	@mkdir -pv $(OBJ_DIR)/display
 	@mkdir -pv $(OBJ_DIR)/parse
 	@mkdir -pv $(OBJ_DIR)/raycast
+	@mkdir -pv $(OBJ_DIR)/get_next_line
 
-$(NAME): obj_folder $(OBJ)
-	@$(CC) $(CFLAG) -o $(NAME) $(OBJ) libmlx42.a $(LFLAG)
+$(NAME): obj_folder $(OBJ) $(HEADERS)
+	@$(CC) $(CFLAG) -o $(NAME) $(OBJ) libft/libft.a libmlx42.a $(LFLAG)
 	@printf "$(_SUCCESS) cub ready.\n"
 	
 obj/%.o : src/%.c
