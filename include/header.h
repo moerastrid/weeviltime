@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/03 14:46:01 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/03 14:50:24 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ typedef struct s_data
 	mlx_image_t		*wall;
 	t_skyfl			sky;
 	t_skyfl			floor;
-	int				camx;
-	int				camy;
+	float			camx;
+	float			camy;
 	char		**wall_textures;
 	char		**f_c_color;
 //	t_player		player;
