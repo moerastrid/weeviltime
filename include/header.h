@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/03 14:44:58 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/03 14:46:01 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,19 @@
 # include "../libft/libft.h"
 # include "../src/get_next_line/get_next_line.h"
 
-#define SKYCOLOR 0xB9D2D6FF
-#define FLOORCOLOR 0xEBBAB9FF
+# define SKYCOLOR	0xB9D2D6FF
+# define FLOORCOLOR	0xEBBAB9FF
+
+# define WIDTH 1024
+# define HEIGHT 768
+
+//# define NO	0
+//# define SO	1
+//# define WE	2
+//# define EA	3
 
 //typedef struct s_player
 //{
-//	mlx_instance_t	*instance;
 //}	t_player;
 
 typedef struct s_sky_or_floor
@@ -36,12 +43,20 @@ typedef struct s_sky_or_floor
 	unsigned int	color;
 }		t_skyfl;
 
+//typedef struct s_wall
+//{
+//	mlx_image_t		*wall;
+//}		t_wall;
+
 typedef struct s_data
 {
-	mlx_t		*mlx;
-	mlx_image_t	*wall;
-	t_skyfl		sky;
-	t_skyfl		floor;
+	mlx_t			*mlx;
+	//t_wall			walls[4];
+	mlx_image_t		*wall;
+	t_skyfl			sky;
+	t_skyfl			floor;
+	int				camx;
+	int				camy;
 	char		**wall_textures;
 	char		**f_c_color;
 //	t_player		player;
