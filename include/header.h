@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/03 16:42:39 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/06 16:25:12 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ typedef struct s_wall
 	mlx_image_t		*wall_east;
 	mlx_image_t		*wall_west;
 }	t_wall;
+
+typedef struct s_cube
+{
+	float	x;
+	float	y;
+	float	length;
+}		t_cube;
 
 typedef struct s_line
 {
