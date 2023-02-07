@@ -12,72 +12,73 @@
 
 #include "../../include/header.h"
 
-static void	updownleftright(mlx_image_t *img, t_line *l)
+static void	updownleftright(mlx_image_t *img, t_co *a, t_co *b, float cps[2])
 {
-	while (l->ay <= l->by && l->ax <= l->bx)
+	while (a->y <= b->y && a->x <= b->x)
 	{
-		wrap_putpixel(img, l->ax, l->ay, l->color);
-		if (l->ay <= (l->slope * l->ax) + l->contactpoint
-			&& (l->ay + 1) >= (l->slope * l->ax) + l->contactpoint)
-			l->ax++;
+		wrap_putpixel(img, a->x, a->y, 0xFFFF00FF);
+		if (a->y <= (cps[1] * a->x) + cps[0]
+			&& (a->y + 1) >= (cps[1] * a->x) + cps[0])
+			a->x++;
 		else
-			l->ay++;
+			a->y++;
 	}
 	return ;
 }
 
-static void	downupleftright(mlx_image_t *img, t_line *l)
+static void	downupleftright(mlx_image_t *img, t_co *a, t_co *b, float cps[2])
 {
-	while (l->ay >= l->by && l->ax <= l->bx)
+	while (a->y >= b->y && a->x <= b->x)
 	{
-		wrap_putpixel(img, l->ax, l->ay, l->color);
-		if (l->ay <= (l->slope * l->ax) + l->contactpoint
-			&& (l->ay + 1) > (l->slope * l->ax + l->contactpoint))
-			l->ax++;
+		wrap_putpixel(img, a->x, a->y, 0xFFFF00FF);
+		if (a->y <= (cps[1] * a->x) + cps[0]
+			&& (a->y + 1) > (cps[1] * a->x + cps[0]))
+			a->x++;
 		else
-			l->ay--;
+			a->y--;
 	}
 }
 
-static void	updownrightleft(mlx_image_t *img, t_line *l)
+static void	updownrightleft(mlx_image_t *img, t_co *a, t_co *b, float cps[2])
 {
-	while (l->ay <= l->by && l->ax >= l->bx)
+	while (a->y <= b->y && a->x >= b->x)
 	{
-		wrap_putpixel(img, l->ax, l->ay, l->color);
-		if (l->ay >= (l->slope * l->ax) + l->contactpoint
-			&& (l->ay - 1) <= (l->slope * l->ax) + l->contactpoint)
-			l->ax--;
+		wrap_putpixel(img, a->x, a->y, 0xFFFF00FF);
+		if (a->y >= (cps[1] * a->x) + cps[0]
+			&& (a->y - 1) <= (cps[1] * a->x) + cps[0])
+			a->x--;
 		else
-			l->ay++;
+			a->y++;
 	}
 }
 
-static void	downuprightleft(mlx_image_t *img, t_line *l)
+static void	downuprightleft(mlx_image_t *img, t_co *a, t_co *b, float cps[2])
 {
-	while (l->ay >= l->by && l->ax >= l->bx)
+	while (a->y >= b->y && a->x >= b->x)
 	{
-		wrap_putpixel(img, l->ax, l->ay, l->color);
-		if (l->ay >= (l->slope * l->ax) + l->contactpoint
-			&& (l->ay - 1) <= (l->slope * l->ax + l->contactpoint))
-			l->ax--;
+		wrap_putpixel(img, a->x, a->y, 0xFFFF00FF);
+		if (a->y >= (cps[1] * a->x) + cps[0]
+			&& (a->y - 1) <= (cps[1] * a->x + cps[0]))
+			a->x--;
 		else
-			l->ay--;
+			a->y--;
 	}
 }
 
-void	line(mlx_image_t *img, t_line *l)
+// float cps[0]s stands for contact point (0) and cps[1] (1).
+// to make the code norm, I put them together in an array.
+void	line(mlx_image_t *img, t_co *a, t_co *b)
 {
-	l->dx = l->bx - l->ax;
-	l->dy = l->by - l->ay;
-	l->slope = l->dy / l->dx;
-	l->contactpoint = l->ay - (l->ax * l->slope);
-	if (l->ay <= l->by && l->ax <= l->bx)
-		updownleftright(img, l);
-	else if (l->ay >= l->by && l->ax <= l->bx)
-		downupleftright(img, l);
-	else if (l->ay <= l->by && l->ax >= l->bx)
-		updownrightleft(img, l);
-	else if (l->ay >= l->by && l->ax >= l->bx)
-		downuprightleft(img, l);
-	return ;
+	float	cps[2];
+
+	cps[1] = (b->y - a->y) / (b->x - a->x);
+	cps[0] = a->y - (a->x * cps[1]);
+	if (a->y <= b->y && a->x <= b->x)
+		updownleftright(img, a, b, cps);
+	else if (a->y >= b->y && a->x <= b->x)
+		downupleftright(img, a, b, cps);
+	else if (a->y <= b->y && a->x >= b->x)
+		updownrightleft(img, a, b, cps);
+	else if (a->y >= b->y && a->x >= b->x)
+		downuprightleft(img, a, b, cps);
 }

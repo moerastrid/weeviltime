@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/06 16:19:03 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/07 13:55:52 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,26 @@ typedef struct s_wall
 	mlx_image_t		*wall_west;
 }	t_wall;
 
-typedef struct s_line
+// type coordinate: (with z as length because otherwise it's confusing.)
+typedef struct s_co
 {
-	int				ax;
-	int				ay;
-	int				bx;
-	int				by;
-	float			dx;
-	float			dy;
-	float			slope;
-	float			contactpoint;
-	unsigned int	color;
-}		t_line;
+	float	x;
+	float	y;
+	float	length;
+}		t_co;
+
+//typedef struct s_line
+//{
+//	int				ax;
+//	int				ay;
+//	int				bx;
+//	int				by;
+//	float			dx;
+//	float			dy;
+//	float			slope;
+//	float			contactpoint;
+//	unsigned int	color;
+//}		t_line;
 
 typedef struct s_point
 {
@@ -91,11 +99,11 @@ typedef struct s_data
 }	t_data;
 
 //display
-bool			background(t_data *data);
-bool			display(t_data *data);
-bool			build(t_data *data);
-void			grid(t_data *data);
-void			line(mlx_image_t *img, t_line *l);
+bool	background(t_data *data);
+bool	display(t_data *data);
+bool	build(t_data *data);
+void	grid(t_data *data);
+void	line(mlx_image_t *img, t_co *a, t_co *b);
 unsigned int	make_color(int r, int g, int b);
 
 //parse
