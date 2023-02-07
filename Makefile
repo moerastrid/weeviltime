@@ -6,13 +6,13 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/02/07 13:54:42 by mforstho      ########   odam.nl          #
+#    Updated: 2023/02/07 14:50:53 by mforstho      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := cub
 OBJ_DIR = ./obj
-CFLAG = -Wall -Werror -Wextra
+CFLAG = -Wall -Werror -Wextra -fsanitize=address -g
 LFLAG = -framework Cocoa -framework OpenGL -framework IOKit -I . -lglfw3
 CC = clang
 SRC = src/main.c\

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/07 13:55:52 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/07 14:21:14 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,9 @@ typedef struct s_data
 	char			**f_c_color;
 	t_list			*map_lines;
 	char			**map_array;
+	int				map_size;
 //	t_player		player;
 // 	t_wall			wall;
-// 	t_list			*map_lines;
-//	char			**map_array;
 }	t_data;
 
 //display
