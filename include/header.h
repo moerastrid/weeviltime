@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/08 11:22:01 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/08 20:59:33 by astrid        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <memory.h>
 # include <fcntl.h>
+# include <math.h>
 # include "../libft/libft.h"
 # include "../src/get_next_line/get_next_line.h"
 
@@ -55,22 +56,8 @@ typedef struct s_wall
 typedef struct s_co
 {
 	float	x;
-	float	y;
 	float	length;
 }		t_co;
-
-//typedef struct s_line
-//{
-//	int				ax;
-//	int				ay;
-//	int				bx;
-//	int				by;
-//	float			dx;
-//	float			dy;
-//	float			slope;
-//	float			contactpoint;
-//	unsigned int	color;
-//}		t_line;
 
 typedef struct s_point
 {
@@ -98,12 +85,10 @@ typedef struct s_data
 }	t_data;
 
 //display
-bool	background(t_data *data);
-bool	display(t_data *data);
-bool	build(t_data *data);
-void	grid(t_data *data);
-void	line(mlx_image_t *img, t_co *a, t_co *b);
-unsigned int	make_color(int r, int g, int b);
+bool			display(t_data *data);
+bool			background(t_data *data);
+bool			build(t_data *data);
+bool			grid(t_data *data);
 
 //parse
 int				parse(int argc, char **argv, t_data *data);
@@ -114,6 +99,7 @@ int				check_map_spaces(t_data *data);
 int				check_map_tabs(t_data *data);
 
 //utils
-void			wrap_putpixel(mlx_image_t *img, uint32_t x, uint32_t y,
-					uint32_t color);
+void			wrap_putpixel(mlx_image_t *img, uint32_t x, uint32_t y, uint32_t color);
+unsigned int	make_color(int r, int g, int b);
+
 #endif

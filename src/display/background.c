@@ -6,18 +6,13 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 16:48:59 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/03 16:42:19 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/08 20:27:12 by astrid        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header.h"
 
-unsigned int	make_color(int r, int g, int b)
-{
-	return ((unsigned int)(r << 24 | g << 16 | b << 8 | 0xFF));
-}
-
-void	fill(t_skyfl plane)
+static void	fill(t_skyfl plane)
 {
 	unsigned int	i;
 	unsigned int	j;

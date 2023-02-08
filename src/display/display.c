@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 16:49:02 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/07 13:56:04 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/08 20:20:48 by astrid        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ bool	display(t_data *data)
 		return (false);
 	if (!build(data))
 		return (false);
-	// grid(data);
+	if (!grid(data))
+		return (false);
 	return (true);
 }

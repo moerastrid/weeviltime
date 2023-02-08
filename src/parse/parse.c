@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 16:49:05 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/08 11:22:17 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/08 19:39:36 by astrid        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	save_map(int map, t_data *data, char *line)
 
 void	save_wall(t_data *data, mlx_image_t *wall, char *line, char *param)
 {
+	(void)wall;
 	wall = mlx_texture_to_image(data->mlx,
 			mlx_load_png(ft_strtrim(line, param)));
 }

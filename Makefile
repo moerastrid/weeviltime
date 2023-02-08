@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/02/07 14:50:53 by mforstho      ########   odam.nl          #
+#    Updated: 2023/02/08 20:19:12 by astrid        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ SRC = src/main.c\
 	src/display/blokje.c\
 	src/display/display.c\
 	src/display/grid.c\
-	src/display/line.c\
 	src/get_next_line/get_next_line_utils.c\
 	src/get_next_line/get_next_line.c\
 	src/parse/parse.c\

@@ -6,13 +6,13 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 18:41:09 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/03 16:29:54 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/08 20:26:59 by astrid        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header.h"
 
-void	my_keyhook(mlx_key_data_t keydata, void *param)
+static void	my_keyhook(mlx_key_data_t keydata, void *param)
 {
 	t_data	*data;
 
