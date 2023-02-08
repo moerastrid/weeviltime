@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/08 20:59:33 by astrid        ########   odam.nl         */
+/*   Updated: 2023/02/08 21:06:54 by astrid        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,6 @@
 //# define SO	1
 //# define WE	2
 //# define EA	3
-
-//typedef struct s_player
-//{
-//}	t_player;
 
 typedef struct s_sky_or_floor
 {
