@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 16:49:05 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/07 17:38:17 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/08 11:22:17 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ int	init_map_data(int map, t_data *data)		//initialiseert de ceiling en floor kl
 			save_map(map, data, temp_line);
 			convert_map(data);
 			// print_map(data);		// Kan je aan en uit zetten
+			check_map_tabs(data);
 			check_map_spaces(data);
 		}
 		temp_line = get_next_line(map);
