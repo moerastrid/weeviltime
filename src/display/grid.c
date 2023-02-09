@@ -6,13 +6,13 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/03 16:07:07 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/08 21:00:53 by astrid        ########   odam.nl         */
+/*   Updated: 2023/02/09 18:02:30 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header.h"
 
-static void	draw_height(mlx_image_t *grid, int x, int height, double color)
+static void	draw_height(mlx_image_t *grid, int x, float height, double color)
 {
 	int			i;
 
@@ -23,6 +23,13 @@ static void	draw_height(mlx_image_t *grid, int x, int height, double color)
 		wrap_putpixel(grid, x, (HEIGHT/2) - i, color);
 		i++;
 	}
+	i = 0;
+	while (i > height)
+	{
+		wrap_putpixel(grid, x, (HEIGHT/2) + i, color);
+		wrap_putpixel(grid, x, (HEIGHT/2) - i, color);
+		i--;
+	}
 }
 
 int	wavy_height(int x)
@@ -30,39 +37,51 @@ int	wavy_height(int x)
 	int	height;
 
 	height = 0;
-	height = sin(3.14 * 15 * x) * 150;
+	height = sin((3.14/150) * x);
+	if (height < 0)
+		height = height * 1;
+	printf("heigth: %d\n", height);
 	return (height);
 }
 
-int	calculate_height(t_data *data, int x)
+float	calculate_height(t_data *data, int x)
 {
-	int height;
+	float	height;
+	float	angle;
+	//int		player_x;
+	//int		player_y;
+	//int		wall_x;
+	//int		wall_y;
+	float	distance_to_wall;
 
-	(void)x;
 	(void)data;
-	height = x % (WIDTH / 20);
+	distance_to_wall = 2.5;
+	angle = (3.14 / WIDTH) * x;
+	printf("angle: %f\n", angle);
+	height = (HEIGHT * 3) / 8 - (50 * distance_to_wall * sin(angle));
+	printf("height: %f\n", height);
 	return (height);
 }
 
 bool	grid(t_data *data)
 {
-	mlx_image_t		*grid;
-	int				x;
-	int				height;
+	mlx_image_t	*grid;
+	int			x;
+	float		height;
 
 	grid = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	if (!grid)
-		return(false);
+		return (false);
 	x = 0;
 	height = 0;
-	while (x  < WIDTH)
+	while (x < WIDTH)
 	{
-		height = wavy_height(x);
-		draw_height(grid, x, height, 0xF0A84CFF);
+		//height = wavy_height(x);
+		//draw_height(grid, x, height, 0xF0A84CFF);
 		height = calculate_height(data, x);
 		draw_height(grid, x, height, 0x0E345BFF);
 		x++;
 	}
 	mlx_image_to_window(data->mlx, grid, 0, 0);
-	return(true);
+	return (true);
 }

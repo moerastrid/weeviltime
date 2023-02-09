@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/08 21:06:54 by astrid        ########   odam.nl         */
+/*   Updated: 2023/02/09 17:02:25 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,22 @@
 # define SKYCOLOR	0xB9D2D6FF
 # define FLOORCOLOR	0xEBBAB9FF
 
-# define WIDTH 1024
-# define HEIGHT 768
+# define WIDTH 720
+# define HEIGHT 720
+
+# define FOV 1.256
 
 //# define NO	0
 //# define SO	1
 //# define WE	2
 //# define EA	3
+
+typedef struct s_player
+{
+	int		x;
+	int		y;
+	float	direction;
+}	t_player;
 
 typedef struct s_sky_or_floor
 {
