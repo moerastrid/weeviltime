@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/08 21:06:54 by astrid        ########   odam.nl         */
+/*   Updated: 2023/02/09 16:03:03 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@
 //# define SO	1
 //# define WE	2
 //# define EA	3
+
+typedef struct s_player
+{
+	int		x;
+	int		y;
+	char	direction;
+}	t_player;
 
 typedef struct s_sky_or_floor
 {
@@ -76,7 +83,7 @@ typedef struct s_data
 	t_list			*map_lines;
 	char			**map_array;
 	int				map_size;
-//	t_player		player;
+	t_player		player;
 // 	t_wall			wall;
 }	t_data;
 
@@ -94,8 +101,16 @@ int				init_map_data(int map, t_data *data);
 int				check_map_spaces(t_data *data);
 int				check_map_tabs(t_data *data);
 
+//print_map
+void			print_map(t_data *data);
+
+//save_and_convert_map
+int				convert_map(t_data *data);
+int				save_map(int map, t_data *data, char *line);
+
 //utils
-void			wrap_putpixel(mlx_image_t *img, uint32_t x, uint32_t y, uint32_t color);
+void			wrap_putpixel(mlx_image_t *img, uint32_t x, uint32_t y,
+					uint32_t color);
 unsigned int	make_color(int r, int g, int b);
 
 #endif
