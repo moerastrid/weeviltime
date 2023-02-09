@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/02/08 20:19:12 by astrid        ########   odam.nl          #
+#    Updated: 2023/02/09 14:44:52 by mforstho      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,9 @@ SRC = src/main.c\
 	src/get_next_line/get_next_line_utils.c\
 	src/get_next_line/get_next_line.c\
 	src/parse/parse.c\
+	src/parse/print_map.c\
 	src/parse/check_map.c\
+	src/parse/save_and_convert_map.c\
 	src/raycast/raycast.c\
 	src/utils/wraps.c\
 
