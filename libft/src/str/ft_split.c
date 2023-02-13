@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/26 13:03:42 by mforstho      #+#    #+#                 */
-/*   Updated: 2021/11/23 12:42:28 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/13 18:51:58 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 // Splits using the delimiting character c
 
 #include "libft.h"
-#include <stdlib.h>
 
 // Does the opposite of ft_strchr
 // Finds the first character that isn't c

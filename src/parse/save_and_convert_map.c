@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/09 14:39:38 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/09 14:41:22 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/13 18:39:11 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,10 @@
 
 int	save_map(int map, t_data *data, char *line)
 {
-	int		map_size;
 	char	*temp_line;
 
-	map_size = 0;
 	if (map < 0)
 		return (EXIT_FAILURE);
-	data->map_lines = NULL;
 	temp_line = line;
 	while (temp_line != NULL)
 	{
@@ -31,11 +28,12 @@ int	save_map(int map, t_data *data, char *line)
 			return (EXIT_FAILURE);
 		}
 		temp_line = get_next_line(map);
-		map_size++;
+		if (data->map.x < (int)ft_strlen(temp_line))
+			data->map.x = ft_strlen(temp_line);
+		data->map.y++;
 	}
-	if (map_size < 1)
+	if (data->map.y < 1)
 		return (EXIT_FAILURE);
-	data->map_size = map_size;
 	return (EXIT_SUCCESS);
 }
 

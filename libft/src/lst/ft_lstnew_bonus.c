@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_lstnew.c                                        :+:    :+:            */
+/*   ft_lstnew_bonus.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/27 18:08:24 by mforstho      #+#    #+#                 */
-/*   Updated: 2021/11/11 14:57:30 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/13 18:52:57 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Returns a new element with the content data
 
 #include "libft.h"
-#include <stdlib.h>
 
 t_list	*ft_lstnew(void *data)
 {

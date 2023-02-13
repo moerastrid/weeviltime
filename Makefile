@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/02/13 14:46:05 by mforstho      ########   odam.nl          #
+#    Updated: 2023/02/13 18:48:12 by ageels        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,13 +20,13 @@ SRC = src/main.c\
 	src/display/blokje.c\
 	src/display/display.c\
 	src/display/grid.c\
-	src/get_next_line/get_next_line_utils.c\
-	src/get_next_line/get_next_line.c\
+	src/parse/check_map.c\
+	src/parse/init.c\
 	src/parse/parse.c\
 	src/parse/print_map.c\
-	src/parse/check_map.c\
 	src/parse/save_and_convert_map.c\
-	src/raycast/raycast.c\
+	src/utils/get_next_line/get_next_line.c\
+	src/utils/math.c\
 	src/utils/wraps.c\
 	src/player/player.c\
 
@@ -52,9 +52,8 @@ obj_folder :
 	mkdir -pv $(OBJ_DIR)
 	mkdir -pv $(OBJ_DIR)/display
 	mkdir -pv $(OBJ_DIR)/parse
-	mkdir -pv $(OBJ_DIR)/raycast
-	mkdir -pv $(OBJ_DIR)/get_next_line
 	mkdir -pv $(OBJ_DIR)/utils
+	mkdir -pv $(OBJ_DIR)/utils/get_next_line
 	mkdir -pv $(OBJ_DIR)/player
 
 $(NAME): obj_folder $(OBJ)

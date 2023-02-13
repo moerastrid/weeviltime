@@ -6,14 +6,13 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/25 11:35:03 by mforstho      #+#    #+#                 */
-/*   Updated: 2021/11/15 11:38:01 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/13 18:52:02 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Converts an integer to ascii
 
 #include "libft.h"
-#include <stdlib.h>
 
 // Counts how many digits are in n
 static int	count_digits(int n)

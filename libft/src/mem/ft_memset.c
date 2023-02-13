@@ -6,14 +6,13 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/19 16:24:25 by mforstho      #+#    #+#                 */
-/*   Updated: 2021/11/11 13:47:59 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/13 18:52:11 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Sets len amount of characters in s to c
 
 #include "libft.h"
-#include <stddef.h>
 
 void	*ft_memset(void *s, int c, size_t len)
 {

@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/20 13:21:52 by mforstho      #+#    #+#                 */
-/*   Updated: 2021/11/16 11:54:08 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/13 18:51:46 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 // Adds s1 and s2 together in the new string
 
 #include "libft.h"
-#include <stdlib.h>
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

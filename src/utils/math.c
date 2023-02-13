@@ -1,13 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   raycast.c                                          :+:    :+:            */
+/*   math.c                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 16:49:09 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/03 15:47:59 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/13 17:52:45 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header.h"
+
+float	calculate_distance(void)
+{
+	return (4);
+}
+
+float	calculate_height(t_data *data, int x)
+{
+	float	height;
+	float	distance;
+	float	angle;
+
+	(void)data;
+	distance = calculate_distance();
+	angle = -0.2 * 3.14 + ((x * 0.4 * 3.14) / WIDTH);
+	height = cos(angle) * ((HEIGHT / 2) / distance);
+	return (height);
+}

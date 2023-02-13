@@ -6,14 +6,13 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/19 16:23:08 by mforstho      #+#    #+#                 */
-/*   Updated: 2021/11/11 14:15:14 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/13 18:51:44 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Appends string src to the end of dst and NUL-terminates the string
 
 #include "libft.h"
-#include <stddef.h>
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {

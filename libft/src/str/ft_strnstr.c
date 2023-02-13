@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/19 16:24:57 by mforstho      #+#    #+#                 */
-/*   Updated: 2021/11/11 15:04:58 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/13 18:51:13 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 // for the string needle
 
 #include "libft.h"
-#include <stddef.h>
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {

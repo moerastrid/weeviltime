@@ -6,14 +6,13 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/19 16:24:21 by mforstho      #+#    #+#                 */
-/*   Updated: 2021/11/16 11:52:10 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/13 18:52:13 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Copies len bytes from src to dst
 
 #include "libft.h"
-#include <stddef.h>
 
 // write_forward is called whens src is greater than dst which means that
 // all characters in dst will be overwritten, including the '\0'

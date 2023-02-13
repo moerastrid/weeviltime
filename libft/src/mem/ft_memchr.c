@@ -6,14 +6,13 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/19 16:24:06 by mforstho      #+#    #+#                 */
-/*   Updated: 2021/11/11 13:47:35 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/13 18:52:22 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Locates the first occurance of c in s if it exists within n bytes
 
 #include "libft.h"
-#include <stddef.h>
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {

@@ -6,12 +6,11 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/02 15:28:26 by mforstho      #+#    #+#                 */
-/*   Updated: 2022/03/08 12:01:05 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/13 18:53:20 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <unistd.h>
 
 ssize_t	ft_putnbr_u_fd(unsigned int n, int fd)
 {

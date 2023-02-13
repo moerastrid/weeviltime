@@ -6,14 +6,13 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/25 14:15:51 by mforstho      #+#    #+#                 */
-/*   Updated: 2022/03/08 11:49:32 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/13 18:53:23 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Writes a string
 
 #include "libft.h"
-#include <unistd.h>
 
 ssize_t	ft_putstr_fd(char *s, int fd)
 {

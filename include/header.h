@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/13 14:44:49 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/13 18:48:52 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include "../libft/libft.h"
-# include "../src/get_next_line/get_next_line.h"
+# include "./get_next_line.h"
 
 # define SKYCOLOR	0xB9D2D6FF
 # define FLOORCOLOR	0xEBBAB9FF
@@ -57,11 +57,10 @@ typedef struct s_wall
 	mlx_image_t		*wall_west;
 }	t_wall;
 
-// type coordinate: (with z as length because otherwise it's confusing.)
 typedef struct s_co
 {
 	float	x;
-	float	length;
+	float	y;
 }		t_co;
 
 typedef struct s_point
@@ -78,13 +77,12 @@ typedef struct s_data
 	mlx_image_t		*wall;
 	t_skyfl			sky;
 	t_skyfl			floor;
-	float			camx;
-	float			camy;
+	t_co			cam;
+	t_co			map;
 	char			**wall_textures;
 	char			**f_c_color;
 	t_list			*map_lines;
 	char			**map_array;
-	int				map_size;
 	t_player		player;
 	float			distance_to_wall;	// Milan aan t testen
 // 	t_wall			wall;
@@ -92,13 +90,14 @@ typedef struct s_data
 
 //display
 bool			display(t_data *data);
-bool			background(t_data *data);
-bool			build(t_data *data);
-bool			grid(t_data *data);
+bool			display_background(t_data *data);
+bool			display_blokje(t_data *data);
+bool			display_walls(t_data *data);
 
 //parse
+void			set_default_values(t_data *data);
 int				parse(int argc, char **argv, t_data *data);
-int				init_map_data(int map, t_data *data);
+int				set_map_data(int map_fd, t_data *data);
 
 //check_map
 int				check_map_spaces(t_data *data);
@@ -112,11 +111,12 @@ void			print_map(t_data *data);
 
 //save_and_convert_map
 int				convert_map(t_data *data);
-int				save_map(int map, t_data *data, char *line);
+int				save_map(int map_fd, t_data *data, char *line);
 
 //utils
-void			wrap_putpixel(mlx_image_t *img, uint32_t x, uint32_t y,
-					uint32_t color);
+void			wrap_putpixel(mlx_image_t *img, uint32_t x, uint32_t y, uint32_t color);
 unsigned int	make_color(int r, int g, int b);
+float			calculate_distance(void);
+float			calculate_height(t_data *data, int x);
 
 #endif

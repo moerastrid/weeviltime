@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/03 16:07:07 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/13 15:56:35 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/13 17:50:04 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,7 @@ int	wavy_height(int x)
 	return (height);
 }
 
-float	calculate_height(t_data *data, int x)
-{
-	float	height;
-	float	distance;
-	float	angle;
-
-	(void)data;
-	distance = 4;
-	angle = -0.2 * 3.14 + ((x * 0.4 * 3.14) / WIDTH);
-	height = cos(angle) * (HEIGHT / 2) / distance;
-	return (height);
-}
-
-bool	grid(t_data *data)
+bool	display_walls(t_data *data)
 {
 	mlx_image_t	*grid;
 	int			x;

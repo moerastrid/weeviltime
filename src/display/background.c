@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 16:48:59 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/08 20:27:12 by astrid        ########   odam.nl         */
+/*   Updated: 2023/02/13 17:48:23 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	fill(t_skyfl plane)
 	}
 }
 
-bool	background(t_data *data)
+bool	display_background(t_data *data)
 {
 	data->sky.img = mlx_new_image(data->mlx, data->mlx->width, (data->mlx->height / 2));
 	data->floor.img = mlx_new_image(data->mlx, data->mlx->width, (data->mlx->height / 2));
@@ -38,7 +38,7 @@ bool	background(t_data *data)
 		return (false);
 	fill(data->sky);
 	fill(data->floor);
-	mlx_image_to_window(data->mlx, data->floor.img, 0, data->camy);
+	mlx_image_to_window(data->mlx, data->floor.img, 0, data->cam.y);
 	mlx_image_to_window(data->mlx, data->sky.img, 0, 0);
 	return (true);
 }

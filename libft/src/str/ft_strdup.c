@@ -6,14 +6,13 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/19 16:24:41 by mforstho      #+#    #+#                 */
-/*   Updated: 2021/11/11 13:59:57 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/13 18:51:52 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Allocates sufficient memory for a copy of s1 and does the copy
 
 #include "libft.h"
-#include <stdlib.h>
 
 char	*ft_strdup(const char *s1)
 {

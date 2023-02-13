@@ -6,14 +6,13 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/19 16:24:11 by mforstho      #+#    #+#                 */
-/*   Updated: 2021/11/11 13:47:48 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/13 18:52:17 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Copies n bytes from src to dst
 
 #include "libft.h"
-#include <stddef.h>
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
