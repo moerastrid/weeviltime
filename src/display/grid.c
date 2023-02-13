@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/03 16:07:07 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/13 12:59:46 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/13 14:28:57 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ float	calculate_height(t_data *data, int x)
 	distance_to_wall = 2.5;
 	angle = (3.14 / WIDTH) * x;
 	printf("angle: %f\n", angle);
-	height = (HEIGHT * 3) / 8 - (50 * distance_to_wall * sin(angle));
+	height = ((HEIGHT * 2) / 8) + (20 * distance_to_wall * sin(angle));
 	printf("height: %f\n", height);
 	return (height);
 }
