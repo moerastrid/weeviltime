@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/03 16:08:40 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/08 20:23:39 by astrid        ########   odam.nl         */
+/*   Updated: 2023/02/13 23:28:48 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,10 @@ void	wrap_putpixel(mlx_image_t *img, uint32_t x, uint32_t y, uint32_t color)
 unsigned int	make_color(int r, int g, int b)
 {
 	return ((unsigned int)(r << 24 | g << 16 | b << 8 | 0xFF));
+}
+
+int	print_error(char *s)
+{
+	printf("%s\n", s);
+	return (EXIT_FAILURE);
 }

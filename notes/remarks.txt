@@ -1,1 +1,3 @@
 // lets write it down here if we've got any remarks / found errors
+
+* can we do the makefile & header in alfabetic order? it makes me happy

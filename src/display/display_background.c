@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 16:48:59 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/13 17:48:23 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/13 18:58:49 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ static void	fill(t_skyfl plane)
 
 bool	display_background(t_data *data)
 {
-	data->sky.img = mlx_new_image(data->mlx, data->mlx->width, (data->mlx->height / 2));
-	data->floor.img = mlx_new_image(data->mlx, data->mlx->width, (data->mlx->height / 2));
+	data->sky.img = mlx_new_image(data->mlx, \
+		data->mlx->width, (data->mlx->height / 2));
+	data->floor.img = mlx_new_image(data->mlx, \
+		data->mlx->width, (data->mlx->height / 2));
 	if (!data->sky.img || !data->floor.img)
 		return (false);
 	fill(data->sky);

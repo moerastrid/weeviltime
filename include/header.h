@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/13 18:48:52 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/14 00:57:11 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,51 +72,50 @@ typedef struct s_point
 
 typedef struct s_data
 {
-	mlx_t			*mlx;
-	t_wall			walls;
-	mlx_image_t		*wall;
-	t_skyfl			sky;
-	t_skyfl			floor;
-	t_co			cam;
-	t_co			map;
-	char			**wall_textures;
-	char			**f_c_color;
-	t_list			*map_lines;
-	char			**map_array;
-	t_player		player;
-	float			distance_to_wall;	// Milan aan t testen
-// 	t_wall			wall;
+	mlx_t		*mlx;
+	t_wall		walls;
+	mlx_image_t	*wall;
+	t_skyfl		sky;
+	t_skyfl		floor;
+	t_co		cam;
+	t_co		map;
+	char		**map_array;
+	//char		**wall_textures;
+	//t_list	*map_lines;
+	//t_player	player;
+	//float		distance_to_wall;	// Milan aan t testen
+	//t_wall	wall;
 }	t_data;
 
-//display
+// F U N C T I O N S
+
+//DEBUG
+void			print_map(t_data *data);
+
+//DISPLAY
 bool			display(t_data *data);
 bool			display_background(t_data *data);
 bool			display_blokje(t_data *data);
 bool			display_walls(t_data *data);
 
-//parse
-void			set_default_values(t_data *data);
+//PARSE
+int				check_map(t_data *data);
 int				parse(int argc, char **argv, t_data *data);
-int				set_map_data(int map_fd, t_data *data);
+bool			set_data(int map_fd, t_data *data);
+bool			set_map(t_data *data, char *line, int map_fd);
+//int				get_player_spawn(t_data *data);
+	// please rename this to "set player" for initilizing
 
-//check_map
-int				check_map_spaces(t_data *data);
-int				check_map_tabs(t_data *data);
-
-//player
-int				get_player_spawn(t_data *data);
-
-//print_map
-void			print_map(t_data *data);
-
-//save_and_convert_map
-int				convert_map(t_data *data);
-int				save_map(int map_fd, t_data *data, char *line);
-
-//utils
-void			wrap_putpixel(mlx_image_t *img, uint32_t x, uint32_t y, uint32_t color);
+//UTILS
+//wraps
+void			wrap_putpixel(mlx_image_t *img, \
+					uint32_t x, uint32_t y, uint32_t color);
 unsigned int	make_color(int r, int g, int b);
+int				print_error(char *s);
+//math
 float			calculate_distance(void);
 float			calculate_height(t_data *data, int x);
+//single alloc split
+char			**ft_single_split(char const *s, char c);
 
 #endif

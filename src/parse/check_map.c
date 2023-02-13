@@ -6,19 +6,13 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/06 15:22:19 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/13 18:37:37 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/14 00:57:21 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header.h"
 
-int	print_error(char *s)
-{
-	printf("%s\n", s);
-	return (EXIT_FAILURE);
-}
-
-int	check_map_tabs(t_data *data)
+static int	check_map_tabs(t_data *data)
 {
 	int	i;
 	int	j;
@@ -38,7 +32,7 @@ int	check_map_tabs(t_data *data)
 	return (EXIT_SUCCESS);
 }
 
-int	check_all(t_data *data, int i, int j)
+static int	check_all(t_data *data, int i, int j)
 {
 	if (i == 0 || i == (data->map.y - 1))
 		return (print_error("First or last line"));
@@ -58,7 +52,7 @@ int	check_all(t_data *data, int i, int j)
 	return (EXIT_SUCCESS);
 }
 
-int	check_map_spaces(t_data *data)
+static int	check_map_spaces(t_data *data)
 {
 	int	i;
 	int	j;
@@ -79,4 +73,22 @@ int	check_map_spaces(t_data *data)
 		i++;
 	}
 	return (EXIT_SUCCESS);
+}
+
+// maybe handig dat elke string in data->map_array even lang is
+// zodat we geen segfaults krijgen tijdens uitlezen
+// dus rest aanvullen met nullen/ spaties zou ik zeggen?
+void	format_map(t_data *data)
+{
+	(void)data;
+}
+
+int	check_map(t_data *data)
+{
+	if (check_map_spaces(data) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (check_map_tabs(data) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	format_map(data);
+	return(EXIT_SUCCESS);
 }
