@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/02/09 14:44:52 by mforstho      ########   odam.nl          #
+#    Updated: 2023/02/13 14:46:05 by mforstho      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC = src/main.c\
 	src/parse/save_and_convert_map.c\
 	src/raycast/raycast.c\
 	src/utils/wraps.c\
+	src/player/player.c\
 
 OBJ = $(patsubst src/%.c,obj/%.o,$(SRC))
 #Colors:
@@ -54,6 +55,7 @@ obj_folder :
 	mkdir -pv $(OBJ_DIR)/raycast
 	mkdir -pv $(OBJ_DIR)/get_next_line
 	mkdir -pv $(OBJ_DIR)/utils
+	mkdir -pv $(OBJ_DIR)/player
 
 $(NAME): obj_folder $(OBJ)
 	$(CC) $(CFLAG) -o $(NAME) $(OBJ) ./libft/libft.a libmlx42.a $(LFLAG)

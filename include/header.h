@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/09 18:03:33 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/13 14:44:49 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_data
 	char			**map_array;
 	int				map_size;
 	t_player		player;
+	float			distance_to_wall;	// Milan aan t testen
 // 	t_wall			wall;
 }	t_data;
 
@@ -102,6 +103,9 @@ int				init_map_data(int map, t_data *data);
 //check_map
 int				check_map_spaces(t_data *data);
 int				check_map_tabs(t_data *data);
+
+//player
+int				get_player_spawn(t_data *data);
 
 //print_map
 void			print_map(t_data *data);
