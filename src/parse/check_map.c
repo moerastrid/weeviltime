@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/06 15:22:19 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/09 15:10:49 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/13 11:24:47 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	check_all(t_data *data, int i, int j)
 		|| data->map_array[i][j - 1] == ' '
 		|| data->map_array[i][j + 1] == ' ')
 		return (print_error("Bordering character"));
+	return (EXIT_SUCCESS);
 }
 
 int	check_map_spaces(t_data *data)

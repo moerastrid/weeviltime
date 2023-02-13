@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 16:49:05 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/09 15:49:49 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/13 11:24:11 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	cf_check(t_data *data, char *line)
 {
 	char	**temp_arr;
 
-	else if (ft_strncmp(line, "C", 1) == 0)
+	if (ft_strncmp(line, "C", 1) == 0)
 	{
 		temp_arr = ft_split(ft_strtrim(line, "C "), ',');
 		data->sky.color = make_color(ft_atoi(temp_arr[0]),
