@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/03 16:07:07 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/13 15:52:14 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/13 15:55:20 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,13 @@ int	wavy_height(int x)
 float	calculate_height(t_data *data, int x)
 {
 	float	height;
+	float	distance;
 	float	angle;
-	float	distance_to_wall;
 
 	(void)data;
-	distance_to_wall = 1;
-
-	(void)x;
-	angle = - 0.2 * 3.14 + ((x * 0.4 * 3.14) / WIDTH);
-	printf("angle: %f\n", angle);
-	height = cos(angle) * (HEIGHT / 2) / distance_to_wall;
-	//height = ((HEIGHT * 2) / 8) + (20 * distance_to_wall * sin(angle));
-	//printf("height: %f\n", height);
+	distance = 4;
+	angle = -0.2 * 3.14 + ((x * 0.4 * 3.14) / WIDTH);
+	height = cos(angle) * (HEIGHT / 2) / distance;
 	return (height);
 }
 
