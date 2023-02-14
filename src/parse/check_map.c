@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/06 15:22:19 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/13 11:24:47 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/14 16:52:46 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ int	check_all(t_data *data, int i, int j)
 {
 	if (i == 0 || i == (data->map_size - 1))
 		return (print_error("First or last line"));
-	if (j == 0 || data->map_array[i][j + 1] == '\n')
+	if (j == 0 || data->map_array[i][j + 1] == '\0')
 		return (print_error("left or right edge"));
-	if (i != 0 && (ft_strlen(data->map_array[i - 1]) < 2
-			|| (size_t)j > ft_strlen(data->map_array[i - 1]) - 2))
+	if (i != 0 && (ft_strlen(data->map_array[i - 1]) < 1
+			|| (size_t)j > ft_strlen(data->map_array[i - 1]) - 1))
 		return (print_error("Above line too short"));
-	if (i != data->map_size - 1 && (ft_strlen(data->map_array[i + 1]) < 2
-			|| (size_t)j > ft_strlen(data->map_array[i + 1]) - 2))
+	if (i != data->map_size - 1 && (ft_strlen(data->map_array[i + 1]) < 1
+			|| (size_t)j > ft_strlen(data->map_array[i + 1]) - 1))
 		return (print_error("Below line too short"));
 	if (data->map_array[i - 1][j] == ' '
 		|| data->map_array[i + 1][j] == ' '

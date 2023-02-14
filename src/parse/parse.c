@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 16:49:05 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/13 11:24:11 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/14 17:12:07 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,61 +28,93 @@ int	parse(int argc, char **argv, t_data *data)
 	return (0);
 }
 
-void	save_wall(t_data *data, mlx_image_t *wall, char *line, char *param)
+bool	save_wall(t_data *data, mlx_image_t *wall, char *line)
 {
+	mlx_texture_t	*texture;
+
 	(void)wall;
-	wall = mlx_texture_to_image(data->mlx,
-			mlx_load_png(ft_strtrim(line, param)));
+	if (line[ft_strlen(line) - 1] == '\n')
+		line[ft_strlen(line) - 1] = '\0';
+	texture = mlx_load_png(&line[3]);
+	if (texture == NULL)
+		return (false);
+	wall = mlx_texture_to_image(data->mlx, texture);
+	mlx_delete_texture(texture);
+	return (true);
 }
 
-void	set_walls(t_data *data, char *line)
+bool	set_walls(t_data *data, char *line)
 {
-	if (ft_strncmp(line, "NO", 2) == 0)
-		save_wall(data, data->walls.wall_north, line, "NO ./\n");
-	else if (ft_strncmp(line, "SO", 2) == 0)
-		save_wall(data, data->walls.wall_south, line, "SO ./\n");
-	else if (ft_strncmp(line, "WE", 2) == 0)
-		save_wall(data, data->walls.wall_west, line, "WE ./\n");
-	else if (ft_strncmp(line, "EA", 2) == 0)
-		save_wall(data, data->walls.wall_east, line, "EA ./\n");
+	if (ft_strncmp(line, "NO ", 3) == 0)
+		return (save_wall(data, data->walls.wall_north, line));
+	else if (ft_strncmp(line, "SO ", 3) == 0)
+		return (save_wall(data, data->walls.wall_south, line));
+	else if (ft_strncmp(line, "WE ", 3) == 0)
+		return (save_wall(data, data->walls.wall_west, line));
+	else if (ft_strncmp(line, "EA ", 3) == 0)
+		return (save_wall(data, data->walls.wall_east, line));
+	else
+		return (false);
+	return (true);
 }
 
-void	cf_check(t_data *data, char *line)
+bool	cf_check(t_data *data, char *line)
 {
 	char	**temp_arr;
 
-	if (ft_strncmp(line, "C", 1) == 0)
+	if (ft_strncmp(line, "C ", 2) == 0)		// lengte van temp array checken voor beiden
 	{
-		temp_arr = ft_split(ft_strtrim(line, "C "), ',');
+		temp_arr = ft_split(&line[2], ',');
 		data->sky.color = make_color(ft_atoi(temp_arr[0]),
 				ft_atoi(temp_arr[1]), ft_atoi(temp_arr[2]));
+		free_array(temp_arr);
 	}
-	else if (ft_strncmp(line, "F", 1) == 0)
+	else if (ft_strncmp(line, "F ", 2) == 0)
 	{
-		temp_arr = ft_split(ft_strtrim(line, "F "), ',');
+		temp_arr = ft_split(&line[2], ',');
 		data->floor.color = make_color(ft_atoi(temp_arr[0]),
 				ft_atoi(temp_arr[1]), ft_atoi(temp_arr[2]));
+		free_array(temp_arr);
 	}
+	else
+		return (false);
+	return (true);
 }
 
 int	init_map_data(int map, t_data *data)		//initialiseert de ceiling en floor kleuren + koppelt png bestanden aan de individuele muur-kanten
 {
 	char	*temp_line;
+	int		element_count;
 
 	temp_line = get_next_line(map);
+	element_count = 0;
 	while (temp_line != NULL)
 	{
-		set_walls(data, temp_line);
-		cf_check(data, temp_line);
-		if (ft_strtrim(temp_line, " ")[0] == '1')
+		if (element_count < 6)
+		{
+			if (set_walls(data, temp_line) || cf_check(data, temp_line))
+				element_count++;
+			free(temp_line);
+		}
+		else
 		{
 			save_map(map, data, temp_line);
 			convert_map(data);
-			// print_map(data);		// Kan je aan en uit zetten
-			check_map_tabs(data);
-			check_map_spaces(data);
+			ft_lstclear(&data->map_lines, &free);
+			if (check_map_tabs(data) == EXIT_FAILURE
+				|| check_map_spaces(data) == EXIT_FAILURE)
+			{
+				free_array(data->map_array);
+				return (EXIT_FAILURE);
+			}
+			print_map(data);		// Kan je aan en uit zetten
 		}
 		temp_line = get_next_line(map);
 	}
-	return (0);
+	if (element_count != 6)
+	{
+		printf("Missing color/texture arguments\n");
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
 }

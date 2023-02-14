@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/13 14:44:49 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/14 15:18:26 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,8 @@ int				save_map(int map, t_data *data, char *line);
 void			wrap_putpixel(mlx_image_t *img, uint32_t x, uint32_t y,
 					uint32_t color);
 unsigned int	make_color(int r, int g, int b);
+
+
+void			free_array(char **arr);
 
 #endif

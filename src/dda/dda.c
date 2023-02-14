@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/13 15:50:36 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/13 15:53:03 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/14 12:24:50 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ void DDA(int X0, int Y0, int X1, int Y1)
 int main()
 {
     int gd = DETECT, gm;
- 
+
     // Initialize graphics function
     initgraph(&gd, &gm, "");
- 
+
     int X0 = 2, Y0 = 2, X1 = 14, Y1 = 16;
- 
+
     // Function call
     DDA(2, 2, 14, 16);
     return 0;
