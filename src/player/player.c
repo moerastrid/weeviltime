@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/09 15:50:18 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/13 14:59:10 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/16 14:07:06 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ int	get_player_spawn(t_data *data)
 	i = 0;
 	j = 0;
 	printf("Test\n");
-	printf("Map size: %i\n", data->map_size);
+	printf("Map size: %i\n", data->map_y);
 	printf("Test\n");
 	// data->distance_to_wall = 0.5;
-	printf("Map size: %d\n", data->map_size);
-	while (i < data->map_size)
+	printf("Map size: %d\n", data->map_y);
+	while (i < data->map_y)
 	{
 		j = 0;
 		while (data->map_array[i][j] != '\0')

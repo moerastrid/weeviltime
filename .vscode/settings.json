@@ -1,7 +1,13 @@
 {
 	"files.associations": {
 		"mlx42.h": "c",
-		"chrono": "c"
+		"chrono": "c",
+		"header.h": "c",
+		"array": "c",
+		"iterator": "c",
+		"string": "c",
+		"string_view": "c",
+		"vector": "c"
 	},
 	"cmake.configureOnOpen": true
 }

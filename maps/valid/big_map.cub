@@ -4,7 +4,7 @@ WE ./include/textures/dungeonTexture.png
 EA ./include/textures/dungeonTexture.png
 
 C 203,225,20
-F 94,9,0
+F 255,9,0
 
         1111111111111111111111111
         1000000000110000000000001

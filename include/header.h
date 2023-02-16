@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/14 15:18:26 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/16 15:54:32 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@
 
 # define FOV 1.256
 
-//# define NO	0
-//# define SO	1
-//# define WE	2
-//# define EA	3
+# define NO	0
+# define SO	1
+# define WE	2
+# define EA	3
+# define C 0
+# define F 1
 
 typedef struct s_player
 {
@@ -43,11 +45,11 @@ typedef struct s_player
 	char	direction;
 }	t_player;
 
-typedef struct s_sky_or_floor
+typedef struct s_plane
 {
 	mlx_image_t		*img;
 	unsigned int	color;
-}	t_skyfl;
+}	t_plane;
 
 typedef struct s_wall
 {
@@ -76,49 +78,49 @@ typedef struct s_data
 	mlx_t			*mlx;
 	t_wall			walls;
 	mlx_image_t		*wall;
-	t_skyfl			sky;
-	t_skyfl			floor;
+	t_plane			ceiling;
+	t_plane			floor;
 	float			camx;
 	float			camy;
-	char			**wall_textures;
-	char			**f_c_color;
 	t_list			*map_lines;
 	char			**map_array;
-	int				map_size;
+	int				map_y;
 	t_player		player;
 	float			distance_to_wall;	// Milan aan t testen
+	bool			*wall_check;
+	bool			*color_check;
 // 	t_wall			wall;
 }	t_data;
 
-//display
+//DEBUG
+void			print_map(t_data *data);
+
+//DISPLAY
 bool			display(t_data *data);
 bool			background(t_data *data);
 bool			build(t_data *data);
 bool			grid(t_data *data);
 
-//parse
-int				parse(int argc, char **argv, t_data *data);
-int				init_map_data(int map, t_data *data);
+//PARSE
+int				check_map(t_data *data);
+int				check_player_spawn(t_data *data);
+int				convert_map(t_data *data);
+int				init_map(int map, t_data *data);
+bool			init_plane(t_data *data, char *line);
+bool			init_walls(t_data *data, char *line);
+int				save_map(int map, t_data *data, char *line);
+int				setup(int argc, char **argv, t_data *data);
 
-//check_map
-int				check_map_spaces(t_data *data);
-int				check_map_tabs(t_data *data);
-
-//player
+//PLAYER
 int				get_player_spawn(t_data *data);
 
-//print_map
-void			print_map(t_data *data);
-
-//save_and_convert_map
-int				convert_map(t_data *data);
-int				save_map(int map, t_data *data, char *line);
-
-//utils
+//UTILS
 void			wrap_putpixel(mlx_image_t *img, uint32_t x, uint32_t y,
 					uint32_t color);
 unsigned int	make_color(int r, int g, int b);
 
+//WRAPS
+int				print_error(char *s);
 
 void			free_array(char **arr);
 

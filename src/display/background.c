@@ -6,13 +6,13 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 16:48:59 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/08 20:27:12 by astrid        ########   odam.nl         */
+/*   Updated: 2023/02/16 15:54:37 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header.h"
 
-static void	fill(t_skyfl plane)
+static void	fill(t_plane plane)
 {
 	unsigned int	i;
 	unsigned int	j;
@@ -32,13 +32,13 @@ static void	fill(t_skyfl plane)
 
 bool	background(t_data *data)
 {
-	data->sky.img = mlx_new_image(data->mlx, data->mlx->width, (data->mlx->height / 2));
+	data->ceiling.img = mlx_new_image(data->mlx, data->mlx->width, (data->mlx->height / 2));
 	data->floor.img = mlx_new_image(data->mlx, data->mlx->width, (data->mlx->height / 2));
-	if (!data->sky.img || !data->floor.img)
+	if (!data->ceiling.img || !data->floor.img)
 		return (false);
-	fill(data->sky);
+	fill(data->ceiling);
 	fill(data->floor);
 	mlx_image_to_window(data->mlx, data->floor.img, 0, data->camy);
-	mlx_image_to_window(data->mlx, data->sky.img, 0, 0);
+	mlx_image_to_window(data->mlx, data->ceiling.img, 0, 0);
 	return (true);
 }

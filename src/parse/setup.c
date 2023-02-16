@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   print_map.c                                        :+:    :+:            */
+/*   setup.c                                            :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
+/*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/02/09 14:43:10 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/14 15:06:05 by mforstho      ########   odam.nl         */
+/*   Created: 2023/02/02 16:49:05 by ageels        #+#    #+#                 */
+/*   Updated: 2023/02/16 15:34:25 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header.h"
 
-void	print_map(t_data *data)
+static void	set_default_values(t_data *data)
 {
-	int	i;
+	data->mlx = NULL;
+	data->wall = NULL;
+	data->camx = WIDTH / 2;
+	data->camy = HEIGHT / 2;
+}
 
-	i = 0;
-	while (i < data->map_size)
-	{
-		printf("%s\n", data->map_array[i]);
-		i++;
-	}
+int	setup(int argc, char **argv, t_data *data)
+{
+	set_default_values(data);
+	(void)argc;
+	(void)argv;
+	return (EXIT_SUCCESS);
 }

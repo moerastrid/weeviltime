@@ -1,47 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   save_and_convert_map.c                             :+:    :+:            */
+/*   convert_map.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/09 14:39:38 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/14 15:42:13 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/16 14:17:09 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/header.h"
 
-int	save_map(int map, t_data *data, char *line)
-{
-	int		map_size;
-	char	*temp_line;
-
-	map_size = 0;
-	if (map < 0)
-		return (EXIT_FAILURE);
-	data->map_lines = NULL;
-	temp_line = line;
-	while (temp_line != NULL)
-	{
-		if (temp_line[ft_strlen(temp_line) - 1] == '\n')
-			temp_line[ft_strlen(temp_line) - 1] = '\0';
-		if (ft_lstnew_back(&data->map_lines, temp_line) == NULL)
-		{
-			ft_lstclear(&data->map_lines, &free);
-			free(temp_line);
-			return (EXIT_FAILURE);
-		}
-		temp_line = get_next_line(map);
-		map_size++;
-	}
-	if (map_size < 1)
-		return (EXIT_FAILURE);
-	data->map_size = map_size;
-	return (EXIT_SUCCESS);
-}
-
-void	free_map_array(char **map_array)
+static void	free_map_array(char **map_array)
 {
 	int	y;
 
