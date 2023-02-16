@@ -1,0 +1,3 @@
+invalid maps die nog niet goed gehandled worden:
+	extra_newlines
+	missing_number
