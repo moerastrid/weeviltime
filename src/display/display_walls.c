@@ -6,11 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/03 16:07:07 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/13 23:00:04 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/16 20:31:57 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/header.h"
+#include "../../include/cub.h"
 
 static void	draw_height(mlx_image_t *grid, int x, float height, double color)
 {

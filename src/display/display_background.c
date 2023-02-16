@@ -6,11 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 16:48:59 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/16 19:56:16 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/16 20:31:48 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/header.h"
+#include "../../include/cub.h"
 
 static void	fill(t_plane plane)
 {
@@ -38,7 +38,7 @@ bool	display_background(t_data *data)
 		return (false);
 	fill(data->ceiling);
 	fill(data->floor);
-	mlx_image_to_window(data->mlx, data->floor.img, 0, data->camy);
+	mlx_image_to_window(data->mlx, data->floor.img, 0, data->cam.y);
 	mlx_image_to_window(data->mlx, data->ceiling.img, 0, 0);
 	return (true);
 }

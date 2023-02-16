@@ -6,11 +6,11 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 13:54:28 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/16 14:11:42 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/16 20:32:05 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/header.h"
+#include "../../include/cub.h"
 
 int	check_player_spawn(t_data *data)
 {

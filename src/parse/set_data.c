@@ -6,11 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/13 18:00:07 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/14 00:37:02 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/16 20:32:27 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/header.h"
+#include "../../include/cub.h"
 
 static bool	set_texture(t_data *data, mlx_image_t *wall, char *line, char *par)
 {

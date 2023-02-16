@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/02/16 19:58:03 by ageels        ########   odam.nl          #
+#    Updated: 2023/02/16 21:46:34 by ageels        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,12 +17,10 @@ LFLAG =  -I . -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 CC = clang
 SRC = src/main.c\
 	src/debug/print_map.c\
-	src/display/background.c\
-	src/display/blokje.c\
+	src/display/display_background.c\
+	src/display/display_blokje.c\
+	src/display/display_walls.c\
 	src/display/display.c\
-	src/display/grid.c\
-	src/get_next_line/get_next_line_utils.c\
-	src/get_next_line/get_next_line.c\
 	src/parse/check_map.c\
 	src/parse/check_player_spawn.c\
 	src/parse/convert_map.c\
@@ -31,9 +29,11 @@ SRC = src/main.c\
 	src/parse/init_walls.c\
 	src/parse/setup.c\
 	src/parse/save_map.c\
-	src/player/player.c\
-	src/raycast/raycast.c\
+	src/utils/get_next_line.c\
+	src/utils/math.c\
+	src/utils/single_alloc_split.c\
 	src/utils/wraps.c\
+	src/utils/clean.c\
 
 OBJ = $(patsubst src/%.c,obj/%.o,$(SRC))
 #Colors:
@@ -60,7 +60,6 @@ obj_folder :
 	mkdir -pv $(OBJ_DIR)/parse
 	mkdir -pv $(OBJ_DIR)/player
 	mkdir -pv $(OBJ_DIR)/raycast
-	mkdir -pv $(OBJ_DIR)/get_next_line
 	mkdir -pv $(OBJ_DIR)/utils
 
 $(NAME): obj_folder $(OBJ)

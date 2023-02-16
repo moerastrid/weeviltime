@@ -6,11 +6,11 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/08 12:52:16 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/13 18:48:38 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/16 20:32:40 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/get_next_line.h"
+#include "../../include/get_next_line.h"
 
 static char	*gnl_split(const char *s, char *dst)
 {

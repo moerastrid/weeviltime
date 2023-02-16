@@ -6,11 +6,11 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/09 14:39:38 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/16 14:17:09 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/16 21:12:34 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/header.h"
+#include "../../include/cub.h"
 
 static void	free_map_array(char **map_array)
 {
@@ -27,14 +27,14 @@ static void	free_map_array(char **map_array)
 	free(map_array);
 }
 
-int	convert_map(t_data *data)
+int	convert_map(t_data *data, t_par *par)
 {
 	int		rows;
 	int		y;
 	char	**map_array;
 	t_list	*map_lines;
 
-	map_lines = data->map_lines;
+	map_lines = par->map_lines;
 	rows = ft_lstsize(map_lines);
 	map_array = malloc(((size_t)rows + 1) * sizeof(char *));
 	if (map_array == NULL)
@@ -53,5 +53,6 @@ int	convert_map(t_data *data)
 	}
 	map_array[y] = NULL;
 	data->map_array = map_array;
+	ft_lstclear(&map_lines, &free);
 	return (EXIT_SUCCESS);
 }
