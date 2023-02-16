@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:33 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/16 15:49:41 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/16 19:57:51 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,14 @@ int	main(int argc, char **argv)
 	if (!display(&data))
 		return (EXIT_FAILURE);
 	mlx_loop(data.mlx);
+	mlx_delete_image(data.mlx, data.walls.wall_north);
+	mlx_delete_image(data.mlx, data.walls.wall_south);
+	mlx_delete_image(data.mlx, data.walls.wall_west);
+	mlx_delete_image(data.mlx, data.walls.wall_east);
 	mlx_terminate(data.mlx);
 	free_array(data.map_array);
 	return (EXIT_SUCCESS);
 }
+
+	//mlx_delete_image(data.mlx, ~all images~); 
+	// need a proper cleaning function

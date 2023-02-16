@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/16 15:54:32 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/16 19:54:54 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include "../libft/libft.h"
-# include "../src/get_next_line/get_next_line.h"
+# include "./get_next_line.h"
 
 # define SKYCOLOR	0xB9D2D6FF
 # define FLOORCOLOR	0xEBBAB9FF
@@ -59,11 +59,10 @@ typedef struct s_wall
 	mlx_image_t		*wall_west;
 }	t_wall;
 
-// type coordinate: (with z as length because otherwise it's confusing.)
 typedef struct s_co
 {
 	float	x;
-	float	length;
+	float	y;
 }		t_co;
 
 typedef struct s_point
@@ -118,6 +117,12 @@ int				get_player_spawn(t_data *data);
 void			wrap_putpixel(mlx_image_t *img, uint32_t x, uint32_t y,
 					uint32_t color);
 unsigned int	make_color(int r, int g, int b);
+int				print_error(char *s);
+//math
+float			calculate_distance(void);
+float			calculate_height(t_data *data, int x);
+//single alloc split
+char			**ft_single_split(char const *s, char c);
 
 //WRAPS
 int				print_error(char *s);

@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_lstadd_front.c                                  :+:    :+:            */
+/*   ft_lstadd_front_bonus.c                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/01 13:51:23 by mforstho      #+#    #+#                 */
-/*   Updated: 2021/11/11 14:51:28 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/13 18:52:37 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Adds the element new to the front of the list
 
 #include "libft.h"
-#include <stdlib.h>
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {

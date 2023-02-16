@@ -6,14 +6,11 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/08 12:52:16 by mforstho      #+#    #+#                 */
-/*   Updated: 2022/08/31 14:32:22 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/13 18:48:38 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-
-#include <unistd.h> // read, ssize_t
-#include <stdlib.h> // free, size_t, NULL
+#include "../../../include/get_next_line.h"
 
 static char	*gnl_split(const char *s, char *dst)
 {
@@ -24,7 +21,7 @@ static char	*gnl_split(const char *s, char *dst)
 	begin = ft_substr(s, 0, newl - s + 1);
 	if (begin == NULL)
 		return (NULL);
-	ft_strcpy(dst, newl + 1);
+	ft_strlcpy(dst, newl + 1, ft_strlen(newl));
 	return (begin);
 }
 

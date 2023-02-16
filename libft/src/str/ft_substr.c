@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/20 11:40:33 by mforstho      #+#    #+#                 */
-/*   Updated: 2021/11/23 12:43:24 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/13 18:50:57 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 // up to len amount of characters
 
 #include "libft.h"
-#include <stdlib.h>
 
 static size_t	ft_strnlen(const char *c, size_t n)
 {

@@ -6,14 +6,15 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/19 16:24:41 by mforstho      #+#    #+#                 */
-/*   Updated: 2021/11/11 13:59:57 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/14 00:25:20 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+// EDIT ASTRID : protected your strdup for segfaults :)
 
 // Allocates sufficient memory for a copy of s1 and does the copy
 
 #include "libft.h"
-#include <stdlib.h>
 
 char	*ft_strdup(const char *s1)
 {
@@ -22,6 +23,9 @@ char	*ft_strdup(const char *s1)
 	char	*s2;
 
 	i = 0;
+	s2 = NULL;
+	if (!s1)
+		return (NULL);
 	len = ft_strlen((char *)s1) + 1;
 	s2 = malloc(len);
 	if (s2 == NULL)

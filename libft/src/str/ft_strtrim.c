@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/20 14:17:55 by mforstho      #+#    #+#                 */
-/*   Updated: 2021/11/11 14:42:44 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/13 18:51:07 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 // Removes the set of characters from the beginning and start of s1
 
 #include "libft.h"
-#include <stdlib.h>
 
 // Locates the start of s1 (without the characters in set) using ft_strchr
 static size_t	index_start(char const *string, char const *start_set)

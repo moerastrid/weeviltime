@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   background.c                                       :+:    :+:            */
+/*   display_background.c                               :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 16:48:59 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/16 15:54:37 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/16 19:56:16 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	fill(t_plane plane)
 	}
 }
 
-bool	background(t_data *data)
+bool	display_background(t_data *data)
 {
 	data->ceiling.img = mlx_new_image(data->mlx, data->mlx->width, (data->mlx->height / 2));
 	data->floor.img = mlx_new_image(data->mlx, data->mlx->width, (data->mlx->height / 2));

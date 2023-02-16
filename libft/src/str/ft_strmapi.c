@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/25 13:43:38 by mforstho      #+#    #+#                 */
-/*   Updated: 2021/11/11 15:05:37 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/13 18:51:29 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 // to each character of s in a new string
 
 #include "libft.h"
-#include <stdlib.h>
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {

@@ -6,14 +6,13 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/19 16:24:52 by mforstho      #+#    #+#                 */
-/*   Updated: 2021/11/11 14:19:39 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/13 18:51:24 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Compares up to n amount of characters from strings s1 and s2
 
 #include "libft.h"
-#include <stddef.h>
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
