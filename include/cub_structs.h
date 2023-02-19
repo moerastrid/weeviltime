@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/16 21:42:05 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/19 22:55:45 by astrid        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,10 @@ typedef struct s_data
 	t_plane			ceiling;
 	t_plane			floor;
 	t_co			cam;
+	t_list	*map_lines;
+	bool	*wall_check;
+	bool	*color_check;
+	int		fd;
 	t_player		player;
 }	t_data;
 

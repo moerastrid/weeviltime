@@ -6,26 +6,26 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:50:09 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/16 21:16:46 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/19 22:59:04 by astrid        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub.h"
 
-static void	free_array(char **arr)
-{
-	int	i;
+// static void	free_array(char **arr)
+// {
+// 	int	i;
 
-	if (arr == NULL)
-		return ;
-	i = 0;
-	while (arr[i] != NULL)
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-}
+// 	if (arr == NULL)
+// 		return ;
+// 	i = 0;
+// 	while (arr[i] != NULL)
+// 	{
+// 		free(arr[i]);
+// 		i++;
+// 	}
+// 	free(arr);
+// }
 
 void	clean_everything(t_data *data)
 {

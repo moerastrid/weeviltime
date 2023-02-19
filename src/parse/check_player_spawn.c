@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 13:54:28 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/16 20:32:05 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/19 22:48:31 by astrid        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	check_player_spawn(t_data *data)
 		while (data->map_array[i][j] != '\0')
 		{
 			if (data->map_array[i][j] == 'N'
-				|| data->map_array[i][j] == 'E'
 				|| data->map_array[i][j] == 'S'
-				|| data->map_array[i][j] == 'W')
+				|| data->map_array[i][j] == 'W'
+				|| data->map_array[i][j] == 'E')
 				player_count++;
 			j++;
 		}

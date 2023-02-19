@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/19 22:29:36 by astrid        ########   odam.nl         */
+/*   Updated: 2023/02/19 22:58:15 by astrid        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,14 @@ bool			display_walls(t_data *data);
 //PARSE
 int				check_map(t_data *data);
 int				check_player_spawn(t_data *data);
-int				convert_map(t_data *data, t_par *pars);
-int				init_map(t_data *data, t_par *pars);
-bool			init_plane(t_data *data, char *line, t_par *pars);
-bool			init_walls(t_data *data, char *line, t_par *pars);
+int				convert_map(t_data *data);
+// int				convert_map(t_data *data, t_par *pars);
+int				init_map(int map, t_data *data);
+// int				init_map(t_data *data, t_par *pars);
+bool			init_plane(t_data *data, char *line);
+// bool				init_plane(t_data *data, char *line, t_par *pars);
+bool			init_walls(t_data *data, char *line);
+// bool				init_walls(t_data *data, char *line, t_par *pars);
 int				save_map(int map, t_data *data, char *line);
 int				setup(int argc, char **argv, t_data *data);
 
@@ -61,5 +65,7 @@ int				print_error(char *s);
 unsigned int	make_color(int r, int g, int b);
 void			wrap_putpixel(mlx_image_t *img, uint32_t x, uint32_t y,
 					uint32_t color);
+
+void	free_array(char **arr);
 
 #endif
