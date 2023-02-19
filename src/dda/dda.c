@@ -1,59 +1,59 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   dda.c                                              :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/02/13 15:50:36 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/14 12:24:50 by mforstho      ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
+///* ************************************************************************** */
+///*                                                                            */
+///*                                                        ::::::::            */
+///*   dda.c                                              :+:    :+:            */
+///*                                                     +:+                    */
+///*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
+///*                                                   +#+                      */
+///*   Created: 2023/02/13 15:50:36 by mforstho      #+#    #+#                 */
+///*   Updated: 2023/02/14 12:24:50 by mforstho      ########   odam.nl         */
+///*                                                                            */
+///* ************************************************************************** */
 
-#include "../../include/header.h"
+//#include "../../include/header.h"
 
-int	abs(int n)
-{
-	return ((n > 0) ? n : (n * (-1)));
-}
+//int	abs(int n)
+//{
+//	return ((n > 0) ? n : (n * (-1)));
+//}
 
-// DDA Function for line generation
-void DDA(int X0, int Y0, int X1, int Y1)
-{
-    // calculate dx & dy
-	int dx = X1 - X0;
-	int dy = Y1 - Y0;
+//// DDA Function for line generation
+//void DDA(int X0, int Y0, int X1, int Y1)
+//{
+//    // calculate dx & dy
+//	int dx = X1 - X0;
+//	int dy = Y1 - Y0;
 
-	// calculate steps required for generating pixels
-	int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+//	// calculate steps required for generating pixels
+//	int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
 
-	// calculate increment in x & y for each steps
-	float Xinc = dx / (float)steps;
-	float Yinc = dy / (float)steps;
+//	// calculate increment in x & y for each steps
+//	float Xinc = dx / (float)steps;
+//	float Yinc = dy / (float)steps;
 
-	// Put pixel for each step
-	float X = X0;
-	float Y = Y0;
-	for (int i = 0; i <= steps; i++) {
-		mlx_put_pixel(round(X), round(Y), RED); // put pixel at (X,Y)
-		X += Xinc; // increment in x at each step
-		Y += Yinc; // increment in y at each step
-		delay(100); // for visualization of line-
-                    // generation step by step
-	}
-}
+//	// Put pixel for each step
+//	float X = X0;
+//	float Y = Y0;
+//	for (int i = 0; i <= steps; i++) {
+//		mlx_put_pixel(round(X), round(Y), RED); // put pixel at (X,Y)
+//		X += Xinc; // increment in x at each step
+//		Y += Yinc; // increment in y at each step
+//		delay(100); // for visualization of line-
+//                    // generation step by step
+//	}
+//}
 
-// Driver program
-int main()
-{
-    int gd = DETECT, gm;
+//// Driver program
+//int main()
+//{
+//    int gd = DETECT, gm;
 
-    // Initialize graphics function
-    initgraph(&gd, &gm, "");
+//    // Initialize graphics function
+//    initgraph(&gd, &gm, "");
 
-    int X0 = 2, Y0 = 2, X1 = 14, Y1 = 16;
+//    int X0 = 2, Y0 = 2, X1 = 14, Y1 = 16;
 
-    // Function call
-    DDA(2, 2, 14, 16);
-    return 0;
-}
+//    // Function call
+//    DDA(2, 2, 14, 16);
+//    return 0;
+//}

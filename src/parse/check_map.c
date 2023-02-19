@@ -6,13 +6,13 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/06 15:22:19 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/16 19:56:42 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/16 20:32:02 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/header.h"
+#include "../../include/cub.h"
 
-static int	check_all(t_data *data, int i, int j)
+static int	check_every_zero(t_data *data, int i, int j)
 {
 	if (i == 0 || i == (data->map_y - 1))
 		return (print_error("First or last line"));
@@ -45,7 +45,7 @@ static int	check_map_spaces(t_data *data)
 		{
 			if (data->map_array[i][j] == '0')
 			{
-				if (check_all(data, i, j) == EXIT_FAILURE)
+				if (check_every_zero(data, i, j) == EXIT_FAILURE)
 					return (EXIT_FAILURE);
 			}
 			j++;

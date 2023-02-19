@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   blokje.c                                           :+:    :+:            */
+/*   display_blokje.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 18:41:09 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/13 18:59:16 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/16 20:31:53 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/header.h"
+#include "../../include/cub.h"
 
 static void	my_keyhook(mlx_key_data_t keydata, void *param)
 {

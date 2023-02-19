@@ -6,11 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 16:48:59 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/19 22:17:05 by astrid        ########   odam.nl         */
+/*   Updated: 2023/02/19 22:24:02 by astrid        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/header.h"
+#include "../../include/cub.h"
 
 static void	fill(t_plane plane)
 {
