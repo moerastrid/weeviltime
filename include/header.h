@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/16 19:54:54 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/19 22:16:38 by astrid        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,7 @@ typedef struct s_data
 	mlx_image_t		*wall;
 	t_plane			ceiling;
 	t_plane			floor;
-	float			camx;
-	float			camy;
+	t_co			cam;
 	t_list			*map_lines;
 	char			**map_array;
 	int				map_y;
@@ -96,9 +95,9 @@ void			print_map(t_data *data);
 
 //DISPLAY
 bool			display(t_data *data);
-bool			background(t_data *data);
-bool			build(t_data *data);
-bool			grid(t_data *data);
+bool			display_background(t_data *data);
+bool			display_blokje(t_data *data);
+bool			display_walls(t_data *data);
 
 //PARSE
 int				check_map(t_data *data);

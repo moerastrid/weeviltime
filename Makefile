@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/02/16 19:58:03 by ageels        ########   odam.nl          #
+#    Updated: 2023/02/19 22:19:48 by astrid        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,7 @@ SRC = src/main.c\
 	src/display/background.c\
 	src/display/blokje.c\
 	src/display/display.c\
-	src/display/grid.c\
-	src/get_next_line/get_next_line_utils.c\
-	src/get_next_line/get_next_line.c\
+	src/display/walls.c\
 	src/parse/check_map.c\
 	src/parse/check_player_spawn.c\
 	src/parse/convert_map.c\
@@ -32,7 +30,9 @@ SRC = src/main.c\
 	src/parse/setup.c\
 	src/parse/save_map.c\
 	src/player/player.c\
-	src/raycast/raycast.c\
+	src/utils/get_next_line.c\
+	src/utils/math.c\
+	src/utils/single_alloc_split.c\
 	src/utils/wraps.c\
 
 OBJ = $(patsubst src/%.c,obj/%.o,$(SRC))
