@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 13:53:23 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/16 21:41:21 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/19 22:30:43 by astrid        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static bool	set_wall(t_data *data, char *line, int n, mlx_image_t *wall, t_par *
 {
 	mlx_texture_t	*texture;
 
+	(void)wall;
 	if (pars->wall_check[n] != true)
 	{
 		//pars->wall_check[n] = true;

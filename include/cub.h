@@ -6,11 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-<<<<<<< HEAD:include/header.h
-/*   Updated: 2023/02/19 22:16:38 by astrid        ########   odam.nl         */
-=======
-/*   Updated: 2023/02/16 21:44:19 by ageels        ########   odam.nl         */
->>>>>>> main:include/cub.h
+/*   Updated: 2023/02/19 22:29:36 by astrid        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,68 +29,6 @@
 # define HEIGHT 720
 # define FOV 1.256
 
-<<<<<<< HEAD:include/header.h
-# define NO	0
-# define SO	1
-# define WE	2
-# define EA	3
-# define C 0
-# define F 1
-
-typedef struct s_player
-{
-	int		x;
-	int		y;
-	char	direction;
-}	t_player;
-
-typedef struct s_plane
-{
-	mlx_image_t		*img;
-	unsigned int	color;
-}	t_plane;
-
-typedef struct s_wall
-{
-	mlx_image_t		*wall_north;
-	mlx_image_t		*wall_south;
-	mlx_image_t		*wall_east;
-	mlx_image_t		*wall_west;
-}	t_wall;
-
-typedef struct s_co
-{
-	float	x;
-	float	y;
-}		t_co;
-
-typedef struct s_point
-{
-	char	s;
-	int		x;
-	int		y;
-}	t_point;
-
-typedef struct s_data
-{
-	mlx_t			*mlx;
-	t_wall			walls;
-	mlx_image_t		*wall;
-	t_plane			ceiling;
-	t_plane			floor;
-	t_co			cam;
-	t_list			*map_lines;
-	char			**map_array;
-	int				map_y;
-	t_player		player;
-	float			distance_to_wall;	// Milan aan t testen
-	bool			*wall_check;
-	bool			*color_check;
-// 	t_wall			wall;
-}	t_data;
-
-=======
->>>>>>> main:include/cub.h
 //DEBUG
 void			print_map(t_data *data);
 

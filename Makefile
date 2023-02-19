@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/02/19 22:24:56 by astrid        ########   odam.nl          #
+#    Updated: 2023/02/19 22:30:23 by astrid        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,8 @@ LFLAG =  -I . -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 CC = clang
 SRC = src/main.c\
 	src/debug/print_map.c\
-	src/display/display_background.c\
-	src/display/display_blokje.c\
-	src/display/display_walls.c\
+	src/display/background.c\
+	src/display/blokje.c\
 	src/display/display.c\
 	src/display/walls.c\
 	src/parse/check_map.c\

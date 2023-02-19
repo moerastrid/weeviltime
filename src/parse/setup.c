@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 16:49:05 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/19 22:23:56 by astrid        ########   odam.nl         */
+/*   Updated: 2023/02/19 22:31:07 by astrid        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	set_default_values(t_data *data, t_par *pars)
 {
+	(void)pars;
 	data->mlx = NULL;
 	data->wall = NULL;
 	data->cam.x = WIDTH / 2;
