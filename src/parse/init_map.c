@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 13:52:34 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/20 14:02:13 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/20 14:40:14 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	init_map(int map, t_data *data)		//initialiseert de ceiling en floor kleuren
 		printf("Missing color/texture arguments\n");
 		return (EXIT_FAILURE);
 	}
+	get_player_spawn(data);
 	return (EXIT_SUCCESS);
 }
 
