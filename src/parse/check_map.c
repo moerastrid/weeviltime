@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/06 15:22:19 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/20 12:50:56 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/20 14:44:32 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,35 @@ static int	check_map_spaces(t_data *data)
 {
 	int	i;
 	int	j;
+	int	player_count;
 
 	i = 0;
+	player_count = 0;
 	while (i < data->map_y)
 	{
 		j = 0;
 		while (data->map_array[i][j] != '\0')
 		{
-			if (data->map_array[i][j] == '0')
+			if (data->map_array[i][j] == '0') // of player?
 			{
 				if (check_all(data, i, j) == EXIT_FAILURE)
 					return (EXIT_FAILURE);
+			}
+			if (data->map_array[i][j] == 'N'
+				|| data->map_array[i][j] == 'S'
+				|| data->map_array[i][j] == 'W'
+				|| data->map_array[i][j] == 'E')
+			{
+				data->player.x = j;
+				data->player.y = i;
+				player_count++;
 			}
 			j++;
 		}
 		i++;
 	}
+	if (player_count != 1)
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
