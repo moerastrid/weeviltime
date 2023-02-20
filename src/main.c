@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:33 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/19 23:01:50 by astrid        ########   odam.nl         */
+/*   Updated: 2023/02/20 14:21:39 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,8 @@ int	main(int argc, char **argv)
 	t_data	data;
 
 	atexit(leakfunc);
-	if (argc <= 1)
-	{
-		printf("Need map\n");
-		return (EXIT_FAILURE);
-	}
 	if (setup(argc, argv, &data))
 		return (EXIT_FAILURE);
-	data.mlx = mlx_init(WIDTH, HEIGHT, "~Weevil time~", false);
-	if (!data.mlx)
-		return (EXIT_FAILURE);
-	if (init_map(open(argv[1], O_RDONLY), &data) == EXIT_FAILURE)
-	{
-		mlx_terminate(data.mlx);
-		return (EXIT_FAILURE);
-	}
 	if (!display(&data))
 		return (EXIT_FAILURE);
 	mlx_loop(data.mlx);
