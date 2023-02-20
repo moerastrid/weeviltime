@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/06 15:22:19 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/20 14:56:10 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/20 15:21:42 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,14 @@ static int	check_map_spaces(t_data *data)
 	}
 	if (player_count != 1)
 		return (EXIT_FAILURE);
+	if (data->map_array[data->player.y][data->player.x] == 'N')
+		data->player.direction = 0;
+	if (data->map_array[data->player.y][data->player.x] == 'S')
+		data->player.direction = M_PI;
+	if (data->map_array[data->player.y][data->player.x] == 'W')
+		data->player.direction = M_PI_2 + M_PI;
+	if (data->map_array[data->player.y][data->player.x] == 'E')
+		data->player.direction = M_PI_2;
 	return (EXIT_SUCCESS);
 }
 
