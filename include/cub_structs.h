@@ -6,19 +6,26 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/19 22:55:45 by astrid        ########   odam.nl         */
+/*   Updated: 2023/02/20 14:02:42 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_STRUCTS_H
 # define CUB_STRUCTS_H
 
-# define NO	0
-# define SO	1
-# define WE	2
-# define EA	3
-# define C 0
-# define F 1
+typedef enum e_wall_side
+{
+	NO,
+	SO,
+	WE,
+	EA,
+}	t_wall_side;
+
+typedef enum e_plane
+{
+	C,
+	F,
+}	t_planes;	// betere naam geven om verwarring te voorkomen
 
 // direction in rad please :) 
 // NO = 0 rad, SO = pi rad, EA = 0,5pi rad, WE = 1,5pi rad
@@ -49,14 +56,6 @@ typedef struct s_co
 	float	y;
 }		t_co;
 
-typedef struct s_parsing_data
-{
-	t_list	*map_lines;
-	bool	*wall_check;
-	bool	*color_check;
-	int		fd;
-}		t_par;
-
 typedef struct s_data
 {
 	int				map_y;
@@ -67,10 +66,9 @@ typedef struct s_data
 	t_plane			ceiling;
 	t_plane			floor;
 	t_co			cam;
-	t_list	*map_lines;
-	bool	*wall_check;
-	bool	*color_check;
-	int		fd;
+	t_list			*map_lines;
+	bool			*wall_check;
+	bool			*color_check;
 	t_player		player;
 }	t_data;
 

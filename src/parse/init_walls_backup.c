@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 13:53:23 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/19 22:52:08 by astrid        ########   odam.nl         */
+/*   Updated: 2023/02/20 12:51:51 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 // 	mlx_delete_texture(texture);
 // 	return (true);
 // }
-
 
 /*
 static bool	set_wall(t_data *data, char *line, int n, mlx_image_t *wall)
@@ -67,7 +66,6 @@ bool	init_walls(t_data *data, char *line)
 	return (false);
 }
 */
-
 
 /*
 static bool	save_wall(t_data *data, mlx_image_t *wall, char *line)

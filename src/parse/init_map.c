@@ -1,14 +1,14 @@
-// /* ************************************************************************** */
-// /*                                                                            */
-// /*                                                        ::::::::            */
-// /*   init_map.c                                         :+:    :+:            */
-// /*                                                     +:+                    */
-// /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
-// /*                                                   +#+                      */
-// /*   Created: 2023/02/16 13:52:34 by mforstho      #+#    #+#                 */
-// /*   Updated: 2023/02/19 22:49:25 by astrid        ########   odam.nl         */
-// /*                                                                            */
-// /* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   init_map.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/02/16 13:52:34 by mforstho      #+#    #+#                 */
+/*   Updated: 2023/02/20 14:02:13 by mforstho      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../include/cub.h"
 
@@ -31,7 +31,7 @@ int	init_map(int map, t_data *data)		//initialiseert de ceiling en floor kleuren
 	{
 		if (element_count < 6)
 		{
-			if (init_walls(data, temp_line) || init_plane(data, temp_line))
+			if (init_wall(data, temp_line) || init_plane(data, temp_line))
 				element_count++;
 			free(temp_line);
 		}
@@ -82,7 +82,7 @@ int	init_map(int map, t_data *data)		//initialiseert de ceiling en floor kleuren
 // 	{
 // 		if (elem_count < 6)
 // 		{
-// 			//if (init_walls(data, temp_line) || init_plane(data, temp_line))
+// 			//if (init_walls(data, pars, temp_line) || init_plane(data, temp_line))
 // 				elem_count++;
 // 			free(temp_line);
 // 		}

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:33 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/19 23:01:50 by astrid        ########   odam.nl         */
+/*   Updated: 2023/02/20 12:49:44 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	leakfunc(void)
 void	free_array(char **arr)
 {
 	int	i;
+
 	if (arr == NULL)
 		return ;
 	i = 0;
