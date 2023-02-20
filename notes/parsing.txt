@@ -1,3 +1,4 @@
 invalid maps die nog niet goed gehandled worden:
 	extra_newlines
 	missing_number
+	no_cub_file.cbu (dus niet .cub)

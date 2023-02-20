@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:33 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/20 14:21:39 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/20 14:29:53 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,6 @@ void	free_array(char **arr)
 	}
 	free(arr);
 }
-
-// int	main(int argc, char **argv)
-// {
-// 	t_data	data;
-
-// 	atexit(leakfunc);
-// 	if (setup(argc, argv, &data))
-// 		return (EXIT_FAILURE);
-// 	//if (!display(&data))
-// 	//	return (EXIT_FAILURE);
-// 	mlx_loop(data.mlx);
-// 	//clean_everything(&data);
-// 	return (EXIT_SUCCESS);
-// }
-
-	//mlx_delete_image(data.mlx, ~all images~); 
-	// need a proper cleaning function
-
 
 int	main(int argc, char **argv)
 {
