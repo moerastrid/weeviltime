@@ -6,15 +6,15 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/06 15:22:19 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/20 14:44:32 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/20 14:56:10 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
- #include "../../include/cub.h"
+#include "../../include/cub.h"
 
 static int	check_all(t_data *data, int i, int j)
 {
-if (i == 0 || i == (data->map_y - 1))
+	if (i == 0 || i == (data->map_y - 1))
 		return (print_error("First or last line"));
 	if (j == 0 || data->map_array[i][j + 1] == '\0')
 		return (print_error("left or right edge"));
@@ -45,16 +45,18 @@ static int	check_map_spaces(t_data *data)
 		j = 0;
 		while (data->map_array[i][j] != '\0')
 		{
-			if (data->map_array[i][j] == '0') // of player?
+			if (data->map_array[i][j] == '0')
 			{
 				if (check_all(data, i, j) == EXIT_FAILURE)
 					return (EXIT_FAILURE);
 			}
-			if (data->map_array[i][j] == 'N'
+			else if (data->map_array[i][j] == 'N'
 				|| data->map_array[i][j] == 'S'
 				|| data->map_array[i][j] == 'W'
 				|| data->map_array[i][j] == 'E')
 			{
+				if (check_all(data, i, j) == EXIT_FAILURE)
+					return (EXIT_FAILURE);
 				data->player.x = j;
 				data->player.y = i;
 				player_count++;
