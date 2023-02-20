@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/20 14:02:22 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/20 14:33:22 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int				setup(int argc, char **argv, t_data *data);
 // clean
 void			clean_everything(t_data *data);
 //math
-float			calculate_distance(void);
+//float			calculate_distance(void);
 float			calculate_height(t_data *data, int x);
 //single alloc split
 char			**ft_single_split(char const *s, char c);

@@ -22,9 +22,20 @@ static void	set_default_values(t_data *data)
 
 int	setup(int argc, char **argv, t_data *data)
 {
+	if (argc <= 1)
+	{
+		printf("Need map\n");
+		return (EXIT_FAILURE);
+	}
 	set_default_values(data);
-	(void)argc;
-	(void)argv;
+	data->mlx = mlx_init(WIDTH, HEIGHT, "~Weevil time~", false);
+	if (!data->mlx)
+		return (EXIT_FAILURE);
+	if (init_map(open(argv[1], O_RDONLY), data) == EXIT_FAILURE)
+	{
+		mlx_terminate(data->mlx);
+		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 
