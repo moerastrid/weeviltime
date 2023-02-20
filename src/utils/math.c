@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 16:49:09 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/20 14:19:35 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/20 14:55:51 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static float	calculate_distance(t_data *data)
 	distance = 4;
 	myplace.x = data->player.x + 0.5;
 	myplace.y = data->player.y + 0.5;
-	printf("data player\tx: %d\ty: %d\n", data->player.x, data->player.y);
+	// printf("data player\tx: %f\ty: %f\n", data->player.x, data->player.y);
 	return (distance);
 }
 

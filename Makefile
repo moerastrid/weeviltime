@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/02/19 22:30:23 by astrid        ########   odam.nl          #
+#    Updated: 2023/02/20 14:50:39 by mforstho      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC = src/main.c\
 	src/parse/convert_map.c\
 	src/parse/init_map.c\
 	src/parse/init_plane.c\
-	src/parse/init_walls.c\
+	src/parse/init_wall.c\
 	src/parse/setup.c\
 	src/parse/save_map.c\
 	src/player/player.c\

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/20 14:40:37 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/20 14:57:02 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,6 @@ bool			init_wall(t_data *data, char *line);
 // bool				init_walls(t_data *data, char *line, t_par *pars);
 int				save_map(int map, t_data *data, char *line);
 int				setup(int argc, char **argv, t_data *data);
-
-//PLAYER
-
 
 //UTILS
 // clean
