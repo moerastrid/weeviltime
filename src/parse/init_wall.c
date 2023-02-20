@@ -1,18 +1,18 @@
-// /* ************************************************************************** */
-// /*                                                                            */
-// /*                                                        ::::::::            */
-// /*   init_walls.c                                       :+:    :+:            */
-// /*                                                     +:+                    */
-// /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
-// /*                                                   +#+                      */
-// /*   Created: 2023/02/16 13:53:23 by mforstho      #+#    #+#                 */
-// /*   Updated: 2023/02/19 22:30:43 by astrid        ########   odam.nl         */
-// /*                                                                            */
-// /* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   init_wall.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/02/16 13:53:23 by mforstho      #+#    #+#                 */
+/*   Updated: 2023/02/20 14:03:03 by mforstho      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../include/cub.h"
 
-static bool	set_wall(t_data *data, char *line, int n, mlx_image_t *wall)
+static bool	set_wall(t_data *data, char *line, t_wall_side n, mlx_image_t *wall)
 {
 	mlx_texture_t	*texture;
 
@@ -30,10 +30,10 @@ static bool	set_wall(t_data *data, char *line, int n, mlx_image_t *wall)
 		mlx_delete_texture(texture);
 		return (true);
 	}
-	return (false);		// moet dit reworken om de juiste error te geven
+	return (false);	// moet dit reworken om de juiste error te geven
 }
 
-bool	init_walls(t_data *data, char *line)
+bool	init_wall(t_data *data, char *line)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0)
 		return (set_wall(data, line, EA, data->walls.wall_east));
@@ -45,7 +45,6 @@ bool	init_walls(t_data *data, char *line)
 		return (set_wall(data, line, SO, data->walls.wall_south));
 	return (false);
 }
-
 
 // static bool	save_wall(t_data *data, mlx_image_t *wall, char *line)
 // {

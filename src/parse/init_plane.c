@@ -1,14 +1,14 @@
-// /* ************************************************************************** */
-// /*                                                                            */
-// /*                                                        ::::::::            */
-// /*   init_plane.c                                       :+:    :+:            */
-// /*                                                     +:+                    */
-// /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
-// /*                                                   +#+                      */
-// /*   Created: 2023/02/16 14:15:30 by mforstho      #+#    #+#                 */
-// /*   Updated: 2023/02/16 21:38:21 by ageels        ########   odam.nl         */
-// /*                                                                            */
-// /* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   init_plane.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/02/16 14:15:30 by mforstho      #+#    #+#                 */
+/*   Updated: 2023/02/20 13:49:08 by mforstho      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../include/cub.h"
 
@@ -47,7 +47,7 @@
 // 	return (true);
 // }
 
-static bool	check_and_set_plane(t_data *data, char *line, int n, t_plane *plane)	// int n naar een enum veranderen
+static bool	set_plane(t_data *data, char *line, t_planes n, t_plane *plane)
 {
 	char	**temp_arr;
 
@@ -65,10 +65,10 @@ static bool	check_and_set_plane(t_data *data, char *line, int n, t_plane *plane)
 
 bool	init_plane(t_data *data, char *line)
 {
-	if (ft_strncmp(line, "C ", 2) == 0)		// lengte van temp array checken voor beiden
-		return (check_and_set_plane(data, line, C, &data->ceiling));
+	if (ft_strncmp(line, "C ", 2) == 0)	//lengte van line checken voor beiden
+		return (set_plane(data, line, C, &data->ceiling));
 	else if (ft_strncmp(line, "F ", 2) == 0)
-		return (check_and_set_plane(data, line, F, &data->floor));
+		return (set_plane(data, line, F, &data->floor));
 	return (false);
 }
 
