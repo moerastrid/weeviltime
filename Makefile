@@ -6,13 +6,13 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/02/20 15:42:05 by mforstho      ########   odam.nl          #
+#    Updated: 2023/02/21 16:48:47 by mforstho      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := cub3D
 OBJ_DIR = ./obj
-CFLAG = -Wall -Werror -Wextra #-fsanitize=address -g
+CFLAG = -Wall -Werror -Wextra
 LFLAG =  -I . -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 CC = clang
 SRC = main.c\
@@ -36,6 +36,10 @@ SRC = main.c\
 	# src/utils/single_alloc_split.c\
 	# src/utils/wraps.c\
 	# src/utils/clean.c\
+
+ifdef DEBUG
+CFLAG += -fsanitize=address -g
+endif
 
 OBJ = $(patsubst src/%.c,obj/%.o,$(SRC))
 #Colors:

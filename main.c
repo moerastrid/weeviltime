@@ -34,7 +34,7 @@ void	updownleftright(t_img *img, t_map *mapdata, float mn[2])
 {
 	while (mapdata->ya <= mapdata->yb && mapdata->xa <= mapdata->xb)
 	{
-		ft_pixelputwrap(img, mapdata->xa, mapdata->ya, 0xEEEEEEFF);
+		ft_pixelputwrap(img, mapdata->xa, mapdata->ya, 0xEEEE99FF);
 		if (mapdata->ya <= (mn[0] * mapdata->xa) + mn[1]
 			&& (mapdata->ya + 1) >= (mn[0] * mapdata->xa) + mn[1])
 			mapdata->xa++;
@@ -48,7 +48,7 @@ void	downupleftright(t_img *img, t_map *mapdata, float mn[2])
 {
 	while (mapdata->ya >= mapdata->yb && mapdata->xa <= mapdata->xb)
 	{
-		ft_pixelputwrap(img, mapdata->xa, mapdata->ya, 0x99EEEEFF);
+		ft_pixelputwrap(img, mapdata->xa, mapdata->ya, 0xEEEE99FF);
 		if (mapdata->ya <= (mn[0] * mapdata->xa) + mn[1]
 			&& (mapdata->ya + 1) > (mn[0] * mapdata->xa + mn[1]))
 			mapdata->xa++;
@@ -61,7 +61,7 @@ void	updownrightleft(t_img *img, t_map *mapdata, float mn[2])
 {
 	while (mapdata->ya <= mapdata->yb && mapdata->xa >= mapdata->xb)
 	{
-		ft_pixelputwrap(img, mapdata->xa, mapdata->ya, 0xEE99EEFF);
+		ft_pixelputwrap(img, mapdata->xa, mapdata->ya, 0xEEEE99FF);
 		if (mapdata->ya >= (mn[0] * mapdata->xa) + mn[1]
 			&& (mapdata->ya - 1) <= (mn[0] * mapdata->xa) + mn[1])
 			mapdata->xa--;
@@ -104,6 +104,92 @@ void	ft_line(t_img *img, t_map *mapdata)
 	return ;
 }
 
+
+
+
+
+
+
+
+
+
+/* ---------------------------------------- */
+
+void	updownleftright_red(t_img *img, t_map *mapdata, float mn[2])
+{
+	while (mapdata->ya <= mapdata->yb && mapdata->xa <= mapdata->xb)
+	{
+		ft_pixelputwrap(img, mapdata->xa, mapdata->ya, 0xFF0000FF);
+		if (mapdata->ya <= (mn[0] * mapdata->xa) + mn[1]
+			&& (mapdata->ya + 1) >= (mn[0] * mapdata->xa) + mn[1])
+			mapdata->xa++;
+		else
+			mapdata->ya++;
+	}
+	return ;
+}
+
+void	downupleftright_red(t_img *img, t_map *mapdata, float mn[2])
+{
+	while (mapdata->ya >= mapdata->yb && mapdata->xa <= mapdata->xb)
+	{
+		ft_pixelputwrap(img, mapdata->xa, mapdata->ya, 0xFF0000FF);
+		if (mapdata->ya <= (mn[0] * mapdata->xa) + mn[1]
+			&& (mapdata->ya + 1) > (mn[0] * mapdata->xa + mn[1]))
+			mapdata->xa++;
+		else
+			mapdata->ya--;
+	}
+}
+
+void	updownrightleft_red(t_img *img, t_map *mapdata, float mn[2])
+{
+	while (mapdata->ya <= mapdata->yb && mapdata->xa >= mapdata->xb)
+	{
+		ft_pixelputwrap(img, mapdata->xa, mapdata->ya, 0xFF0000FF);
+		if (mapdata->ya >= (mn[0] * mapdata->xa) + mn[1]
+			&& (mapdata->ya - 1) <= (mn[0] * mapdata->xa) + mn[1])
+			mapdata->xa--;
+		else
+			mapdata->ya++;
+	}
+}
+
+void	downuprightleft_red(t_img *img, t_map *mapdata, float mn[2])
+{
+	while (mapdata->ya >= mapdata->yb && mapdata->xa >= mapdata->xb)
+	{
+		ft_pixelputwrap(img, mapdata->xa, mapdata->ya, 0xFF0000FF);
+		if (mapdata->ya >= (mn[0] * mapdata->xa) + mn[1]
+			&& (mapdata->ya - 1) <= (mn[0] * mapdata->xa + mn[1]))
+			mapdata->xa--;
+		else
+			mapdata->ya--;
+	}
+}
+
+void	ft_line_red(t_img *img, t_map *mapdata)
+{
+	float		xd;
+	float		yd;
+	float		mn[2];
+
+	xd = mapdata->xb - mapdata->xa;
+	yd = mapdata->yb - mapdata->ya;
+	mn[0] = yd / xd;
+	mn[1] = mapdata->ya - (mapdata->xa * mn[0]);
+	if (mapdata->ya <= mapdata->yb && mapdata->xa <= mapdata->xb)
+		updownleftright_red(img, mapdata, mn);
+	else if (mapdata->ya >= mapdata->yb && mapdata->xa <= mapdata->xb)
+		downupleftright_red(img, mapdata, mn);
+	else if (mapdata->ya <= mapdata->yb && mapdata->xa >= mapdata->xb)
+		updownrightleft_red(img, mapdata, mn);
+	else if (mapdata->ya >= mapdata->yb && mapdata->xa >= mapdata->xb)
+		downuprightleft_red(img, mapdata, mn);
+	return ;
+}
+/* ---------------------------------------- */
+
 typedef struct s_testdata
 {
 	mlx_t		*mlx;
@@ -119,14 +205,14 @@ typedef struct s_testdata
 #define mapS 64      //map cube size
 int map[]=           //the map array. Edit to change level but keep the outer walls
 {
- 1,1,1,1,1,1,1,1,
- 1,0,1,0,0,0,0,1,
- 1,0,1,0,0,0,0,1,
- 1,0,1,0,0,0,0,1,
- 1,0,0,0,0,0,0,1,
- 1,0,0,0,0,1,0,1,
- 1,0,0,0,0,0,0,1,
- 1,1,1,1,1,1,1,1,	
+	1,1,1,1,1,1,1,1,
+	1,0,1,0,0,0,0,1,
+	1,0,1,0,0,0,0,1,
+	1,0,1,0,0,0,0,1,
+	1,0,0,0,0,0,0,1,
+	1,0,0,0,0,1,0,1,
+	1,0,0,0,0,0,0,1,
+	1,1,1,1,1,1,1,1,	
 };
 
 float px,py,pdx,pdy,pa;
@@ -136,7 +222,7 @@ float degToRad(int a)
 	return (a * M_PI / 180.0);
 }
 
-int FixAng(int a)
+float FixAng(float a)
 { 
 	if(a > 359)
 		a -= 360;
@@ -145,32 +231,159 @@ int FixAng(int a)
 	return (a);
 }
 
-void drawline(t_testdata *data, int x0, int y0, int x1, int y1)
-{
-    int dx, dy, p, x, y;
- 
-	dx=x1-x0;
-	dy=y1-y0;
+void drawRays2D(t_testdata *data)
+{	
+	int r,mx,my,mp,dof,side; float vx,vy,rx,ry,ra,xo,yo,disV,disH; 
 	
-	x=x0;
-	y=y0;
+	ra=FixAng(pa+30);                                                              //ray set back 30 degrees
+	// ra=FixAng(pa);                                                              //ray set back 30 degrees
 	
-	p=2*dy-dx;
-	
-	while(x<x1)
+	for(r=0;r<60;r++)
+	// for(r=0;r<1;r++)
 	{
-		if(p>=0)
+		//---Vertical--- 
+		dof=0; side=0; disV=100000;
+		float Tan=tan(degToRad(ra));
+		if(cos(degToRad(ra)) > 0.001) //looking left
 		{
-			mlx_put_pixel(data->grid, x,y,255);
-			y=y+1;
-			p=p+2*dy-2*dx;
+			rx=(((data->player->instances->x + 4)>>6)<<6)+64;
+			ry=((float)(data->player->instances->x + 4)-rx)*Tan+(float)(data->player->instances->y + 4);
+			xo= 64; yo=-xo*Tan;
 		}
-		else
+		else if(cos(degToRad(ra)) < -0.001) //looking right
 		{
-			mlx_put_pixel(data->grid, x,y,255);
-			p=p+2*dy;
+			rx=(((data->player->instances->x + 4)>>6)<<6) -0.0001;
+			ry=((float)(data->player->instances->x + 4)-rx)*Tan+(float)(data->player->instances->y + 4);
+			xo=-64; yo=-xo*Tan;
 		}
-		x=x+1;
+		else { //looking up or down. no hit
+			rx=(float)(data->player->instances->x + 4);
+			ry=(float)(data->player->instances->y + 4);
+			dof=8;
+		}                                                    
+
+		while(dof<8) 
+		{ 
+			mx=(int)(rx)>>6; my=(int)(ry)>>6; mp=my*mapX+mx;                     
+			if(mp>0 && mp<mapX*mapY && map[mp]==1){ dof=8; disV=cos(degToRad(ra))*(rx-(float)(data->player->instances->x + 4))-sin(degToRad(ra))*(ry-(float)(data->player->instances->y + 4));}//hit         
+			else{ rx+=xo; ry+=yo; dof+=1;}                                               //check next horizontal
+		} 
+		vx=rx; vy=ry;
+
+		//---Horizontal---
+		dof=0; disH=100000;
+		Tan=1.0/Tan; 
+		if(sin(degToRad(ra))> 0.001){ ry=(((data->player->instances->y + 4)>>6)<<6) -0.0001; rx=((float)(data->player->instances->y + 4)-ry)*Tan+(float)(data->player->instances->x + 4); yo=-64; xo=-yo*Tan;}//looking up 
+		else if(sin(degToRad(ra))<-0.001){ ry=(((data->player->instances->y + 4)>>6)<<6)+64;      rx=((float)(data->player->instances->y + 4)-ry)*Tan+(float)(data->player->instances->x + 4); yo= 64; xo=-yo*Tan;}//looking down
+		else{ rx=(float)(data->player->instances->x + 4); ry=(float)(data->player->instances->y + 4); dof=8;}                                                   //looking straight left or right
+	
+		while(dof<8) 
+		{ 
+			mx=(int)(rx)>>6; my=(int)(ry)>>6; mp=my*mapX+mx;                          
+			if(mp>0 && mp<mapX*mapY && map[mp]==1){ dof=8; disH=cos(degToRad(ra))*(rx-(float)(data->player->instances->x + 4))-sin(degToRad(ra))*(ry-(float)(data->player->instances->y + 4));}//hit         
+			else{ rx+=xo; ry+=yo; dof+=1;}                                               //check next horizontal
+		} 
+		
+
+//   glColor3f(0,0.8,0);
+  if(disV<disH){ rx=vx; ry=vy; disH=disV; /*glColor3f(0,0.6,0);*/}                  //horizontal hit first
+//   glLineWidth(2); glBegin(GL_LINES); glVertex2i((float)data->player->instances->x,py); glVertex2i(rx,ry); glEnd();//draw 2D ray
+				
+//   int ca=FixAng(pa-ra); disH=disH*cos(degToRad(ca));                            //fix fisheye 
+//   int lineH = (mapS*320)/(disH); if(lineH>320){ lineH=320;}                     //line height and limit
+//   int lineOff = 160 - (lineH>>1);                                               //line offset
+		
+//   glLineWidth(8);glBegin(GL_LINES);glVertex2i(r*8+530,lineOff);glVertex2i(r*8+530,lineOff+lineH);glEnd();//draw vertical wall  
+	data->map.xa = data->player->instances->x + 4;
+	data->map.ya = data->player->instances->y + 4;
+	data->map.xb = rx;
+	data->map.yb = ry;
+	if (r == 0)
+	{
+	ft_line_red(data->grid, &data->map);
+	}
+	else {
+	ft_line(data->grid, &data->map);
+	}
+		ra=FixAng(ra-1);                                                              //go to next ray
+	}
+}
+
+// void	drawRays2D(t_testdata *data)
+// {
+// 	int	r,mx,my,mp,dof; float rx,ry,ra,xo,yo;
+
+// 	ra = FixAng(pa);
+// 	for (r=0; r<1; r++)
+// 	{
+// 		// Horizontal
+// 		dof = 0;
+// 		float aTan=-1/tan(ra);
+// 		if (sin(degToRad(ra))> 0.001)
+// 		{
+// 			printf("foo\n");
+// 			ry = ((data->player->instances->y / mapS) * mapS) - 0.0001;
+// 			rx = ((float)data->player->instances->y - ry) * aTan + (float)data->player->instances->x;
+// 			yo = -mapS;
+// 			xo = -yo * aTan;
+// 		}
+// 		if (sin(degToRad(ra))<-0.001)
+// 		{
+// 			printf("bar\n");
+// 			ry = ((data->player->instances->y / mapS) * mapS) + mapS;
+// 			rx = ((float)data->player->instances->y - ry) * aTan + (float)data->player->instances->x;
+// 			yo = mapS;
+// 			xo = -yo * aTan;
+// 		}
+// 		if (ra==0 || ra==M_PI)
+// 		{
+// 			printf("bas\n");
+// 			rx=(float)data->player->instances->x;
+// 			ry=(float)data->player->instances->y;
+// 			dof=8;
+// 		}
+// 		while (dof<8)
+// 		{
+// 			mx=(int)(rx / mapS);
+// 			my=(int)(ry / mapS);
+// 			mp=my*mapX+mx;
+// 			if (mp<mapX*mapY && map[mp] == 1)
+// 				dof = 8;
+// 			else
+// 			{
+// 				rx += xo;
+// 				ry += yo;
+// 				dof +=1;
+// 			}
+// 		}
+// 	}
+// 	data->map.xa = data->player->instances->x + 4;
+// 	data->map.ya = data->player->instances->y + 4;
+// 	data->map.xb = rx + 4;
+// 	data->map.yb = ry + 4;
+// 	ft_line(data->grid, &data->map);
+// 	printf("rx: %f\nry: %f\n", rx, ry);
+// 	printf("ra: %f\n", ra);
+// }
+
+mlx_image_t *test_image;
+mlx_image_t *test_image2;
+
+void	ft_fill(t_img *img, mlx_t *mlx)
+{
+	int				i;
+	int				j;
+
+	j = 0;
+	while (j < mlx->height)
+	{
+		i = 0;
+		while (i < mlx->width)
+		{
+			ft_pixelputwrap(img, i, j, 0);
+			i++;
+		}
+		j++;
 	}
 }
 
@@ -179,20 +392,28 @@ void hook(void* param)
 	t_testdata	*data;
 	mlx_t		*mlx;
 
+	int ppddxx = pdx * 5;
+	int ppddyy = pdy * 5;
+
 	data = param;
 	mlx = data->mlx;
+	ft_fill(data->grid, data->mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_UP))
 	{
-		data->player->instances->x += pdx*5;
-		data->player->instances->y += pdy*5;
+		data->player->instances->x += ppddxx;
+		data->player->instances->y += ppddyy;
+		// data->player->instances->x += pdx*5;
+		// data->player->instances->y += pdy*5;
 		// drawline(data, data->player->instances->x, data->player->instances->y, 500, 255);
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
 	{
-		data->player->instances->y -= pdy*5;
-		data->player->instances->x -= pdx*5;
+		data->player->instances->x -= ppddxx;
+		data->player->instances->y -= ppddyy;
+		// data->player->instances->x -= pdx*5;
+		// data->player->instances->y -= pdy*5;
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
 	{
@@ -208,13 +429,20 @@ void hook(void* param)
 		pdx=cos(degToRad(pa));
 		pdy=-sin(degToRad(pa));
 	}
-	// data->map.xa = data->player->instances->x;
-	// data->map.xb = data->player->instances->y;
-	// data->map.ya = data->player->instances->x + pdx * 50;
-	// data->map.yb = data->player->instances->y + pdy * 50;
-	// ft_line(data->grid, &data->map);
-	// drawline(data, 300, 500, 250, 300);
-	// drawline(data, data->player->instances->x, data->player->instances->y, data->player->instances->x + pdx * 50, data->player->instances->y + pdy * 50);
+	// test_image->instances->x = data->player->instances->x + ppddxx * 4;
+	// test_image->instances->y = data->player->instances->y + ppddyy * 4;
+	// test_image2->instances->x = data->player->instances->x - ppddxx * 4;
+	// test_image2->instances->y = data->player->instances->y - ppddyy * 4;
+	data->map.xa = data->player->instances->x + 4;
+	data->map.ya = data->player->instances->y + 4;
+	data->map.xb = data->player->instances->x + 4 + pdx * 30;
+	data->map.yb = data->player->instances->y + 4 + pdy * 30;
+	ft_line(data->grid, &data->map);
+	drawRays2D(data);
+	// mlx_close_window(mlx);
+	// drawline(data, 200, 100, 250, 250);
+	// drawline(data, 250, 200, 200, 250);
+	// betterLineDraw(data, data->player->instances->x, data->player->instances->y, data->player->instances->x + ppddxx * 10, data->player->instances->y + ppddyy * 10);
 	
 }
 
@@ -258,24 +486,30 @@ void input_hook(mlx_key_data_t keydata, void* param)
 
 void drawMap2D(t_testdata *data)
 {
- int x,y,xo,yo;
- mlx_image_t	*img;
- for(y=0;y<mapY;y++)
- {
-  for(x=0;x<mapX;x++)
-  {
-   if(map[y*mapX+x]==1){ img = data->wall;} else{ img = data->floor;}
-   xo=x*mapS; yo=y*mapS;
-   mlx_image_to_window(data->mlx, img, xo, yo);
-  } 
- } 
+	int x,y,xo,yo;
+	mlx_image_t	*img;
+	for(y=0;y<mapY;y++)
+	{
+		for(x=0;x<mapX;x++)
+		{
+			if(map[y*mapX+x]==1){ img = data->wall;} else{ img = data->floor;}
+			xo=x*mapS; yo=y*mapS;
+			mlx_image_to_window(data->mlx, img, xo, yo);
+		} 
+	} 
 }
 
 void	draw_player(t_testdata *data)
 {
 	data->player = mlx_new_image(data->mlx, 8, 8);
-	memset(data->player->pixels, 255, data->player->width * data->player->height * sizeof(int));
+	memset(data->player->pixels, 200, data->player->width * data->player->height * sizeof(int));
 	mlx_image_to_window(data->mlx, data->player, 284, 348);
+	// test_image = mlx_new_image(data->mlx, 8, 8);
+	// memset(test_image->pixels, 150, test_image->width * test_image->height * sizeof(int));
+	// mlx_image_to_window(data->mlx, test_image, 284, 348);
+	// test_image2 = mlx_new_image(data->mlx, 8, 8);
+	// memset(test_image2->pixels, 150, test_image2->width * test_image2->height * sizeof(int));
+	// mlx_image_to_window(data->mlx, test_image2, 284, 348);
 }
 
 void	init_textures(t_testdata *data)
@@ -289,8 +523,8 @@ void	init_textures(t_testdata *data)
 
 void init()
 {
- px=150; py=400; pa=90;
- pdx=cos(degToRad(pa)); pdy=-sin(degToRad(pa)); 
+	px=150; py=400; pa=0;
+	pdx=cos(degToRad(pa)); pdy=-sin(degToRad(pa)); 
 }
 
 // void	hook(void *param)
