@@ -3,6 +3,7 @@
 #include <memory.h>
 #include "MLX42/include/MLX42/MLX42.h"
 #include "include/cub.h"
+#define FOV 90
 
 typedef mlx_image_t	t_img;
 
@@ -104,92 +105,6 @@ void	ft_line(t_img *img, t_map *mapdata)
 	return ;
 }
 
-
-
-
-
-
-
-
-
-
-/* ---------------------------------------- */
-
-void	updownleftright_red(t_img *img, t_map *mapdata, float mn[2])
-{
-	while (mapdata->ya <= mapdata->yb && mapdata->xa <= mapdata->xb)
-	{
-		ft_pixelputwrap(img, mapdata->xa, mapdata->ya, 0xFF0000FF);
-		if (mapdata->ya <= (mn[0] * mapdata->xa) + mn[1]
-			&& (mapdata->ya + 1) >= (mn[0] * mapdata->xa) + mn[1])
-			mapdata->xa++;
-		else
-			mapdata->ya++;
-	}
-	return ;
-}
-
-void	downupleftright_red(t_img *img, t_map *mapdata, float mn[2])
-{
-	while (mapdata->ya >= mapdata->yb && mapdata->xa <= mapdata->xb)
-	{
-		ft_pixelputwrap(img, mapdata->xa, mapdata->ya, 0xFF0000FF);
-		if (mapdata->ya <= (mn[0] * mapdata->xa) + mn[1]
-			&& (mapdata->ya + 1) > (mn[0] * mapdata->xa + mn[1]))
-			mapdata->xa++;
-		else
-			mapdata->ya--;
-	}
-}
-
-void	updownrightleft_red(t_img *img, t_map *mapdata, float mn[2])
-{
-	while (mapdata->ya <= mapdata->yb && mapdata->xa >= mapdata->xb)
-	{
-		ft_pixelputwrap(img, mapdata->xa, mapdata->ya, 0xFF0000FF);
-		if (mapdata->ya >= (mn[0] * mapdata->xa) + mn[1]
-			&& (mapdata->ya - 1) <= (mn[0] * mapdata->xa) + mn[1])
-			mapdata->xa--;
-		else
-			mapdata->ya++;
-	}
-}
-
-void	downuprightleft_red(t_img *img, t_map *mapdata, float mn[2])
-{
-	while (mapdata->ya >= mapdata->yb && mapdata->xa >= mapdata->xb)
-	{
-		ft_pixelputwrap(img, mapdata->xa, mapdata->ya, 0xFF0000FF);
-		if (mapdata->ya >= (mn[0] * mapdata->xa) + mn[1]
-			&& (mapdata->ya - 1) <= (mn[0] * mapdata->xa + mn[1]))
-			mapdata->xa--;
-		else
-			mapdata->ya--;
-	}
-}
-
-void	ft_line_red(t_img *img, t_map *mapdata)
-{
-	float		xd;
-	float		yd;
-	float		mn[2];
-
-	xd = mapdata->xb - mapdata->xa;
-	yd = mapdata->yb - mapdata->ya;
-	mn[0] = yd / xd;
-	mn[1] = mapdata->ya - (mapdata->xa * mn[0]);
-	if (mapdata->ya <= mapdata->yb && mapdata->xa <= mapdata->xb)
-		updownleftright_red(img, mapdata, mn);
-	else if (mapdata->ya >= mapdata->yb && mapdata->xa <= mapdata->xb)
-		downupleftright_red(img, mapdata, mn);
-	else if (mapdata->ya <= mapdata->yb && mapdata->xa >= mapdata->xb)
-		updownrightleft_red(img, mapdata, mn);
-	else if (mapdata->ya >= mapdata->yb && mapdata->xa >= mapdata->xb)
-		downuprightleft_red(img, mapdata, mn);
-	return ;
-}
-/* ---------------------------------------- */
-
 typedef struct s_testdata
 {
 	mlx_t		*mlx;
@@ -234,12 +149,12 @@ float FixAng(float a)
 void drawRays2D(t_testdata *data)
 {	
 	int r,mx,my,mp,dof,side; float vx,vy,rx,ry,ra,xo,yo,disV,disH; 
+
+	// int rays_per_degree = 10;
 	
-	ra=FixAng(pa+30);                                                              //ray set back 30 degrees
-	// ra=FixAng(pa);                                                              //ray set back 30 degrees
+	ra=FixAng(pa+FOV/2);                                                              //ray set back 30 degrees
 	
-	for(r=0;r<60;r++)
-	// for(r=0;r<1;r++)
+	for(r=0;r<FOV;r++)
 	{
 		//---Vertical--- 
 		dof=0; side=0; disV=100000;
@@ -275,99 +190,39 @@ void drawRays2D(t_testdata *data)
 		Tan=1.0/Tan; 
 		if(sin(degToRad(ra))> 0.001){ ry=(((data->player->instances->y + 4)>>6)<<6) -0.0001; rx=((float)(data->player->instances->y + 4)-ry)*Tan+(float)(data->player->instances->x + 4); yo=-64; xo=-yo*Tan;}//looking up 
 		else if(sin(degToRad(ra))<-0.001){ ry=(((data->player->instances->y + 4)>>6)<<6)+64;      rx=((float)(data->player->instances->y + 4)-ry)*Tan+(float)(data->player->instances->x + 4); yo= 64; xo=-yo*Tan;}//looking down
-		else{ rx=(float)(data->player->instances->x + 4); ry=(float)(data->player->instances->y + 4); dof=8;}                                                   //looking straight left or right
+		else{
+			rx=(float)(data->player->instances->x + 4); ry=(float)(data->player->instances->y + 4); dof=8;
+		}                                                   //looking straight left or right
 	
 		while(dof<8) 
 		{ 
 			mx=(int)(rx)>>6; my=(int)(ry)>>6; mp=my*mapX+mx;                          
-			if(mp>0 && mp<mapX*mapY && map[mp]==1){ dof=8; disH=cos(degToRad(ra))*(rx-(float)(data->player->instances->x + 4))-sin(degToRad(ra))*(ry-(float)(data->player->instances->y + 4));}//hit         
+			if(mp>0 && mp<mapX*mapY && map[mp]==1){ dof=8; disH=cos(degToRad(ra))*(rx-(float)(data->player->instances->x + 4))-sin(degToRad(ra))*(ry-(float)(data->player->instances->y + 4));}//hit
 			else{ rx+=xo; ry+=yo; dof+=1;}                                               //check next horizontal
-		} 
+		}
 		
 
 //   glColor3f(0,0.8,0);
-  if(disV<disH){ rx=vx; ry=vy; disH=disV; /*glColor3f(0,0.6,0);*/}                  //horizontal hit first
+		if(disV<disH){ rx=vx; ry=vy; disH=disV; /*glColor3f(0,0.6,0);*/}                  //horizontal hit first
 //   glLineWidth(2); glBegin(GL_LINES); glVertex2i((float)data->player->instances->x,py); glVertex2i(rx,ry); glEnd();//draw 2D ray
 				
-//   int ca=FixAng(pa-ra); disH=disH*cos(degToRad(ca));                            //fix fisheye 
-//   int lineH = (mapS*320)/(disH); if(lineH>320){ lineH=320;}                     //line height and limit
-//   int lineOff = 160 - (lineH>>1);                                               //line offset
-		
-//   glLineWidth(8);glBegin(GL_LINES);glVertex2i(r*8+530,lineOff);glVertex2i(r*8+530,lineOff+lineH);glEnd();//draw vertical wall  
-	data->map.xa = data->player->instances->x + 4;
-	data->map.ya = data->player->instances->y + 4;
-	data->map.xb = rx;
-	data->map.yb = ry;
-	if (r == 0)
-	{
-	ft_line_red(data->grid, &data->map);
-	}
-	else {
-	ft_line(data->grid, &data->map);
-	}
+		int ca=FixAng(pa-ra); disH=disH*cos(degToRad(ca));                            //fix fisheye 
+		int lineH = (mapS*320)/(disH); if(lineH>320){ lineH=320;}                     //line height and limit
+		int lineOff = 160 - (lineH>>1);                                               //line offset
+		data->map.xa = r*8+530;
+		data->map.ya = lineOff;
+		data->map.xb = r*8+530;
+		data->map.yb = lineOff+lineH;
+		ft_line(data->grid, &data->map);
+		// glLineWidth(8);glBegin(GL_LINES);glVertex2i(r*8+530,lineOff);glVertex2i(r*8+530,lineOff+lineH);glEnd();//draw vertical wall  
+		data->map.xa = data->player->instances->x + 4;
+		data->map.ya = data->player->instances->y + 4;
+		data->map.xb = rx;
+		data->map.yb = ry;
+		ft_line(data->grid, &data->map);
 		ra=FixAng(ra-1);                                                              //go to next ray
 	}
 }
-
-// void	drawRays2D(t_testdata *data)
-// {
-// 	int	r,mx,my,mp,dof; float rx,ry,ra,xo,yo;
-
-// 	ra = FixAng(pa);
-// 	for (r=0; r<1; r++)
-// 	{
-// 		// Horizontal
-// 		dof = 0;
-// 		float aTan=-1/tan(ra);
-// 		if (sin(degToRad(ra))> 0.001)
-// 		{
-// 			printf("foo\n");
-// 			ry = ((data->player->instances->y / mapS) * mapS) - 0.0001;
-// 			rx = ((float)data->player->instances->y - ry) * aTan + (float)data->player->instances->x;
-// 			yo = -mapS;
-// 			xo = -yo * aTan;
-// 		}
-// 		if (sin(degToRad(ra))<-0.001)
-// 		{
-// 			printf("bar\n");
-// 			ry = ((data->player->instances->y / mapS) * mapS) + mapS;
-// 			rx = ((float)data->player->instances->y - ry) * aTan + (float)data->player->instances->x;
-// 			yo = mapS;
-// 			xo = -yo * aTan;
-// 		}
-// 		if (ra==0 || ra==M_PI)
-// 		{
-// 			printf("bas\n");
-// 			rx=(float)data->player->instances->x;
-// 			ry=(float)data->player->instances->y;
-// 			dof=8;
-// 		}
-// 		while (dof<8)
-// 		{
-// 			mx=(int)(rx / mapS);
-// 			my=(int)(ry / mapS);
-// 			mp=my*mapX+mx;
-// 			if (mp<mapX*mapY && map[mp] == 1)
-// 				dof = 8;
-// 			else
-// 			{
-// 				rx += xo;
-// 				ry += yo;
-// 				dof +=1;
-// 			}
-// 		}
-// 	}
-// 	data->map.xa = data->player->instances->x + 4;
-// 	data->map.ya = data->player->instances->y + 4;
-// 	data->map.xb = rx + 4;
-// 	data->map.yb = ry + 4;
-// 	ft_line(data->grid, &data->map);
-// 	printf("rx: %f\nry: %f\n", rx, ry);
-// 	printf("ra: %f\n", ra);
-// }
-
-mlx_image_t *test_image;
-mlx_image_t *test_image2;
 
 void	ft_fill(t_img *img, mlx_t *mlx)
 {

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/20 14:57:02 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/21 17:36:56 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 // temporary!
 # define WIDTH 720
 # define HEIGHT 720
-# define FOV 1.256
+// # define FOV 1.256
 
 //DEBUG
 void			print_map(t_data *data);
