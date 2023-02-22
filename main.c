@@ -4,40 +4,8 @@
 #include "MLX42/include/MLX42/MLX42.h"
 #include "include/cub.h"
 #include "line.h"
+#include "raycaster.h"
 #define FOV 70
-
-typedef struct s_raymath
-{
-	int r;
-	int	mx;
-	int	my;
-	int	mp;
-	int	dof;
-	float vx;
-	float vy;
-	float rx;
-	float ry;
-	float ra;
-	float xo;
-	float yo;
-	float disV;
-	float disH;
-}	t_raymath;
-
-typedef struct s_raydata
-{
-	mlx_t		*mlx;
-	t_raymath	r_math;
-	mlx_image_t	*player;
-	mlx_image_t	*wall;
-	mlx_image_t	*grid;
-	mlx_image_t	*floor;
-	t_line		line;
-	bool		display_rays;
-	float		pdx;
-	float		pdy;
-	float		pa;
-}	t_raydata;
 
 #define mapX  8      //map width		//moeten in de struct en gebaseerd op de grootte van de gegeven map
 #define mapY  8      //map height		//
@@ -79,7 +47,7 @@ void drawRays2D(t_raydata *raydata, mlx_instance_t *player, t_raymath *r_math)
 	{
 		//---Vertical---
 		r_math->dof = 0;
-		r_math->disV = 100000;
+		r_math->disv = 100000;
 		float Tan = tan(degToRad(r_math->ra));
 		if (cos(degToRad(r_math->ra)) > 0.001) //looking left
 		{
@@ -110,7 +78,7 @@ void drawRays2D(t_raydata *raydata, mlx_instance_t *player, t_raymath *r_math)
 			if (r_math->mp > 0 && r_math->mp < mapX * mapY && map[r_math->mp] == 1)		//hit
 			{
 				r_math->dof = 8;
-				r_math->disV = cos(degToRad(r_math->ra)) * (r_math->rx - (float)(player->x + 4)) - sin(degToRad(r_math->ra)) * (r_math->ry - (float)(player->y + 4));
+				r_math->disv = cos(degToRad(r_math->ra)) * (r_math->rx - (float)(player->x + 4)) - sin(degToRad(r_math->ra)) * (r_math->ry - (float)(player->y + 4));
 			}
 			else                         //check next horizontal
 			{
@@ -124,7 +92,7 @@ void drawRays2D(t_raydata *raydata, mlx_instance_t *player, t_raymath *r_math)
 
 		//---Horizontal---
 		r_math->dof = 0;
-		r_math->disH = 100000;
+		r_math->dish = 100000;
 		Tan = 1.0 / Tan;
 		if (sin(degToRad(r_math->ra)) > 0.001)		//looking up
 		{
@@ -155,7 +123,7 @@ void drawRays2D(t_raydata *raydata, mlx_instance_t *player, t_raymath *r_math)
 			if (r_math->mp > 0 && r_math->mp < mapX * mapY && map[r_math->mp] == 1)		//hit
 			{
 				r_math->dof = 8;
-				r_math->disH = cos(degToRad(r_math->ra)) * (r_math->rx - (float)(player->x + 4)) - sin(degToRad(r_math->ra)) * (r_math->ry - (float)(player->y + 4));
+				r_math->dish = cos(degToRad(r_math->ra)) * (r_math->rx - (float)(player->x + 4)) - sin(degToRad(r_math->ra)) * (r_math->ry - (float)(player->y + 4));
 			}
 			else				 //check next horizontal
 			{
@@ -165,17 +133,17 @@ void drawRays2D(t_raydata *raydata, mlx_instance_t *player, t_raymath *r_math)
 			}
 		}
 
-		if (r_math->disV < r_math->disH)			 //horizontal hit first
+		if (r_math->disv < r_math->dish)			 //horizontal hit first
 		{
 			r_math->rx = r_math->vx;
 			r_math->ry = r_math->vy;
-			r_math->disH = r_math->disV;
+			r_math->dish = r_math->disv;
 		}
 
 		int ca = FixAng(raydata->pa - r_math->ra);
-		r_math->disH = r_math->disH * cos(degToRad(ca));                            //fix fisheye
+		r_math->dish = r_math->dish * cos(degToRad(ca));                            //fix fisheye
 
-		int lineH = (mapS * 320) / (r_math->disH);
+		int lineH = (mapS * 320) / (r_math->dish);
 		if (lineH > 320)
 			lineH = 320;                     //line height and limit
 
@@ -222,9 +190,8 @@ void hook(void* param)
 	t_raydata		*raydata;
 	mlx_t			*mlx;
 	mlx_instance_t	*player;
-
-	int ppddxx;
-	int ppddyy;
+	int				ppddxx;
+	int 			ppddyy;
 
 	raydata = param;
 	ppddxx = raydata->pdx * 5;
@@ -281,7 +248,6 @@ void input_hook(mlx_key_data_t keydata, void* param)
 	}
 }
 
-
 void drawMap2D(t_raydata *raydata)
 {
 	int x,y,xo,yo;
@@ -305,20 +271,20 @@ void drawMap2D(t_raydata *raydata)
 	}
 }
 
-void	draw_player(t_raydata *data)
+void	draw_player(t_raydata *raydata)
 {
-	data->player = mlx_new_image(data->mlx, 8, 8);
-	memset(data->player->pixels, 200, data->player->width * data->player->height * sizeof(int));
-	mlx_image_to_window(data->mlx, data->player, 284, 348);
+	raydata->player = mlx_new_image(raydata->mlx, 8, 8);
+	memset(raydata->player->pixels, 200, raydata->player->width * raydata->player->height * sizeof(int));
+	mlx_image_to_window(raydata->mlx, raydata->player, 284, 348);
 }
 
-void	init_textures(t_raydata *data)
+void	init_textures(t_raydata *raydata)
 {
-	data->floor = mlx_new_image(data->mlx, mapS - 1, mapS - 1);
-	memset(data->floor->pixels, 100, data->floor->width * data->floor->height * sizeof(int));
-	data->wall = mlx_new_image(data->mlx, mapS - 1, mapS - 1);
-	memset(data->wall->pixels, 255, data->wall->width * data->wall->height * sizeof(int));
-	data->grid = mlx_new_image(data->mlx, 1200, 512);
+	raydata->floor = mlx_new_image(raydata->mlx, mapS - 1, mapS - 1);
+	memset(raydata->floor->pixels, 100, raydata->floor->width * raydata->floor->height * sizeof(int));
+	raydata->wall = mlx_new_image(raydata->mlx, mapS - 1, mapS - 1);
+	memset(raydata->wall->pixels, 255, raydata->wall->width * raydata->wall->height * sizeof(int));
+	raydata->grid = mlx_new_image(raydata->mlx, 1200, 512);
 }
 
 void init(t_raydata *raydata)
@@ -326,6 +292,7 @@ void init(t_raydata *raydata)
 	raydata->pa = 0;
 	raydata->pdx = cos(degToRad(raydata->pa));
 	raydata->pdy = -sin(degToRad(raydata->pa));
+	raydata->display_rays = false;
 }
 
 int32_t	main(void)
@@ -337,7 +304,6 @@ int32_t	main(void)
 		return(EXIT_FAILURE);
 
 	init(&raydata);
-	raydata.display_rays = false;
 	init_textures(&raydata);
 	drawMap2D(&raydata);
 	mlx_image_to_window(raydata.mlx, raydata.grid, 0, 0);
