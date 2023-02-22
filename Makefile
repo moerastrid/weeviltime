@@ -15,6 +15,7 @@ OBJ_DIR = ./obj
 CFLAG = -Wall -Werror -Wextra
 LFLAG =  -I . -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 CC = clang
+
 SRC = main.c\
 	line.c\
 	# src/debug/print_map.c\

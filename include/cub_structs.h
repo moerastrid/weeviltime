@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/20 14:37:57 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/20 15:11:01 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ typedef enum e_plane
 // NO = 0 rad, SO = pi rad, EA = 0,5pi rad, WE = 1,5pi rad
 typedef struct s_player
 {
-	float	x;
-	float	y;
+	int	x;
+	int	y;
 	float	direction;
 }	t_player;
 
