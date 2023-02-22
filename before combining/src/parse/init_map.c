@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 13:52:34 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/20 14:56:05 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/22 19:50:54 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int	init_map(int map, t_data *data)		//initialiseert de ceiling en floor kleuren
 
 	temp_line = get_next_line(map);
 	element_count = 0;
-	data->wall_check = malloc(4 * sizeof(bool));	//protecten
-	if (data->wall_check == NULL)
-		return (EXIT_FAILURE);
-	ft_bzero(data->wall_check, 4 * sizeof(bool));
-	data->color_check = malloc(2 * sizeof(bool));
-	if (data->color_check == NULL)
-		return (EXIT_FAILURE);
-	ft_bzero(data->color_check, 2 * sizeof(bool));
+	//data->wall_check = malloc(4 * sizeof(bool));	//protecten
+	//if (data->wall_check == NULL)
+	//	return (EXIT_FAILURE);
+	//ft_bzero(data->wall_check, 4 * sizeof(bool));
+	//data->color_check = malloc(2 * sizeof(bool));
+	//if (data->color_check == NULL)
+	//	return (EXIT_FAILURE);
+	//ft_bzero(data->color_check, 2 * sizeof(bool));
 	while (temp_line != NULL)
 	{
 		if (element_count < 6)

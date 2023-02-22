@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_isdigit.c                                       :+:    :+:            */
+/*   get_data.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/10/19 16:24:01 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/22 20:37:14 by ageels        ########   odam.nl         */
+/*   Created: 2023/02/16 13:52:34 by mforstho      #+#    #+#                 */
+/*   Updated: 2023/02/22 20:19:26 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Checks if the given character is a digit
-// Changed it to check for '-' '+' ' ' '\n' too.
+#include "../../cub_include/cub.h"
 
-#include "libft.h"
-
-int	ft_isdigit(int c)
+int	get_data(t_data *data, t_par *par)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	if (c == '-' || c == '+')
-		return (1);
-	if (c == ' ' || c == '\n')
-		return (1);
-	return (0);
+	char	*temp_line;
+	int		elem_count;
+
+	temp_line = get_next_line(par->fd_cub);
+	elem_count = 0;
+	while (temp_line != NULL)
+	{
+		if (elem_count < 6)
+		{
+			if (get_elem(data, par, temp_line) == true)
+				elem_count++;
+		}
+		free(temp_line);
+		temp_line = get_next_line(par->fd_cub);
+	}
+	return (EXIT_FAILURE);
 }

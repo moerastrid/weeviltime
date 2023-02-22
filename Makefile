@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/02/22 17:58:24 by ageels        ########   odam.nl          #
+#    Updated: 2023/02/22 20:34:00 by ageels        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,10 @@ LFLAG =  -I . -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 CC = clang
 
 SRC = cub_src/main.c\
+	cub_src/parse/get_data.c\
+	cub_src/parse/get_elem.c\
+	cub_src/parse/parse.c\
+	cub_src/utils/libft_extra.c\
 	cub_src/utils/get_next_line.c\
 	cub_src/utils/single_alloc_split.c\
 	cub_src/utils/wraps.c\
@@ -45,6 +49,7 @@ libmlx :
 
 obj_folder :
 	mkdir -pv $(OBJ_DIR)
+	mkdir -pv $(OBJ_DIR)/parse
 	mkdir -pv $(OBJ_DIR)/utils
 
 $(NAME): obj_folder $(OBJ)
