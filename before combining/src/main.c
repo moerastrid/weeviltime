@@ -1,15 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
-#include "MLX42/include/MLX42/MLX42.h"
-#include "include/cub.h"
-#include "line.h"
-#include "raycaster.h"
+#include "../MLX42/include/MLX42/MLX42.h"
+#include "../include/cub.h"
+#include "../line.h"
+#include "../raycaster.h"
 #define FOV 70
 
 #define mapX  8      //map width		//moeten in de struct en gebaseerd op de grootte van de gegeven map
 #define mapY  8      //map height		//
 #define mapS 64      //map cube size
+
 int map[] =           //the map array. Edit to change level but keep the outer walls
 {
 	1,1,1,1,1,1,1,1,
@@ -178,7 +179,7 @@ void	ft_fill(t_img *img, mlx_t *mlx)
 		i = 0;
 		while (i < mlx->width)
 		{
-			ft_pixelputwrap(img, i, j, 0);
+			wrap_putpixel(img, i, j, 0);
 			i++;
 		}
 		j++;
