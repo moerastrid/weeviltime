@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/02/21 16:48:47 by mforstho      ########   odam.nl          #
+#    Updated: 2023/02/22 12:47:46 by mforstho      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ CFLAG = -Wall -Werror -Wextra
 LFLAG =  -I . -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 CC = clang
 SRC = main.c\
+	line.c\
 	# src/debug/print_map.c\
 	# src/display/background.c\
 	# src/display/blokje.c\
@@ -45,7 +46,7 @@ OBJ = $(patsubst src/%.c,obj/%.o,$(SRC))
 #Colors:
 GREEN		=	\e[38;5;118m
 YELLOW		=	\e[38;5;226m
-RESET		=	\e[0m 
+RESET		=	\e[0m
 _SUCCESS	=	[$(GREEN)SUCCESS$(RESET)]
 _INFO		=	[$(YELLOW)INFO$(RESET)]
 
@@ -71,7 +72,7 @@ obj_folder :
 $(NAME): obj_folder $(OBJ)
 	$(CC) $(CFLAG) -o $(NAME) $(OBJ) ./libft/libft.a libmlx42.a $(LFLAG)
 	printf "$(_SUCCESS) cub3D ready.\n"
-	
+
 obj/%.o : src/%.c
 	$(CC) $(CFLAG) -o $@ -c $^
 

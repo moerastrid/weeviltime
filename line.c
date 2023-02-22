@@ -6,102 +6,100 @@
 /*   By: ageels <ageels@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/11 18:18:27 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/20 17:56:15 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/22 12:46:35 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/cub.h"
+#include "line.h"
 
-typedef mlx_image_t	t_img;
-
-typedef struct s_map
+t_line	set_line_coords(int xa, int ya, int xb, int yb)
 {
-	t_img	*img;
-	mlx_t	*mlx;
-	char	*path;
-	int		hor;
-	int		ver;
-	int		xa;
-	int		xb;
-	int		ya;
-	int		yb;
-	int		offsetx;
-	int		offsety;
-	int		zoom;
-	int		steepness;
-	float	angle;
-}	t_map;
+	t_line	line;
 
-void	updownleftright(t_img *img, t_map *mapdata, float mn[2])
+	line.xa = xa;
+	line.ya = ya;
+	line.xb = xb;
+	line.yb = yb;
+	return (line);
+}
+
+void	ft_pixelputwrap(t_img *img, uint32_t x, uint32_t y, uint32_t color)
 {
-	while (mapdata->ya <= mapdata->yb && mapdata->xa <= mapdata->xb)
+	if (x < img->width && y < img->height)
+		mlx_put_pixel(img, x, y, color);
+}
+
+void	updownleftright(t_img *img, t_line *line, float mn[2], uint32_t color)
+{
+	while (line->ya <= line->yb && line->xa <= line->xb)
 	{
-		ft_pixelputwrap(img, mapdata->xa, mapdata->ya, 0xEEEEEEFF);
-		if (mapdata->ya <= (mn[0] * mapdata->xa) + mn[1]
-			&& (mapdata->ya + 1) >= (mn[0] * mapdata->xa) + mn[1])
-			mapdata->xa++;
+		ft_pixelputwrap(img, line->xa, line->ya, color);
+		if (line->ya <= (mn[0] * line->xa) + mn[1]
+			&& (line->ya + 1) >= (mn[0] * line->xa) + mn[1])
+			line->xa++;
 		else
-			mapdata->ya++;
+			line->ya++;
 	}
 	return ;
 }
 
-void	downupleftright(t_img *img, t_map *mapdata, float mn[2])
+void	downupleftright(t_img *img, t_line *line, float mn[2], uint32_t color)
 {
-	while (mapdata->ya >= mapdata->yb && mapdata->xa <= mapdata->xb)
+	while (line->ya >= line->yb && line->xa <= line->xb)
 	{
-		ft_pixelputwrap(img, mapdata->xa, mapdata->ya, 0x99EEEEFF);
-		if (mapdata->ya <= (mn[0] * mapdata->xa) + mn[1]
-			&& (mapdata->ya + 1) > (mn[0] * mapdata->xa + mn[1]))
-			mapdata->xa++;
+		ft_pixelputwrap(img, line->xa, line->ya, color);
+		if (line->ya <= (mn[0] * line->xa) + mn[1]
+			&& (line->ya + 1) > (mn[0] * line->xa + mn[1]))
+			line->xa++;
 		else
-			mapdata->ya--;
+			line->ya--;
 	}
 }
 
-void	updownrightleft(t_img *img, t_map *mapdata, float mn[2])
+void	updownrightleft(t_img *img, t_line *line, float mn[2], uint32_t color)
 {
-	while (mapdata->ya <= mapdata->yb && mapdata->xa >= mapdata->xb)
+	while (line->ya <= line->yb && line->xa >= line->xb)
 	{
-		ft_pixelputwrap(img, mapdata->xa, mapdata->ya, 0xEE99EEFF);
-		if (mapdata->ya >= (mn[0] * mapdata->xa) + mn[1]
-			&& (mapdata->ya - 1) <= (mn[0] * mapdata->xa) + mn[1])
-			mapdata->xa--;
+		ft_pixelputwrap(img, line->xa, line->ya, color);
+		if (line->ya >= (mn[0] * line->xa) + mn[1]
+			&& (line->ya - 1) <= (mn[0] * line->xa) + mn[1])
+			line->xa--;
 		else
-			mapdata->ya++;
+			line->ya++;
 	}
 }
 
-void	downuprightleft(t_img *img, t_map *mapdata, float mn[2])
+void	downuprightleft(t_img *img, t_line *line, float mn[2], uint32_t color)
 {
-	while (mapdata->ya >= mapdata->yb && mapdata->xa >= mapdata->xb)
+	while (line->ya >= line->yb && line->xa >= line->xb)
 	{
-		ft_pixelputwrap(img, mapdata->xa, mapdata->ya, 0xEEEE99FF);
-		if (mapdata->ya >= (mn[0] * mapdata->xa) + mn[1]
-			&& (mapdata->ya - 1) <= (mn[0] * mapdata->xa + mn[1]))
-			mapdata->xa--;
+		ft_pixelputwrap(img, line->xa, line->ya, color);
+		if (line->ya >= (mn[0] * line->xa) + mn[1]
+			&& (line->ya - 1) <= (mn[0] * line->xa + mn[1]))
+			line->xa--;
 		else
-			mapdata->ya--;
+			line->ya--;
 	}
 }
 
-void	ft_line(t_img *img, t_map *mapdata)
+void	ft_line(t_img *img, t_line *line, uint32_t color)
 {
 	float		xd;
 	float		yd;
 	float		mn[2];
 
-	xd = mapdata->xb - mapdata->xa;
-	yd = mapdata->yb - mapdata->ya;
+	xd = line->xb - line->xa;
+	yd = line->yb - line->ya;
 	mn[0] = yd / xd;
-	mn[1] = mapdata->ya - (mapdata->xa * mn[0]);
-	if (mapdata->ya <= mapdata->yb && mapdata->xa <= mapdata->xb)
-		updownleftright(img, mapdata, mn);
-	else if (mapdata->ya >= mapdata->yb && mapdata->xa <= mapdata->xb)
-		downupleftright(img, mapdata, mn);
-	else if (mapdata->ya <= mapdata->yb && mapdata->xa >= mapdata->xb)
-		updownrightleft(img, mapdata, mn);
-	else if (mapdata->ya >= mapdata->yb && mapdata->xa >= mapdata->xb)
-		downuprightleft(img, mapdata, mn);
+	mn[1] = line->ya - (line->xa * mn[0]);
+	if (line->ya <= line->yb && line->xa <= line->xb)
+		updownleftright(img, line, mn, color);
+	else if (line->ya >= line->yb && line->xa <= line->xb)
+		downupleftright(img, line, mn, color);
+	else if (line->ya <= line->yb && line->xa >= line->xb)
+		updownrightleft(img, line, mn, color);
+	else if (line->ya >= line->yb && line->xa >= line->xb)
+		downuprightleft(img, line, mn, color);
 	return ;
 }
