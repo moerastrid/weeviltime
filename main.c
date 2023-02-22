@@ -6,17 +6,37 @@
 #include "line.h"
 #define FOV 70
 
-
+typedef struct s_raymath
+{
+	int r;
+	int	mx;
+	int	my;
+	int	mp;
+	int	dof;
+	float vx;
+	float vy;
+	float rx;
+	float ry;
+	float ra;
+	float xo;
+	float yo;
+	float disV;
+	float disH;
+}	t_raymath;
 
 typedef struct s_raydata
 {
 	mlx_t		*mlx;
+	t_raymath	r_math;
 	mlx_image_t	*player;
 	mlx_image_t	*wall;
 	mlx_image_t	*grid;
 	mlx_image_t	*floor;
 	t_line		line;
 	bool		display_rays;
+	float		pdx;
+	float		pdy;
+	float		pa;
 }	t_raydata;
 
 #define mapX  8      //map width		//moeten in de struct en gebaseerd op de grootte van de gegeven map
@@ -34,8 +54,6 @@ int map[] =           //the map array. Edit to change level but keep the outer w
 	1,1,1,1,1,1,1,1,
 };
 
-float pdx,pdy,pa;
-
 float degToRad(int a)
 {
 	return (a * M_PI / 180.0);
@@ -50,134 +68,114 @@ float FixAng(float a)
 	return (a);
 }
 
-// typedef struct s_raymath
-// {
-// 	int r;
-// 	int	mx;
-// 	int	my;
-// 	int	mp;
-// 	int	dof;
-// 	float vx;
-// 	float vy;
-// 	float rx;
-// 	float ry;
-// 	float ra;
-// 	float xo;
-// 	float yo;
-// 	float disV;
-// 	float disH;
-// }	t_raymath;
-
-void drawRays2D(t_raydata *raydata, mlx_instance_t *player)
+void drawRays2D(t_raydata *raydata, mlx_instance_t *player, t_raymath *r_math)
 {
-	int r,mx,my,mp,dof; float vx,vy,rx,ry,ra,xo,yo,disV,disH;
-
 	// int rays_per_degree = 10;
 
-	ra = FixAng(pa + FOV / 2);              //ray set back 30 degrees
+	r_math->ra = FixAng(raydata->pa + FOV / 2);              //ray set back 30 degrees
 
-	r = 0;
-	while (r < FOV)
+	r_math->r = 0;
+	while (r_math->r < FOV)
 	{
 		//---Vertical---
-		dof = 0;
-		disV = 100000;
-		float Tan = tan(degToRad(ra));
-		if (cos(degToRad(ra)) > 0.001) //looking left
+		r_math->dof = 0;
+		r_math->disV = 100000;
+		float Tan = tan(degToRad(r_math->ra));
+		if (cos(degToRad(r_math->ra)) > 0.001) //looking left
 		{
-			rx = (((player->x + 4) >> 6) << 6) + 64;
-			ry = ((float)(player->x + 4) - rx) * Tan + (float)(player->y + 4);
-			xo = 64;
-			yo = -xo * Tan;
+			r_math->rx = (((player->x + 4) >> 6) << 6) + 64;
+			r_math->ry = ((float)(player->x + 4) - r_math->rx) * Tan + (float)(player->y + 4);
+			r_math->xo = 64;
+			r_math->yo = -r_math->xo * Tan;
 		}
-		else if (cos(degToRad(ra)) < -0.001) //looking right
+		else if (cos(degToRad(r_math->ra)) < -0.001) //looking right
 		{
-			rx = (((player->x + 4) >> 6) << 6) - 0.0001;
-			ry = ((float)(player->x + 4) - rx) * Tan + (float)(player->y + 4);
-			xo = -64;
-			yo = -xo * Tan;
+			r_math->rx = (((player->x + 4) >> 6) << 6) - 0.0001;
+			r_math->ry = ((float)(player->x + 4) - r_math->rx) * Tan + (float)(player->y + 4);
+			r_math->xo = -64;
+			r_math->yo = -r_math->xo * Tan;
 		}
 		else							//looking up or down. no hit
 		{
-			rx = (float)(player->x + 4);
-			ry = (float)(player->y + 4);
-			dof = 8;
+			r_math->rx = (float)(player->x + 4);
+			r_math->ry = (float)(player->y + 4);
+			r_math->dof = 8;
 		}
 
-		while (dof < 8)
+		while (r_math->dof < 8)
 		{
-			mx = (int)(rx) >> 6;
-			my = (int)(ry) >> 6;
-			mp = my * mapX + mx;
-			if (mp > 0 && mp < mapX * mapY && map[mp] == 1)		//hit
+			r_math->mx = (int)(r_math->rx) >> 6;
+			r_math->my = (int)(r_math->ry) >> 6;
+			r_math->mp = r_math->my * mapX + r_math->mx;
+			if (r_math->mp > 0 && r_math->mp < mapX * mapY && map[r_math->mp] == 1)		//hit
 			{
-				dof = 8;
-				disV = cos(degToRad(ra)) * (rx - (float)(player->x + 4)) - sin(degToRad(ra)) * (ry - (float)(player->y + 4));
+				r_math->dof = 8;
+				r_math->disV = cos(degToRad(r_math->ra)) * (r_math->rx - (float)(player->x + 4)) - sin(degToRad(r_math->ra)) * (r_math->ry - (float)(player->y + 4));
 			}
 			else                         //check next horizontal
 			{
-				rx += xo;
-				ry += yo;
-				dof += 1;
+				r_math->rx += r_math->xo;
+				r_math->ry += r_math->yo;
+				r_math->dof += 1;
 			}
 		}
-		vx = rx;
-		vy = ry;
+		r_math->vx = r_math->rx;
+		r_math->vy = r_math->ry;
 
 		//---Horizontal---
-		dof = 0;
-		disH = 100000;
+		r_math->dof = 0;
+		r_math->disH = 100000;
 		Tan = 1.0 / Tan;
-		if (sin(degToRad(ra)) > 0.001)		//looking up
+		if (sin(degToRad(r_math->ra)) > 0.001)		//looking up
 		{
-			ry = (((player->y + 4) / 64) * 64) - 0.0001;
-			rx = ((float)(player->y + 4) - ry) * Tan + (float)(player->x + 4);
-			yo = -64;
-			xo = -yo * Tan;
+			r_math->ry = (((player->y + 4) / 64) * 64) - 0.0001;
+			r_math->rx = ((float)(player->y + 4) - r_math->ry) * Tan + (float)(player->x + 4);
+			r_math->yo = -64;
+			r_math->xo = -r_math->yo * Tan;
 		}
-		else if (sin(degToRad(ra)) < -0.001)	//looking down
+		else if (sin(degToRad(r_math->ra)) < -0.001)	//looking down
 		{
-			ry = (((player->y + 4) / 64) * 64) + 64;
-			rx = ((float)(player->y + 4) - ry) * Tan + (float)(player->x + 4);
-			yo = 64;
-			xo = -yo * Tan;
+			r_math->ry = (((player->y + 4) / 64) * 64) + 64;
+			r_math->rx = ((float)(player->y + 4) - r_math->ry) * Tan + (float)(player->x + 4);
+			r_math->yo = 64;
+			r_math->xo = -r_math->yo * Tan;
 		}
 		else								//looking straight left or right
 		{
-			rx = (float)(player->x + 4);
-			ry = (float)(player->y + 4);
-			dof = 8;
+			r_math->rx = (float)(player->x + 4);
+			r_math->ry = (float)(player->y + 4);
+			r_math->dof = 8;
 		}
 
-		while (dof < 8)
+		while (r_math->dof < 8)
 		{
-			mx = (int)(rx) >> 6;
-			my = (int)(ry) >> 6;
-			mp = my * mapX + mx;
-			if (mp > 0 && mp < mapX * mapY && map[mp] == 1)		//hit
+			r_math->mx = (int)(r_math->rx) >> 6;
+			r_math->my = (int)(r_math->ry) >> 6;
+			r_math->mp = r_math->my * mapX + r_math->mx;
+			if (r_math->mp > 0 && r_math->mp < mapX * mapY && map[r_math->mp] == 1)		//hit
 			{
-				dof = 8;
-				disH = cos(degToRad(ra)) * (rx - (float)(player->x + 4)) - sin(degToRad(ra)) * (ry - (float)(player->y + 4));
+				r_math->dof = 8;
+				r_math->disH = cos(degToRad(r_math->ra)) * (r_math->rx - (float)(player->x + 4)) - sin(degToRad(r_math->ra)) * (r_math->ry - (float)(player->y + 4));
 			}
 			else				 //check next horizontal
 			{
-				rx += xo;
-				ry += yo;
-				dof += 1;
+				r_math->rx += r_math->xo;
+				r_math->ry += r_math->yo;
+				r_math->dof += 1;
 			}
 		}
 
-		if (disV < disH)			 //horizontal hit first
+		if (r_math->disV < r_math->disH)			 //horizontal hit first
 		{
-			rx = vx;
-			ry = vy;
-			disH = disV;
+			r_math->rx = r_math->vx;
+			r_math->ry = r_math->vy;
+			r_math->disH = r_math->disV;
 		}
 
-		int ca = FixAng(pa - ra);
-		disH = disH * cos(degToRad(ca));                            //fix fisheye
+		int ca = FixAng(raydata->pa - r_math->ra);
+		r_math->disH = r_math->disH * cos(degToRad(ca));                            //fix fisheye
 
-		int lineH = (mapS * 320) / (disH);
+		int lineH = (mapS * 320) / (r_math->disH);
 		if (lineH > 320)
 			lineH = 320;                     //line height and limit
 
@@ -186,18 +184,18 @@ void drawRays2D(t_raydata *raydata, mlx_instance_t *player)
 		int	i = -4;
 		while (i < 4)
 		{
-			raydata->line = set_line_coords(r * 8 + 530 - i, lineOff, r * 8 + 530 - i, lineOff + lineH);
+			raydata->line = set_line_coords(r_math->r * 8 + 530 - i, lineOff, r_math->r * 8 + 530 - i, lineOff + lineH);
 			ft_line(raydata->grid, &raydata->line, 0xFFFFFFFF);
 			i++;
 		}
 
 		if (raydata->display_rays)
 		{
-			raydata->line = set_line_coords(player->x + 4, player->y + 4, rx, ry);
+			raydata->line = set_line_coords(player->x + 4, player->y + 4, r_math->rx, r_math->ry);
 			ft_line(raydata->grid, &raydata->line, 0xEEEE99FF);
 		}
-		ra = FixAng(ra - 1);                                                              //go to next ray
-		r++;
+		r_math->ra = FixAng(r_math->ra - 1);                                                              //go to next ray
+		r_math->r++;
 	}
 }
 
@@ -225,10 +223,12 @@ void hook(void* param)
 	mlx_t			*mlx;
 	mlx_instance_t	*player;
 
-	int ppddxx = pdx * 5;
-	int ppddyy = pdy * 5;
+	int ppddxx;
+	int ppddyy;
 
 	raydata = param;
+	ppddxx = raydata->pdx * 5;
+	ppddyy = raydata->pdy * 5;
 	mlx = raydata->mlx;
 	player = raydata->player->instances;
 	ft_fill(raydata->grid, raydata->mlx);
@@ -246,21 +246,21 @@ void hook(void* param)
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
 	{
-		pa += 5;
-		pa = FixAng(pa);
-		pdx = cos(degToRad(pa));
-		pdy = -sin(degToRad(pa));
+		raydata->pa += 5;
+		raydata->pa = FixAng(raydata->pa);
+		raydata->pdx = cos(degToRad(raydata->pa));
+		raydata->pdy = -sin(degToRad(raydata->pa));
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 	{
-		pa -= 5;
-		pa = FixAng(pa);
-		pdx = cos(degToRad(pa));
-		pdy = -sin(degToRad(pa));
+		raydata->pa -= 5;
+		raydata->pa = FixAng(raydata->pa);
+		raydata->pdx = cos(degToRad(raydata->pa));
+		raydata->pdy = -sin(degToRad(raydata->pa));
 	}
-	raydata->line = set_line_coords(player->x + 4, player->y + 4, player->x + 4 + pdx * 30, player->y + 4 + pdy * 30);
+	raydata->line = set_line_coords(player->x + 4, player->y + 4, player->x + 4 + raydata->pdx * 30, player->y + 4 + raydata->pdy * 30);
 	ft_line(raydata->grid, &raydata->line, 0xEEEE99FF);
-	drawRays2D(raydata, player);
+	drawRays2D(raydata, player, &raydata->r_math);
 }
 
 void input_hook(mlx_key_data_t keydata, void* param)
@@ -321,31 +321,32 @@ void	init_textures(t_raydata *data)
 	data->grid = mlx_new_image(data->mlx, 1200, 512);
 }
 
-void init()
+void init(t_raydata *raydata)
 {
-	pa = 0;
-	pdx = cos(degToRad(pa));
-	pdy = -sin(degToRad(pa));
+	raydata->pa = 0;
+	raydata->pdx = cos(degToRad(raydata->pa));
+	raydata->pdy = -sin(degToRad(raydata->pa));
 }
 
 int32_t	main(void)
 {
-	t_raydata	data;
+	t_raydata	raydata;
 
-	if (!(data.mlx = mlx_init(1200, 512, "MLX42", true)))
+	ft_bzero(&raydata, sizeof(t_raydata));
+	if (!(raydata.mlx = mlx_init(1200, 512, "MLX42", true)))
 		return(EXIT_FAILURE);
 
-	init();
-	data.display_rays = false;
-	init_textures(&data);
-	drawMap2D(&data);
-	mlx_image_to_window(data.mlx, data.grid, 0, 0);
-	draw_player(&data);
+	init(&raydata);
+	raydata.display_rays = false;
+	init_textures(&raydata);
+	drawMap2D(&raydata);
+	mlx_image_to_window(raydata.mlx, raydata.grid, 0, 0);
+	draw_player(&raydata);
 
-	mlx_key_hook(data.mlx, &input_hook, &data);
-	mlx_loop_hook(data.mlx, &hook, &data);
-	mlx_loop(data.mlx);
+	mlx_key_hook(raydata.mlx, &input_hook, &raydata);
+	mlx_loop_hook(raydata.mlx, &hook, &raydata);
+	mlx_loop(raydata.mlx);
 
-	mlx_terminate(data.mlx);
+	mlx_terminate(raydata.mlx);
 	return (EXIT_SUCCESS);
 }
