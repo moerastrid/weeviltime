@@ -240,12 +240,7 @@ void input_hook(mlx_key_data_t keydata, void* param)
 	if (keydata.action != MLX_PRESS)
 		return ;
 	if (keydata.key == MLX_KEY_R)
-	{
-		if (data->display_rays == false)
-			data->display_rays = true;
-		else
-			data->display_rays = false;
-	}
+		data->display_rays = !data->display_rays;
 }
 
 void drawMap2D(t_raydata *raydata)
