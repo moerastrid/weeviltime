@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/21 17:36:56 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/23 13:57:38 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # define WIDTH 720
 # define HEIGHT 720
 // # define FOV 1.256
+
+void			free_array(char **arr);
 
 //DEBUG
 void			print_map(t_data *data);
@@ -65,7 +67,5 @@ int				print_error(char *s);
 unsigned int	make_color(int r, int g, int b);
 void			wrap_putpixel(mlx_image_t *img, uint32_t x, uint32_t y,
 					uint32_t color);
-
-void			free_array(char **arr);
 
 #endif

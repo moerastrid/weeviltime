@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 14:16:34 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/20 12:50:11 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/23 16:49:50 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ int	save_map(int map, t_data *data, char *line)
 	temp_line = line;
 	while (temp_line != NULL)
 	{
+		// printf("%s\n", temp_line);
+		// if (temp_line[0] == '\n')
+		// 	break ;
 		if (temp_line[ft_strlen(temp_line) - 1] == '\n')
 			temp_line[ft_strlen(temp_line) - 1] = '\0';
 		if (ft_lstnew_back(&data->map_lines, temp_line) == NULL)

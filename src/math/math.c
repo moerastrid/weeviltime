@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 16:49:09 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/20 18:28:46 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/23 14:00:24 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static float	calculate_distance(t_data *data, float angle)
 	pos.y = data->player.y + 0.5;
 	angle += data->player.direction;
 
-	//line formula: 
+	//line formula:
 	b = (pos.y - atan(angle) * pos.x);
 	while (data->map_array[j])
 	{
@@ -50,7 +50,7 @@ static float	calculate_distance(t_data *data, float angle)
 		}
 		j++;
 	}
-	printf("data player\tx: %f\ty: %f\tangle: %f\ndistance: %f\n\n", pos.x, pos.y, angle, distance);
+	// printf("data player\tx: %f\ty: %f\tangle: %f\ndistance: %f\n\n", pos.x, pos.y, angle, distance);
 	return (sqrt(distance));
 }
 
@@ -65,7 +65,7 @@ float	calculate_height(t_data *data, int x)
 	if (angle >= M_PI * 2)
 		angle = angle - M_PI * 2;
 	if (angle < 0)
-		angle = angle + 2 * M_PI; 
+		angle = angle + 2 * M_PI;
 	distance = calculate_distance(data,angle );
 	height = cos(angle) * ((HEIGHT / 2) / distance);
 	height = ((HEIGHT / 2) / distance);
