@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
-#include "MLX42/include/MLX42/MLX42.h"
+#include "./MLX42/include/MLX42/MLX42.h"
 #include "include/cub.h"
 #include "line.h"
 #include "raycaster.h"
@@ -233,10 +233,10 @@ void hook(void* param)
 void input_hook(mlx_key_data_t keydata, void* param)
 {
 	t_raydata	*data;
-	mlx_t		*mlx;
+	//mlx_t		*mlx;
 
 	data = param;
-	mlx = data->mlx;
+	//mlx = data->mlx;
 	if (keydata.action != MLX_PRESS)
 		return ;
 	if (keydata.key == MLX_KEY_R)
