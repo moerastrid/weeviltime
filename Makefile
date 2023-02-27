@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/02/22 20:34:00 by ageels        ########   odam.nl          #
+#    Updated: 2023/02/24 16:12:25 by astrid        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ cub_obj/%.o : cub_src/%.c
 	$(CC) $(CFLAG) -o $@ -c $^
 
 clean :
-	test -e obj && rm -fr obj || printf "$(_INFO) No objects to clean \n"
+	test -e $(OBJ_DIR) && rm -fr $(OBJ_DIR) || printf "$(_INFO) No objects to clean \n"
 	rm -rf ./MLX42/build
 	make clean -C ./libft
 
