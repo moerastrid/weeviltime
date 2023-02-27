@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_lstnew_back.c                                   :+:    :+:            */
+/*   print_map.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/08/09 16:24:04 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/27 18:40:47 by ageels        ########   odam.nl         */
+/*   Created: 2023/02/09 14:43:10 by mforstho      #+#    #+#                 */
+/*   Updated: 2023/02/27 17:19:24 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../cub_include/cub.h"
 
-t_list	*ft_lstnew_back(t_list **lst, void *data)
+void	print_map(t_data *data)
 {
-	t_list	*new_lst;
+	int	i;
 
-	new_lst = ft_lstnew(data);
-	if (new_lst == NULL)
-		return (NULL);
-	ft_lstadd_back(lst, new_lst);
-	return (new_lst);
+	i = 0;
+	while (i < data->max.y)
+	{
+		//printf("%s\n", data->map_array[i]);
+		i++;
+	}
 }

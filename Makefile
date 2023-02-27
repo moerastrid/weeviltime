@@ -6,20 +6,23 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/02/24 16:12:25 by astrid        ########   odam.nl          #
+#    Updated: 2023/02/27 18:14:31 by ageels        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := cub3D
 OBJ_DIR = ./cub_obj
-CFLAG = -Wall -Werror -Wextra
+CFLAG = -Wall -Werror -Wextra -fsanitize=address
 LFLAG =  -I . -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 CC = clang
 
 SRC = cub_src/main.c\
+	cub_src/debug/print_map.c\
 	cub_src/parse/get_data.c\
 	cub_src/parse/get_elem.c\
+	cub_src/parse/get_map.c\
 	cub_src/parse/parse.c\
+	cub_src/parse/save_map_list.c\
 	cub_src/utils/libft_extra.c\
 	cub_src/utils/get_next_line.c\
 	cub_src/utils/single_alloc_split.c\
@@ -48,9 +51,10 @@ libmlx :
 	ln -sF MLX42/build/libmlx42.a
 
 obj_folder :
-	mkdir -pv $(OBJ_DIR)
-	mkdir -pv $(OBJ_DIR)/parse
-	mkdir -pv $(OBJ_DIR)/utils
+	mkdir -p $(OBJ_DIR)
+	mkdir -p $(OBJ_DIR)/debug
+	mkdir -p $(OBJ_DIR)/parse
+	mkdir -p $(OBJ_DIR)/utils
 
 $(NAME): obj_folder $(OBJ)
 	$(CC) $(CFLAG) -o $(NAME) $(OBJ) ./libft/libft.a libmlx42.a $(LFLAG)

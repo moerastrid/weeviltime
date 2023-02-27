@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 13:52:34 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/22 20:19:26 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/27 18:22:08 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,32 @@
 
 int	get_data(t_data *data, t_par *par)
 {
-	char	*temp_line;
+	char	*line;
 	int		elem_count;
+	int		check_elem;
 
-	temp_line = get_next_line(par->fd_cub);
+	line = get_next_line(par->fd_cub);
 	elem_count = 0;
-	while (temp_line != NULL)
+	while (line != NULL)
 	{
 		if (elem_count < 6)
 		{
-			if (get_elem(data, par, temp_line) == true)
+			check_elem = get_elem(data, par, line);
+			if (check_elem == 1)
 				elem_count++;
+			else if (check_elem == -1)
+			{
+				free(line);
+				return (EXIT_FAILURE);
+			}
 		}
-		free(temp_line);
-		temp_line = get_next_line(par->fd_cub);
+		else
+		{
+			printf("Got to get map!\n");
+			return (get_map(data, par, &line));
+		}
+		free(line);
+		line = get_next_line(par->fd_cub);
 	}
 	return (EXIT_FAILURE);
 }

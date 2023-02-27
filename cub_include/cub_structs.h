@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/22 20:45:20 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/27 17:31:57 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,31 +20,61 @@
 #  define HEIGHT 400
 # endif
 
+/*	wall side parameters	*/
+typedef enum e_wall_side
+{
+	NO,
+	SO,
+	WE,
+	EA,
+}		t_wall_e;
+
+/*	C: ceiling
+	F: floor	*/
 typedef enum e_eplane
 {
 	C,
 	F,
-}		t_eplane;
+}		t_plane_e;
 
+/*	coordinate	*/
+typedef struct s_co
+{
+	int	x;
+	int	y;
+}		t_co;
+
+/*	plane: floor or ceiling	*/
+typedef struct s_plane
+{
+	//mlx_image_t		*img;
+	unsigned int	color;
+}		t_plane;
+
+/*	wall: NO, SO, WE or EA	*/
+typedef struct s_wall
+{
+	//mlx_image_t		*img;
+	char	*path;
+}		t_wall;
+
+/*	parse data	*/
 typedef struct s_par
 {
 	int		fd_cub;
 	bool	*wall_check;
 	bool	*color_check;
+	t_list	*map_lines;
 }		t_par;
 
-typedef struct s_plane
-{
-	//mlx_image_t		*img;
-	unsigned int	color;
-}	t_plane;
-
+/*	general data	*/
 typedef struct s_data
 {
 	t_par	*par;
 	mlx_t	*mlx;
-	t_plane	ceiling;
-	t_plane	floor;
+	t_plane	*planes;
+	t_wall	*walls;
+	t_co	max;
 }		t_data;
 
 #endif

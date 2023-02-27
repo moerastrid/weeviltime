@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/27 14:15:35 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/27 18:21:13 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@
 # include "./get_next_line.h"
 
 // parse
-bool			get_elem(t_data *data, t_par *par, char *temp_line);
+int				get_elem(t_data *data, t_par *par, char *line);
 int				get_data(t_data *data, t_par *par);
+int				get_map(t_data *data, t_par *par, char **line);
 int				parse(int argc, char **argv, t_data *data);
+int				save_map_list(t_data *data, t_par *par, char **line);
 
 // utils
 char			*get_next_line(int fd);

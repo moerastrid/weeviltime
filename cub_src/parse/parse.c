@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/22 19:00:17 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/27 14:03:20 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/27 18:48:14 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,34 @@
 
 static int	set_default_values(t_data *data, t_par *par)
 {
+	// general data:
 	data->mlx = NULL;
 	data->par = par;
-	data->ceiling.color = 0;
-	data->floor.color = 0;
+	data->max.x = 0;
+	data->max.y = 0;
+	data->walls = ft_calloc(4, sizeof(t_wall));
+	if (data->walls == NULL)
+		return (print_error("malloc error"));
+	data->planes = ft_calloc(2, sizeof(t_plane));
+	if (data->planes == NULL)
+	{
+		free(data->walls);
+		return (print_error("malloc error"));
+	}
+	// parse data:
+	par->map_lines = NULL;
 	par->wall_check = ft_calloc(4, sizeof(bool));
 	if (par->wall_check == NULL)
+	{
+		free(data->walls);
+		free(data->planes);
 		return (print_error("malloc error"));
+	}
 	par->color_check = ft_calloc(2, sizeof(bool));
 	if (par->color_check == NULL)
 	{
+		free(data->walls);
+		free(data->planes);
 		free(par->wall_check);
 		return (print_error("malloc error"));
 	}
