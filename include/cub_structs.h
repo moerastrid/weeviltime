@@ -6,13 +6,14 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/20 15:11:01 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/27 17:35:21 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_STRUCTS_H
 # define CUB_STRUCTS_H
 
+# include "../raycaster.h"
 typedef enum e_wall_side
 {
 	NO,
@@ -27,12 +28,12 @@ typedef enum e_plane
 	F,
 }	t_planes;	// betere naam geven om verwarring te voorkomen
 
-// direction in rad please :) 
+// direction in rad please :)
 // NO = 0 rad, SO = pi rad, EA = 0,5pi rad, WE = 1,5pi rad
 typedef struct s_player
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 	float	direction;
 }	t_player;
 
@@ -58,8 +59,11 @@ typedef struct s_co
 
 typedef struct s_data
 {
+	t_rays			rays;
 	int				map_y;
+	int				map_x;
 	char			**map_array;
+	int				*final_map;
 	mlx_t			*mlx;
 	mlx_image_t		*wall;
 	t_wall			walls;

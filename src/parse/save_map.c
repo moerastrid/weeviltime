@@ -6,27 +6,40 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 14:16:34 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/23 16:49:50 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/27 14:17:24 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub.h"
 
+static void	save_line_length(t_data *data, char *temp_line)
+{
+	int	length;
+
+	length = ft_strlen(temp_line);
+	if (data->map_x < length)
+		data->map_x = length;
+}
+
 int	save_map(int map, t_data *data, char *line)
 {
-	int		map_y;
 	char	*temp_line;
 
-	map_y = 0;
+	data->map_y = 0;
+	data->map_x = 0;
 	if (map < 0)
 		return (EXIT_FAILURE);
 	data->map_lines = NULL;
 	temp_line = line;
+	while (temp_line[0] == '\n')
+	{
+		free(temp_line);
+		temp_line = get_next_line(map);
+	}
 	while (temp_line != NULL)
 	{
-		// printf("%s\n", temp_line);
-		// if (temp_line[0] == '\n')
-		// 	break ;
+		if (temp_line[0] == '\n')
+			break ;
 		if (temp_line[ft_strlen(temp_line) - 1] == '\n')
 			temp_line[ft_strlen(temp_line) - 1] = '\0';
 		if (ft_lstnew_back(&data->map_lines, temp_line) == NULL)
@@ -35,11 +48,21 @@ int	save_map(int map, t_data *data, char *line)
 			free(temp_line);
 			return (EXIT_FAILURE);
 		}
+		save_line_length(data, temp_line);
 		temp_line = get_next_line(map);
-		map_y++;
+		data->map_y++;
 	}
-	if (map_y < 1)
+	while (temp_line != NULL)
+	{
+		if (temp_line[0] != '\n')
+		{
+			free(temp_line);
+			return (EXIT_FAILURE);
+		}
+		free(temp_line);
+		temp_line = get_next_line(map);
+	}
+	if (data->map_y < 1)
 		return (EXIT_FAILURE);
-	data->map_y = map_y;
 	return (EXIT_SUCCESS);
 }

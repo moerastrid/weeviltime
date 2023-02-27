@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/22 15:32:25 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/22 15:34:35 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/27 15:38:36 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ typedef struct s_raydata
 	float		pdx;
 	float		pdy;
 	float		pa;
-}	t_raydata;
+}	t_rays;
 
 #endif

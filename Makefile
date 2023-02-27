@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/02/23 16:43:01 by mforstho      ########   odam.nl          #
+#    Updated: 2023/02/27 17:42:01 by mforstho      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,26 +18,29 @@ CC = clang
 
 SRC =	main.c\
 	line.c\
-	# src/main.c\
-	# src/debug/print_map.c\
-	# src/display/background.c\
-	# src/display/blokje.c\
-	# src/display/display.c\
-	# src/display/walls.c\
-	# src/math/math.c\
-	# src/parse/check_map.c\
-	# src/parse/check_player_spawn.c\
-	# src/parse/convert_map.c\
-	# src/parse/init_map.c\
-	# src/parse/init_plane.c\
-	# src/parse/init_wall.c\
-	# src/parse/setup.c\
-	# src/parse/save_map.c\
-	# src/player/player.c\
-	# src/utils/get_next_line.c\
-	# src/utils/single_alloc_split.c\
-	# src/utils/wraps.c\
-	# src/utils/clean.c\
+	src/debug/print_map.c\
+	src/display/background.c\
+	src/display/blokje.c\
+	src/display/display.c\
+	src/display/walls.c\
+	src/math/math.c\
+	src/parse/check_map.c\
+	src/parse/check_player_spawn.c\
+	src/parse/compatibalize_map.c\
+	src/parse/convert_map.c\
+	src/parse/init_map.c\
+	src/parse/init_plane.c\
+	src/parse/init_wall.c\
+	src/parse/setup.c\
+	src/parse/save_map.c\
+	src/player/player.c\
+	src/utils/get_next_line.c\
+	src/utils/single_alloc_split.c\
+	src/utils/wraps.c\
+	src/utils/clean.c\
+
+# SRC = main.c\
+# 	line.c\
 
 ifdef DEBUG
 CFLAG += -fsanitize=address -g

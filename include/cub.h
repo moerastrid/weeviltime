@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/23 13:57:38 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/27 15:55:18 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include <unistd.h>
 
 // temporary!
-# define WIDTH 720
-# define HEIGHT 720
+# define WIDTH 2400
+# define HEIGHT 1024
 // # define FOV 1.256
 
 void			free_array(char **arr);
@@ -53,6 +53,9 @@ bool			init_wall(t_data *data, char *line);
 // bool				init_walls(t_data *data, char *line, t_par *pars);
 int				save_map(int map, t_data *data, char *line);
 int				setup(int argc, char **argv, t_data *data);
+
+int				compatibalize_map(t_data *data);
+void			print_integer_map(t_data *data);
 
 //UTILS
 // clean
