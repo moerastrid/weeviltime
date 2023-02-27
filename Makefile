@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/02/22 12:47:46 by mforstho      ########   odam.nl          #
+#    Updated: 2023/02/27 14:29:31 by ageels        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,28 +16,26 @@ CFLAG = -Wall -Werror -Wextra
 LFLAG =  -I . -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 CC = clang
 
-SRC = main.c\
-	line.c\
-	# src/debug/print_map.c\
-	# src/display/background.c\
-	# src/display/blokje.c\
-	# src/display/display.c\
-	# src/display/walls.c\
-	# src/math/math.c\
-	# src/parse/check_map.c\
-	# src/parse/check_player_spawn.c\
-	# src/parse/convert_map.c\
-	# src/parse/init_map.c\
-	# src/parse/init_plane.c\
-	# src/parse/init_wall.c\
-	# src/parse/init_wall.c\
-	# src/parse/setup.c\
-	# src/parse/save_map.c\
-	# src/player/player.c\
-	# src/utils/get_next_line.c\
-	# src/utils/single_alloc_split.c\
-	# src/utils/wraps.c\
-	# src/utils/clean.c\
+SRC = src/main.c\
+	 src/debug/print_map.c\
+	 src/display/background.c\
+	 src/display/blokje.c\
+	 src/display/display.c\
+	 src/display/walls.c\
+	 src/math/math.c\
+	 src/parse/check_map.c\
+	 src/parse/check_player_spawn.c\
+	 src/parse/convert_map.c\
+	 src/parse/init_map.c\
+	 src/parse/init_plane.c\
+	 src/parse/init_wall.c\
+	 src/parse/setup.c\
+	 src/parse/save_map.c\
+	 src/player/player.c\
+	 src/utils/get_next_line.c\
+	 src/utils/single_alloc_split.c\
+	 src/utils/wraps.c\
+	 src/utils/clean.c\
 
 ifdef DEBUG
 CFLAG += -fsanitize=address -g
@@ -63,12 +61,12 @@ libmlx :
 
 obj_folder :
 	mkdir -pv $(OBJ_DIR)
-	# mkdir -pv $(OBJ_DIR)/debug
-	# mkdir -pv $(OBJ_DIR)/display
-	# mkdir -pv $(OBJ_DIR)/math
-	# mkdir -pv $(OBJ_DIR)/parse
-	# mkdir -pv $(OBJ_DIR)/player
-	# mkdir -pv $(OBJ_DIR)/utils
+	 mkdir -pv $(OBJ_DIR)/debug
+	 mkdir -pv $(OBJ_DIR)/display
+	 mkdir -pv $(OBJ_DIR)/math
+	 mkdir -pv $(OBJ_DIR)/parse
+	 mkdir -pv $(OBJ_DIR)/player
+	 mkdir -pv $(OBJ_DIR)/utils
 
 $(NAME): obj_folder $(OBJ)
 	$(CC) $(CFLAG) -o $(NAME) $(OBJ) ./libft/libft.a libmlx42.a $(LFLAG)
