@@ -6,13 +6,13 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/27 17:46:24 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/27 18:47:58 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/27 20:42:16 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub_include/cub.h"
 
-static void	save_max(t_data *data, char *line)
+static void	save_max_length(t_data *data, char *line)
 {
 	int	length;
 
@@ -22,38 +22,56 @@ static void	save_max(t_data *data, char *line)
 	data->max.y++;
 }
 
-static void	skip_new_lines(t_par *par, char **line)
+char	*skip_empty_line(t_par *par, char *line)
 {
-	while (*line != NULL && *line[0] == '\n')
+	char	*temp_line;
+
+	temp_line = ft_strdup(line);
+	free(line);
+	while (temp_line != NULL && temp_line[0] == '\n')
 	{
-		free(*line);
-		*line = get_next_line(par->fd_cub);
+		free(temp_line);
+		temp_line = get_next_line(par->fd_cub);
 	}
+	return (temp_line);
 }
 
-int	save_map_list(t_data *data, t_par *par, char **line)
+static bool	save_line(t_par *par, char *line)
+{
+	t_list	*new;
+
+	new = ft_lstnew(line);
+	if (new == NULL)
+		return (false);
+	if (par->map_lst == NULL)
+		par->map_lst = new;
+	else
+		ft_lstlast(par->map_lst)->next = new;
+	return (true);
+}
+
+int	save_map_list(t_data *data, t_par *par, char *line)
 {
 	char	*temp;
 
-	temp = *line;
-	skip_new_lines(par, &temp);
+	temp = skip_empty_line(par, line);
 	while (temp != NULL)
 	{
 		if (temp[0] == '\n')
 			break ;
-		if (ft_strlen(temp) > 0 && temp[ft_strlen(temp) - 1] == '\n')
+		if (temp[ft_strlen(temp) - 1] == '\n')
 			temp[ft_strlen(temp) - 1] = '\0';
-		ft_lstadd_back(&par->map_lines, ft_lstnew(temp));
-		save_max(data, temp);
+		if (save_line(par, temp) == false)
+			return (EXIT_FAILURE);
+		save_max_length(data, temp);
 		free(temp);
 		temp = get_next_line(par->fd_cub);
 	}
-	//skip_new_lines(par, line);
-	if (data->max.y < 1 || temp != NULL)
+	temp = skip_empty_line(par, temp);
+	if (temp != NULL || data->max.y < 1)
 	{
-		if (temp != NULL)
-			free(temp);
-		return (print_error("Wrong map format"));
+		free(temp);
+		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }

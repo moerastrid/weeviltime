@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 13:52:34 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/27 18:22:08 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/27 20:24:20 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ int	get_data(t_data *data, t_par *par)
 			}
 		}
 		else
-		{
-			printf("Got to get map!\n");
-			return (get_map(data, par, &line));
-		}
+			return (get_map(data, par, line));
 		free(line);
 		line = get_next_line(par->fd_cub);
 	}

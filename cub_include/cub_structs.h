@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/27 17:31:57 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/27 20:27:06 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_par
 	int		fd_cub;
 	bool	*wall_check;
 	bool	*color_check;
-	t_list	*map_lines;
+	t_list	*map_lst;
 }		t_par;
 
 /*	general data	*/

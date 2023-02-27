@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/22 19:00:17 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/27 18:48:14 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/27 20:39:46 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	set_default_values(t_data *data, t_par *par)
 		return (print_error("malloc error"));
 	}
 	// parse data:
-	par->map_lines = NULL;
+	par->map_lst = NULL;
 	par->wall_check = ft_calloc(4, sizeof(bool));
 	if (par->wall_check == NULL)
 	{
@@ -50,6 +50,14 @@ static int	set_default_values(t_data *data, t_par *par)
 
 static void	clean_par(t_par *par)
 {
+	t_list	*nxt;
+
+	while (par->map_lst != NULL)
+	{
+		nxt = par->map_lst->next;
+		free (par->map_lst);
+		par->map_lst = nxt;
+	}
 	free(par->wall_check);
 	free(par->color_check);
 }
