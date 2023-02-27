@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/22 19:58:10 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/22 20:55:05 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/27 14:22:40 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,14 @@ static bool	set_plane(t_par *par, char *line, t_eplane n, t_plane *plane)
 			else
 			{
 				free (temp_arr);
-				printf("wrong color format");
-				return (false);
+				return (print_error("wrong color format"));
 			}
 			i++;
+		}
+		if (i != 3)
+		{
+			free (temp_arr);
+			return (print_error("wrong color format"));
 		}
 		plane->color = make_color(rgb[0], rgb[1], rgb[2]);
 		free(temp_arr);
@@ -56,5 +60,7 @@ bool	get_elem(t_data *data, t_par *par, char *temp_line)
 {
 	if (init_plane(data, par, temp_line) == true)
 		return (true);
+	//if (init_wall(data, par, temp_line) == true)
+	//	return (true);
 	return (false);
 }

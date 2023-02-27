@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/22 20:35:25 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/27 14:15:35 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int				parse(int argc, char **argv, t_data *data);
 
 // utils
 char			*get_next_line(int fd);
-int				stringisdigit(char *s);
+bool			stringisdigit(char *s);
 char			**ft_single_split(char const *s, char c);
 unsigned int	make_color(int r, int g, int b);
 int				print_error(char *s);
