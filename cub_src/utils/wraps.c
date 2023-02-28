@@ -6,11 +6,11 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/03 16:08:40 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/16 20:51:37 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/22 19:19:12 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub.h"
+#include "../../cub_include/cub.h"
 
 unsigned int	make_color(int r, int g, int b)
 {
@@ -23,7 +23,7 @@ int	print_error(char *s)
 	return (EXIT_FAILURE);
 }
 
-void	wrap_putpixel(mlx_image_t *img, uint32_t x, uint32_t y, uint32_t color)
+void	putpixel(mlx_image_t *img, uint32_t x, uint32_t y, uint32_t color)
 {
 	if (x < img->width && y < img->height)
 		mlx_put_pixel(img, x, y, color);

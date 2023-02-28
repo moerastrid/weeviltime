@@ -1,3 +1,7 @@
 // lets write it down here if we've got any remarks / found errors
 
 * can we do the makefile & header in alfabetic order? it makes me happy
+
+
+if (init_map(open(argv[1], O_RDONLY), data) == EXIT_FAILURE) 
+-> zie dit steeds terugkomen maar dat werkt niet want wat als open niet lukt?
