@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/27 17:46:24 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 15:54:28 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/28 18:22:27 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	convert_map(t_data *data, t_par *par)
 
 	lst = par->maplst;
 	par->maparray = ft_calloc(((size_t)data->max.y + 1), sizeof(char *));
-	if (!par->maparray)	
+	if (!par->maparray)
 		return (print_error("malloc error"));
 	i = 0;
 	while (i < data->max.y)
@@ -82,7 +82,7 @@ int	get_map(t_data *data, t_par *par, char *line)
 	if (temp != NULL || data->max.y < 1)
 	{
 		free(temp);
-		return (print_error("wrong amount of maps"));
+		return (print_error("wrong amount of MMS"));
 	}
 	return (convert_map(data, par));
 }

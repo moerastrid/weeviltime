@@ -6,12 +6,11 @@
 /*   By: ageels <ageels@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/11 18:18:27 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/22 12:46:35 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/28 18:07:32 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/cub.h"
-#include "line.h"
+#include "../../cub_include/cub.h"
 
 t_line	set_line_coords(int xa, int ya, int xb, int yb)
 {

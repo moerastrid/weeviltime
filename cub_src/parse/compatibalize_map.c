@@ -6,20 +6,20 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/27 14:08:51 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/28 13:58:34 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/28 18:02:07 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub.h"
+#include "../../cub_include/cub.h"
 
 void	print_integer_map(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	while (i < (data->map_y * data->map_x))
+	while (i < (data->max.y * data->max.x))
 	{
-		if ((i % data->map_x) == 0)
+		if ((i % data->max.x) == 0)
 			printf("\n");
 		printf("%d", data->final_map[i]);
 		i++;
@@ -27,31 +27,31 @@ void	print_integer_map(t_data *data)
 	printf("\n");
 }
 
-int	compatibalize_map(t_data *data)
+int	compatibalize_map(t_data *data, t_par *par)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	data->final_map = malloc(data->map_x * data->map_y * sizeof(int));
-	while (data->map_array[i] != NULL)
+	data->final_map = malloc(data->max.x * data->max.y * sizeof(int));
+	while (par->maparray[i] != NULL)
 	{
 		j = 0;
-		while (data->map_array[i][j] != '\0')
+		while (par->maparray[i][j] != '\0')
 		{
-			if (data->map_array[i][j] == ' ' || data->map_array[i][j] == 'N'
-				|| data->map_array[i][j] == 'S' || data->map_array[i][j] == 'E'
-				|| data->map_array[i][j] == 'W')
-				data->final_map[j + (data->map_x * i)] = 0;
+			if (par->maparray[i][j] == ' ' || par->maparray[i][j] == 'N'
+				|| par->maparray[i][j] == 'S' || par->maparray[i][j] == 'E'
+				|| par->maparray[i][j] == 'W')
+				data->final_map[j + (data->max.x * i)] = 0;
 			else
-				data->final_map[j + (data->map_x * i)]
-					= data->map_array[i][j] - '0';
-			if (data->map_array[i][j + 1] == '\0')
+				data->final_map[j + (data->max.x * i)]
+					= par->maparray[i][j] - '0';
+			if (par->maparray[i][j + 1] == '\0')
 			{
 				j++;
-				while (j < data->map_x)
+				while (j < data->max.x)
 				{
-					data->final_map[(j + (data->map_x * i))] = 0;
+					data->final_map[(j + (data->max.x * i))] = 0;
 					j++;
 				}
 				break ;

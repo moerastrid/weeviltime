@@ -6,13 +6,13 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/22 12:44:50 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/22 12:50:37 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/28 17:53:57 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LINE_H
 # define LINE_H
-# include "include/cub.h"
+# include "cub_include/cub.h"
 
 typedef mlx_image_t	t_img;
 
