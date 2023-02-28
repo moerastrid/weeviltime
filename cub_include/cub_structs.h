@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 15:34:27 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/28 16:51:36 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # endif
 # ifndef HEIGHT
 #  define HEIGHT 400
+# endif
+# ifndef MINIMAPSIZE
+#  define MINIMAPSIZE 16
 # endif
 
 /*	wall side parameters	*/
@@ -40,8 +43,8 @@ typedef enum e_eplane
 /*	coordinate	*/
 typedef struct s_co
 {
-	int	x;
-	int	y;
+	int			x;
+	int			y;
 }		t_co;
 
 /*	plane: floor or ceiling	*/
@@ -55,27 +58,37 @@ typedef struct s_plane
 typedef struct s_wall
 {
 	//mlx_image_t		*img;
-	char	*path;
+	char		*path;
 }		t_wall;
+
+/* player data */
+typedef struct s_player
+{
+	int		x;
+	int		y;
+	float	direction;
+	t_co	pos;
+}		t_player;
 
 /*	parse data	*/
 typedef struct s_par
 {
-	bool	*wall_check;
-	bool	*color_check;
-	char	**maparray;
-	int		fd_cub;
-	t_list	*maplst;
+	bool		*wall_check;
+	bool		*color_check;
+	char		**maparray;
+	int			fd_cub;
+	t_list		*maplst;
 }		t_par;
 
 /*	general data	*/
 typedef struct s_data
 {
-	mlx_t	*mlx;
-	t_co	max;
-	t_par	*par;
-	t_plane	*planes;
-	t_wall	*walls;
+	mlx_t		*mlx;
+	t_co		max;
+	t_par		*par;
+	t_plane		*planes;
+	t_player	player;
+	t_wall		*walls;
 }		t_data;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 15:43:26 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/28 16:28:30 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 void			print_map(t_par *par);
 
 // parse
+int				check_map(t_data *data, t_par *par);
 int				get_data(t_data *data, t_par *par);
 int				get_elem(t_data *data, t_par *par, char *line);
 int				get_map(t_data *data, t_par *par, char *line);
