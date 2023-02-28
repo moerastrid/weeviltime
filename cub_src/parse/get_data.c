@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 13:52:34 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/28 16:28:07 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/28 20:35:58 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	get_mapdata(t_data *data, t_par *par, char *line)
 {
 	if (get_map(data, par, line))
 		return (EXIT_FAILURE);
-	if (check_map(data, par) == EXIT_FAILURE)
+	if (set_map(data, par) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/06 15:22:19 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/28 18:22:27 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/28 20:39:53 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,41 @@ static int	check_tile(t_data *data, t_par *par, int i, int j)
 	return (EXIT_SUCCESS);
 }
 
+static int	set_player(t_data *data, t_par *par, int i, int j)
+{
+	char		c;
+	static int	player_count = 0;
+
+	c = par->maparray[i][j];
+	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
+	{
+		player_count += 1;
+		if (check_tile(data, par, i, j) == EXIT_FAILURE || player_count > 1)
+			return (print_error("set_player error"));
+		data->player.x = j;
+		data->player.y = i;
+		data->player.pos_x = ((float)j * MMS) + ((MMS / 2) - (MMS / 8));
+		data->player.pos_y = ((float)i * MMS) + ((MMS / 2) - (MMS / 8));
+	}
+	if (c == 'N')
+		data->player.direction = 90;
+	if (c == 'S')
+		data->player.direction = 270;
+	if (c == 'W')
+		data->player.direction = 180;
+	if (c == 'E')
+		data->player.direction = 0;
+	return (EXIT_SUCCESS);
+}
+
 static int	check_spaces(t_data *data, t_par *par)
 {
 	int	i;
 	int	j;
-	int	player_count;
+	int	ret;
 
 	i = 0;
-	player_count = 0;
+	ret = -1;
 	while (i < data->max.y)
 	{
 		j = 0;
@@ -50,33 +77,12 @@ static int	check_spaces(t_data *data, t_par *par)
 				if (check_tile(data, par, i, j) == EXIT_FAILURE)
 					return (EXIT_FAILURE);
 			}
-			else if (par->maparray[i][j] == 'N'
-				|| par->maparray[i][j] == 'S'
-				|| par->maparray[i][j] == 'W'
-				|| par->maparray[i][j] == 'E')
-			{
-				if (check_tile(data, par, i, j) == EXIT_FAILURE)
-					return (EXIT_FAILURE);
-				data->player.x = j;
-				data->player.y = i;
-				data->player.pos_x = ((float)j * MMS) + ((MMS / 2) - (MMS / 8));
-				data->player.pos_y = ((float)i * MMS) + ((MMS / 2) - (MMS / 8));
-				player_count++;
-			}
+			if (set_player(data, par, i, j))
+				return (EXIT_FAILURE);
 			j++;
 		}
 		i++;
 	}
-	if (player_count != 1)
-		return (EXIT_FAILURE);
-	if (par->maparray[data->player.y][data->player.x] == 'N')
-		data->player.direction = 90;
-	if (par->maparray[data->player.y][data->player.x] == 'S')
-		data->player.direction = 270;
-	if (par->maparray[data->player.y][data->player.x] == 'W')
-		data->player.direction = 180;
-	if (par->maparray[data->player.y][data->player.x] == 'E')
-		data->player.direction = 0;
 	return (EXIT_SUCCESS);
 }
 

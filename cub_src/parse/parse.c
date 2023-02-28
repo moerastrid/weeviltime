@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/22 19:00:17 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 20:13:49 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/28 20:38:33 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	parse(int argc, char **argv, t_data *data)
 		return (exit_par(&parse_data, EXIT_FAILURE));
 	if (get_data(data, &parse_data))
 		return (exit_par(&parse_data, EXIT_FAILURE));
-	if (set_map(data, &parse_data))
+	if (check_map(data, &parse_data))
 		return (exit_par(&parse_data, EXIT_FAILURE));
 	return (exit_par(&parse_data, EXIT_SUCCESS));
 }
