@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   display_rays.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/02/02 14:10:33 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 20:50:36 by ageels        ########   odam.nl         */
+/*   Created: 2023/02/28 21:03:29 by ageels        #+#    #+#                 */
+/*   Updated: 2023/02/28 21:05:07 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub_include/cub.h"
+#include "../../cub_include/cub.h"
 
-static void	leakfunc(void)
+void	display_rays(mlx_key_data_t keydata, void *param)
 {
-	system("leaks -q cub3D");
-}
+	t_data	*data;
+	mlx_t	*mlx;
 
-int32_t	main(int argc, char **argv)
-{
-	t_data	data;
-	int		ret;
-
-	ft_bzero(&data, sizeof(t_data));
-	atexit(leakfunc);
-	if (parse(argc, argv, &data))
+	data = param;
+	mlx = data->mlx;
+	if (keydata.action == MLX_PRESS)
 	{
-		free_data(&data);
-		return (EXIT_FAILURE);
+		if (keydata.key == MLX_KEY_R)
+			data->rays.display_rays = !data->rays.display_rays;
 	}
-	ret = gameloop(&data);
-	free_data(&data);
-	return (EXIT_SUCCESS);
 }

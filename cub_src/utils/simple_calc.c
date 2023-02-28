@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   calculations.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/02/02 14:10:33 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 20:50:36 by ageels        ########   odam.nl         */
+/*   Created: 2023/02/28 20:53:40 by ageels        #+#    #+#                 */
+/*   Updated: 2023/02/28 20:53:49 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub_include/cub.h"
+#include "../../cub_include/cub.h"
 
-static void	leakfunc(void)
+float	deg_to_rad(int a)
 {
-	system("leaks -q cub3D");
+	return (a * M_PI / 180.0);
 }
 
-int32_t	main(int argc, char **argv)
+float	fix_ang(float a)
 {
-	t_data	data;
-	int		ret;
-
-	ft_bzero(&data, sizeof(t_data));
-	atexit(leakfunc);
-	if (parse(argc, argv, &data))
-	{
-		free_data(&data);
-		return (EXIT_FAILURE);
-	}
-	ret = gameloop(&data);
-	free_data(&data);
-	return (EXIT_SUCCESS);
+	if (a > 359)
+		a -= 360;
+	if (a < 0)
+		a += 360;
+	return (a);
 }

@@ -4,25 +4,25 @@
 #include "./MLX42/include/MLX42/MLX42.h"
 #include "cub_include/cub.h"
 
-float	degToRad(int a)
+float	deg_to_rad(int a)
 {
 	return (a * M_PI / 180.0);
 }
 
-float	FixAng(float a)
+float	fix_ang(float a)
 {
-	if(a > 359)
+	if (a > 359)
 		a -= 360;
-	if(a < 0)
+	if (a < 0)
 		a += 360;
 	return (a);
 }
 
-void	drawRays2D(t_data *data, t_rays *rays, mlx_instance_t *player, t_raymath *r_math)
+void	draw_rays_2d(t_data *data, t_rays *rays, mlx_instance_t *player, t_raymath *r_math)
 {
 	// int rays_per_degree = 10;
 
-	r_math->ra = FixAng(rays->pa + FOV / 2);              //ray set back 30 degrees
+	r_math->ra = fix_ang(rays->pa + FOV / 2);              //ray set back 30 degrees
 
 	r_math->r = 0;
 	while (r_math->r < FOV)
@@ -30,15 +30,15 @@ void	drawRays2D(t_data *data, t_rays *rays, mlx_instance_t *player, t_raymath *r
 		//---Vertical---
 		r_math->dof = 0;
 		r_math->disv = 100000;
-		float Tan = tan(degToRad(r_math->ra));
-		if (cos(degToRad(r_math->ra)) > 0.001) //looking left
+		float Tan = tan(deg_to_rad(r_math->ra));
+		if (cos(deg_to_rad(r_math->ra)) > 0.001) //looking left
 		{
 			r_math->rx = (((player->x + (MMS / 8)) / MMS) * MMS) + MMS;
 			r_math->ry = ((float)(player->x + (MMS / 8)) - r_math->rx) * Tan + (float)(player->y + (MMS / 8));
 			r_math->xo = MMS;
 			r_math->yo = -r_math->xo * Tan;
 		}
-		else if (cos(degToRad(r_math->ra)) < -0.001) //looking right
+		else if (cos(deg_to_rad(r_math->ra)) < -0.001) //looking right
 		{
 			r_math->rx = (((player->x + (MMS / 8)) / MMS) * MMS) - 0.0001;
 			r_math->ry = ((float)(player->x + (MMS / 8)) - r_math->rx) * Tan + (float)(player->y + (MMS / 8));
@@ -60,7 +60,7 @@ void	drawRays2D(t_data *data, t_rays *rays, mlx_instance_t *player, t_raymath *r
 			if (r_math->mp > 0 && r_math->mp < data->max.x * data->max.y && data->map[r_math->mp] == 1)		//hit
 			{
 				r_math->dof = DOF;
-				r_math->disv = cos(degToRad(r_math->ra)) * (r_math->rx - (float)(player->x + (MMS / 8))) - sin(degToRad(r_math->ra)) * (r_math->ry - (float)(player->y + (MMS / 8)));
+				r_math->disv = cos(deg_to_rad(r_math->ra)) * (r_math->rx - (float)(player->x + (MMS / 8))) - sin(deg_to_rad(r_math->ra)) * (r_math->ry - (float)(player->y + (MMS / 8)));
 			}
 			else                         //check next horizontal
 			{
@@ -76,14 +76,14 @@ void	drawRays2D(t_data *data, t_rays *rays, mlx_instance_t *player, t_raymath *r
 		r_math->dof = 0;
 		r_math->dish = 100000;
 		Tan = 1.0 / Tan;
-		if (sin(degToRad(r_math->ra)) > 0.001)		//looking up
+		if (sin(deg_to_rad(r_math->ra)) > 0.001)		//looking up
 		{
 			r_math->ry = (((player->y + (MMS / 8)) / MMS) * MMS) - 0.0001;
 			r_math->rx = ((float)(player->y + (MMS / 8)) - r_math->ry) * Tan + (float)(player->x + (MMS / 8));
 			r_math->yo = -MMS;
 			r_math->xo = -r_math->yo * Tan;
 		}
-		else if (sin(degToRad(r_math->ra)) < -0.001)	//looking down
+		else if (sin(deg_to_rad(r_math->ra)) < -0.001)	//looking down
 		{
 			r_math->ry = (((player->y + (MMS / 8)) / MMS) * MMS) + MMS;
 			r_math->rx = ((float)(player->y + (MMS / 8)) - r_math->ry) * Tan + (float)(player->x + (MMS / 8));
@@ -105,7 +105,7 @@ void	drawRays2D(t_data *data, t_rays *rays, mlx_instance_t *player, t_raymath *r
 			if (r_math->mp > 0 && r_math->mp < data->max.x * data->max.y && data->map[r_math->mp] == 1)		//hit
 			{
 				r_math->dof = DOF;
-				r_math->dish = cos(degToRad(r_math->ra)) * (r_math->rx - (float)(player->x + (MMS / 8))) - sin(degToRad(r_math->ra)) * (r_math->ry - (float)(player->y + (MMS / 8)));
+				r_math->dish = cos(deg_to_rad(r_math->ra)) * (r_math->rx - (float)(player->x + (MMS / 8))) - sin(deg_to_rad(r_math->ra)) * (r_math->ry - (float)(player->y + (MMS / 8)));
 			}
 			else				 //check next horizontal
 			{
@@ -122,8 +122,8 @@ void	drawRays2D(t_data *data, t_rays *rays, mlx_instance_t *player, t_raymath *r
 			r_math->dish = r_math->disv;
 		}
 
-		int ca = FixAng(rays->pa - r_math->ra);
-		r_math->dish = r_math->dish * cos(degToRad(ca));                            //fix fisheye
+		int ca = fix_ang(rays->pa - r_math->ra);
+		r_math->dish = r_math->dish * cos(deg_to_rad(ca));                            //fix fisheye
 
 		int lineH = (MMS * 320) / (r_math->dish);
 		if (lineH > 320)
@@ -146,7 +146,7 @@ void	drawRays2D(t_data *data, t_rays *rays, mlx_instance_t *player, t_raymath *r
 			rays->line = set_line_coords(player->x + (MMS / 8), player->y + (MMS / 8), r_math->rx, r_math->ry);
 			ft_line(rays->grid, &rays->line, 0xEEEE99FF);
 		}
-		r_math->ra = FixAng(r_math->ra - 1);                                                              //go to next ray
+		r_math->ra = fix_ang(r_math->ra - 1);                                                              //go to next ray
 		r_math->r++;
 	}
 }
@@ -229,37 +229,23 @@ void hook(void* param)
 		player->x = (int)data->player.pos_x;
 		player->y = (int)data->player.pos_y;
 	}
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-	{
-		rays->pa += 5;
-		rays->pa = FixAng(rays->pa);
-		rays->pdx = cos(degToRad(rays->pa));
-		rays->pdy = -sin(degToRad(rays->pa));
-	}
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-	{
-		rays->pa -= 5;
-		rays->pa = FixAng(rays->pa);
-		rays->pdx = cos(degToRad(rays->pa));
-		rays->pdy = -sin(degToRad(rays->pa));
-	}
+	//if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
+	//{
+	//	rays->pa += 5;
+	//	rays->pa = fix_ang(rays->pa);
+	//	rays->pdx = cos(deg_to_rad(rays->pa));
+	//	rays->pdy = -sin(deg_to_rad(rays->pa));
+	//}
+	//if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
+	//{
+	//	rays->pa -= 5;
+	//	rays->pa = fix_ang(rays->pa);
+	//	rays->pdx = cos(deg_to_rad(rays->pa));
+	//	rays->pdy = -sin(deg_to_rad(rays->pa));
+	//}
 	rays->line = set_line_coords(player->x + (MMS / 8), player->y + (MMS / 8), player->x + (MMS / 8) + rays->pdx * 30, player->y + (MMS / 8) + rays->pdy * 30);
 	ft_line(rays->grid, &rays->line, 0xEEEE99FF);
-	drawRays2D(data, rays, player, &rays->r_math);
-}
-
-void input_hook(mlx_key_data_t keydata, void* param)
-{
-	t_data	*data;
-	mlx_t	*mlx;
-
-	data = param;
-	mlx = data->mlx;
-	if (keydata.action == MLX_PRESS)
-	{
-		if (keydata.key == MLX_KEY_R)
-			data->rays.display_rays = !data->rays.display_rays;
-	}
+	draw_rays_2d(data, rays, player, &rays->r_math);
 }
 
 void drawMap2D(t_data *data)
@@ -306,7 +292,7 @@ void	init_textures(t_data *data)
 void	init_raydata(t_data *data, t_rays *rays)
 {
 	rays->pa = data->player.direction;
-	rays->pdx = cos(degToRad(rays->pa));
-	rays->pdy = -sin(degToRad(rays->pa));
+	rays->pdx = cos(deg_to_rad(rays->pa));
+	rays->pdy = -sin(deg_to_rad(rays->pa));
 	rays->display_rays = false;
 }
