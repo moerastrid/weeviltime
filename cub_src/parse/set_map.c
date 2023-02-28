@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   compatibalize_map.c                                :+:    :+:            */
+/*   set_map.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/27 14:08:51 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/28 20:10:26 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/28 21:16:25 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	set_tile(t_data *data, t_par *par, int i, int *j)
 		data->map[*j + (data->max.x * i)] = par->maparray[i][*j] - '0';
 	if (par->maparray[i][*j + 1] == '\0')
 	{
+		(*j)++;
 		while (*j < data->max.x)
 		{
 			data->map[(*j + (data->max.x * i))] = 0;
