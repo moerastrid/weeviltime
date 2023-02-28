@@ -5,30 +5,13 @@
 #include "include/cub.h"
 #include "line.h"
 #include "raycaster.h"
-#define FOV 70
 
-#define mapX  8      //map width		//moeten in de struct en gebaseerd op de grootte van de gegeven map
-#define mapY  8      //map height		//
-#define mapS 16      //map cube size
-#define DOF 16
-int map[] =           //the map array. Edit to change level but keep the outer walls
-{
-	1,1,1,1,1,1,1,1,
-	1,0,1,0,0,0,0,1,
-	1,0,1,0,0,0,0,1,
-	1,0,1,0,0,0,0,1,
-	1,0,0,0,0,0,0,1,
-	1,0,1,0,0,1,0,1,
-	1,0,0,0,0,0,0,1,
-	1,1,1,1,1,1,1,1,
-};
-
-float degToRad(int a)
+float	degToRad(int a)
 {
 	return (a * M_PI / 180.0);
 }
 
-float FixAng(float a)
+float	FixAng(float a)
 {
 	if(a > 359)
 		a -= 360;
@@ -37,7 +20,7 @@ float FixAng(float a)
 	return (a);
 }
 
-void drawRays2D(t_data *data, t_rays *rays, mlx_instance_t *player, t_raymath *r_math)
+void	drawRays2D(t_data *data, t_rays *rays, mlx_instance_t *player, t_raymath *r_math)
 {
 	// int rays_per_degree = 10;
 
@@ -52,22 +35,22 @@ void drawRays2D(t_data *data, t_rays *rays, mlx_instance_t *player, t_raymath *r
 		float Tan = tan(degToRad(r_math->ra));
 		if (cos(degToRad(r_math->ra)) > 0.001) //looking left
 		{
-			r_math->rx = (((player->x + 4) / mapS) * mapS) + mapS;
-			r_math->ry = ((float)(player->x + 4) - r_math->rx) * Tan + (float)(player->y + 4);
+			r_math->rx = (((player->x + (mapS / 8)) / mapS) * mapS) + mapS;
+			r_math->ry = ((float)(player->x + (mapS / 8)) - r_math->rx) * Tan + (float)(player->y + (mapS / 8));
 			r_math->xo = mapS;
 			r_math->yo = -r_math->xo * Tan;
 		}
 		else if (cos(degToRad(r_math->ra)) < -0.001) //looking right
 		{
-			r_math->rx = (((player->x + 4) / mapS) * mapS) - 0.0001;
-			r_math->ry = ((float)(player->x + 4) - r_math->rx) * Tan + (float)(player->y + 4);
+			r_math->rx = (((player->x + (mapS / 8)) / mapS) * mapS) - 0.0001;
+			r_math->ry = ((float)(player->x + (mapS / 8)) - r_math->rx) * Tan + (float)(player->y + (mapS / 8));
 			r_math->xo = -mapS;
 			r_math->yo = -r_math->xo * Tan;
 		}
 		else							//looking up or down. no hit
 		{
-			r_math->rx = (float)(player->x + 4);
-			r_math->ry = (float)(player->y + 4);
+			r_math->rx = (float)(player->x + (mapS / 8));
+			r_math->ry = (float)(player->y + (mapS / 8));
 			r_math->dof = DOF;
 		}
 
@@ -79,7 +62,7 @@ void drawRays2D(t_data *data, t_rays *rays, mlx_instance_t *player, t_raymath *r
 			if (r_math->mp > 0 && r_math->mp < data->map_x * data->map_y && data->final_map[r_math->mp] == 1)		//hit
 			{
 				r_math->dof = DOF;
-				r_math->disv = cos(degToRad(r_math->ra)) * (r_math->rx - (float)(player->x + 4)) - sin(degToRad(r_math->ra)) * (r_math->ry - (float)(player->y + 4));
+				r_math->disv = cos(degToRad(r_math->ra)) * (r_math->rx - (float)(player->x + (mapS / 8))) - sin(degToRad(r_math->ra)) * (r_math->ry - (float)(player->y + (mapS / 8)));
 			}
 			else                         //check next horizontal
 			{
@@ -97,22 +80,22 @@ void drawRays2D(t_data *data, t_rays *rays, mlx_instance_t *player, t_raymath *r
 		Tan = 1.0 / Tan;
 		if (sin(degToRad(r_math->ra)) > 0.001)		//looking up
 		{
-			r_math->ry = (((player->y + 4) / mapS) * mapS) - 0.0001;
-			r_math->rx = ((float)(player->y + 4) - r_math->ry) * Tan + (float)(player->x + 4);
+			r_math->ry = (((player->y + (mapS / 8)) / mapS) * mapS) - 0.0001;
+			r_math->rx = ((float)(player->y + (mapS / 8)) - r_math->ry) * Tan + (float)(player->x + (mapS / 8));
 			r_math->yo = -mapS;
 			r_math->xo = -r_math->yo * Tan;
 		}
 		else if (sin(degToRad(r_math->ra)) < -0.001)	//looking down
 		{
-			r_math->ry = (((player->y + 4) / mapS) * mapS) + mapS;
-			r_math->rx = ((float)(player->y + 4) - r_math->ry) * Tan + (float)(player->x + 4);
+			r_math->ry = (((player->y + (mapS / 8)) / mapS) * mapS) + mapS;
+			r_math->rx = ((float)(player->y + (mapS / 8)) - r_math->ry) * Tan + (float)(player->x + (mapS / 8));
 			r_math->yo = mapS;
 			r_math->xo = -r_math->yo * Tan;
 		}
 		else								//looking straight left or right
 		{
-			r_math->rx = (float)(player->x + 4);
-			r_math->ry = (float)(player->y + 4);
+			r_math->rx = (float)(player->x + (mapS / 8));
+			r_math->ry = (float)(player->y + (mapS / 8));
 			r_math->dof = DOF;
 		}
 
@@ -124,7 +107,7 @@ void drawRays2D(t_data *data, t_rays *rays, mlx_instance_t *player, t_raymath *r
 			if (r_math->mp > 0 && r_math->mp < data->map_x * data->map_y && data->final_map[r_math->mp] == 1)		//hit
 			{
 				r_math->dof = DOF;
-				r_math->dish = cos(degToRad(r_math->ra)) * (r_math->rx - (float)(player->x + 4)) - sin(degToRad(r_math->ra)) * (r_math->ry - (float)(player->y + 4));
+				r_math->dish = cos(degToRad(r_math->ra)) * (r_math->rx - (float)(player->x + (mapS / 8))) - sin(degToRad(r_math->ra)) * (r_math->ry - (float)(player->y + (mapS / 8)));
 			}
 			else				 //check next horizontal
 			{
@@ -162,7 +145,7 @@ void drawRays2D(t_data *data, t_rays *rays, mlx_instance_t *player, t_raymath *r
 
 		if (rays->display_rays)
 		{
-			rays->line = set_line_coords(player->x + 4, player->y + 4, r_math->rx, r_math->ry);
+			rays->line = set_line_coords(player->x + (mapS / 8), player->y + (mapS / 8), r_math->rx, r_math->ry);
 			ft_line(rays->grid, &rays->line, 0xEEEE99FF);
 		}
 		r_math->ra = FixAng(r_math->ra - 1);                                                              //go to next ray
@@ -194,27 +177,59 @@ void hook(void* param)
 	t_rays			*rays;
 	mlx_t			*mlx;
 	mlx_instance_t	*player;
-	int				ppddxx;
-	int 			ppddyy;
+	float			ppddxx;
+	float 			ppddyy;
 
 	data = param;
 	rays = &data->rays;
-	ppddxx = rays->pdx * 2;
-	ppddyy = rays->pdy * 2;
+	ppddxx = rays->pdx * (mapS / 8);
+	ppddyy = rays->pdy * (mapS / 8);
 	mlx = data->mlx;
 	player = rays->player->instances;
 	ft_fill(rays->grid, mlx);
+
+
+	// collision
+	int	xo = 0;
+	if (rays->pdx < 0)
+		xo = -(mapS / 3);
+	else
+		xo = (mapS / 3);                                  //x offset to check map
+
+	int yo = 0;
+	if (rays->pdy < 0)
+		yo=-(mapS / 3);
+	else
+		yo=(mapS / 3);                                  //y offset to check map
+
+	int ipx = (data->player.pos_x + (mapS / 8)) / mapS;
+	int	ipx_add_xo = ((data->player.pos_x + (mapS / 8)) + xo) / mapS;
+	int	ipx_sub_xo = ((data->player.pos_x + (mapS / 8)) - xo) / mapS;             //x position and offset
+
+	int ipy = (data->player.pos_y + (mapS / 8)) / mapS;
+	int	ipy_add_yo = ((data->player.pos_y + (mapS / 8)) + yo) / mapS;
+	int	ipy_sub_yo = ((data->player.pos_y + (mapS / 8)) - yo) / mapS;             //y position and offset
+
+	// keys
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_UP))
 	{
-		player->x += ppddxx;
-		player->y += ppddyy;
+		if (data->final_map[ipy * data->map_x + ipx_add_xo] == 0)
+			data->player.pos_x += ppddxx;
+		if (data->final_map[ipy_add_yo * data->map_x + ipx] == 0)
+			data->player.pos_y += ppddyy;
+		player->x = (int)data->player.pos_x;
+		player->y = (int)data->player.pos_y;
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
 	{
-		player->x -= ppddxx;
-		player->y -= ppddyy;
+		if (data->final_map[ipy * data->map_x + ipx_sub_xo] == 0)
+			data->player.pos_x -= ppddxx;
+		if (data->final_map[ipy_sub_yo * data->map_x + ipx] == 0)
+			data->player.pos_y -= ppddyy;
+		player->x = (int)data->player.pos_x;
+		player->y = (int)data->player.pos_y;
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
 	{
@@ -230,7 +245,7 @@ void hook(void* param)
 		rays->pdx = cos(degToRad(rays->pa));
 		rays->pdy = -sin(degToRad(rays->pa));
 	}
-	rays->line = set_line_coords(player->x + 4, player->y + 4, player->x + 4 + rays->pdx * 30, player->y + 4 + rays->pdy * 30);
+	rays->line = set_line_coords(player->x + (mapS / 8), player->y + (mapS / 8), player->x + (mapS / 8) + rays->pdx * 30, player->y + (mapS / 8) + rays->pdy * 30);
 	ft_line(rays->grid, &rays->line, 0xEEEE99FF);
 	drawRays2D(data, rays, player, &rays->r_math);
 }
@@ -274,9 +289,11 @@ void drawMap2D(t_data *data)
 
 void	draw_player(t_data *data)
 {
-	data->rays.player = mlx_new_image(data->mlx, 8, 8);
+	data->rays.player = mlx_new_image(data->mlx, mapS / 4, mapS / 4);
 	memset(data->rays.player->pixels, 200, data->rays.player->width * data->rays.player->height * sizeof(int));
-	mlx_image_to_window(data->mlx, data->rays.player, data->player.x * mapS, data->player.y * mapS);
+	printf("player x: %d\nplayer y: %d\n", data->player.x, data->player.y);				//weg
+	printf("player x: %f\nplayer y: %f\n", data->player.pos_x, data->player.pos_y);		//weg
+	mlx_image_to_window(data->mlx, data->rays.player, (data->player.x * mapS) + (mapS / 2) - (mapS / 8), (data->player.y * mapS) + (mapS / 2) - (mapS / 8));
 }
 
 void	init_textures(t_data *data)
@@ -288,9 +305,9 @@ void	init_textures(t_data *data)
 	data->rays.grid = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 }
 
-void init(t_rays *rays)
+void init(t_data *data, t_rays *rays)
 {
-	rays->pa = 0;
+	rays->pa = data->player.direction;
 	rays->pdx = cos(degToRad(rays->pa));
 	rays->pdy = -sin(degToRad(rays->pa));
 	rays->display_rays = false;
@@ -320,14 +337,14 @@ int32_t	main(int argc, char **argv)
 {
 	t_data	data;
 
-	// atexit(leakfunc);
+	atexit(leakfunc);
 	ft_bzero(&data, sizeof(t_data));
 	if (setup(argc, argv, &data))
 		return (EXIT_FAILURE);
 	// if (!(rays.mlx = mlx_init(1200, 512, "MLX42", true)))
 	// 	return(EXIT_FAILURE);
 
-	init(&data.rays);
+	init(&data, &data.rays);
 	init_textures(&data);
 	drawMap2D(&data);
 	mlx_image_to_window(data.mlx, data.rays.grid, 0, 0);
@@ -338,5 +355,69 @@ int32_t	main(int argc, char **argv)
 	mlx_loop(data.mlx);
 
 	mlx_terminate(data.mlx);
+	free(data.final_map);
 	return (EXIT_SUCCESS);
 }
+
+/*
+void hook(void* param)
+{
+	t_data			*data;
+	t_rays			*rays;
+	mlx_t			*mlx;
+	mlx_instance_t	*player;
+	int				ppddxx;
+	int 			ppddyy;
+
+	data = param;
+	rays = &data->rays;
+	ppddxx = rays->pdx * 2;
+	ppddyy = rays->pdy * 2;
+	mlx = data->mlx;
+	player = rays->player->instances;
+	ft_fill(rays->grid, mlx);
+	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(mlx);
+	if (mlx_is_key_down(mlx, MLX_KEY_UP))
+	{
+		player->x += ppddxx;
+		player->y += ppddyy;
+	}
+	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
+	{
+		player->x -= ppddxx;
+		player->y -= ppddyy;
+	}
+	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
+	{
+		rays->pa += 5;
+		rays->pa = FixAng(rays->pa);
+		rays->pdx = cos(degToRad(rays->pa));
+		rays->pdy = -sin(degToRad(rays->pa));
+	}
+	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
+	{
+		rays->pa -= 5;
+		rays->pa = FixAng(rays->pa);
+		rays->pdx = cos(degToRad(rays->pa));
+		rays->pdy = -sin(degToRad(rays->pa));
+	}
+	rays->line = set_line_coords(player->x + (mapS / 8), player->y + 4, player->x + 4 + rays->pdx * 30, player->y + 4 + rays->pdy * 30);
+	ft_line(rays->grid, &rays->line, 0xEEEE99FF);
+	drawRays2D(data, rays, player, &rays->r_math);
+}
+
+void input_hook(mlx_key_data_t keydata, void* param)
+{
+	t_data	*data;
+	mlx_t	*mlx;
+
+	data = param;
+	mlx = data->mlx;
+	if (keydata.action == MLX_PRESS)
+	{
+		if (keydata.key == MLX_KEY_R)
+			data->rays.display_rays = !data->rays.display_rays;
+	}
+}
+*/

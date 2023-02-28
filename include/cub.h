@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/27 15:55:18 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/28 17:07:58 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "./cub_structs.h"
 # include "./get_next_line.h"
+# include "../raycaster.h"
 # include <fcntl.h>
 # include <math.h>
 # include <memory.h>
@@ -28,6 +29,11 @@
 # define WIDTH 2400
 # define HEIGHT 1024
 // # define FOV 1.256
+
+// raycaster
+# define FOV 70
+# define mapS 16      //map cube size
+# define DOF 24
 
 void			free_array(char **arr);
 

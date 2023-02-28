@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/27 17:35:21 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/28 14:30:10 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct s_player
 {
 	int		x;
 	int		y;
+	float	pos_x;
+	float	pos_y;
 	float	direction;
 }	t_player;
 
