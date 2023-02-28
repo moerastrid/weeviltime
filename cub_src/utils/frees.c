@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/28 15:23:16 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 17:04:40 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/28 18:12:34 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,6 @@ void	free_data(t_data	*data)
 	}
 	if (data->planes)
 		free(data->planes);
+	if (data->final_map)
+		free(data->final_map);
 }

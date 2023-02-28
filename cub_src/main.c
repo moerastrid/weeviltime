@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:33 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 15:24:12 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/28 18:13:25 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	leakfunc(void)
 	system("leaks -q cub3D");
 }
 
-int	main(int argc, char **argv)
+int32_t	main(int argc, char **argv)
 {
 	t_data	data;
 
@@ -33,7 +33,16 @@ int	main(int argc, char **argv)
 		free_data(&data);
 		return (print_error("No MLX"));
 	}
+	init_raydata(&data, &data.rays);
+	init_textures(&data);
+	drawMap2D(&data);
+	mlx_image_to_window(data.mlx, data.rays.grid, 0, 0);
+	draw_player(&data);
+
+	mlx_key_hook(data.mlx, &input_hook, &data);
+	mlx_loop_hook(data.mlx, &hook, &data);
 	mlx_loop(data.mlx);
+
 	mlx_terminate(data.mlx);
 	free_data(&data);
 	return (EXIT_SUCCESS);

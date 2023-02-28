@@ -6,12 +6,11 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/06 15:22:19 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/28 17:07:11 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/28 18:22:27 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub_include/cub.h"
-
 
 static int	check_tile(t_data *data, t_par *par, int i, int j)
 {
@@ -60,8 +59,8 @@ static int	check_spaces(t_data *data, t_par *par)
 					return (EXIT_FAILURE);
 				data->player.x = j;
 				data->player.y = i;
-				data->player.pos.x = (float)j * mapS + (mapS / 4);
-				data->player.pos.y = (float)i * mapS + (mapS / 4);
+				data->player.pos_x = ((float)j * MMS) + ((MMS / 2) - (MMS / 8));
+				data->player.pos_y = ((float)i * MMS) + ((MMS / 2) - (MMS / 8));
 				player_count++;
 			}
 			j++;

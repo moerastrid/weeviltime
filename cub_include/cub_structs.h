@@ -6,21 +6,30 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 17:07:19 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/28 18:22:27 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_STRUCTS_H
 # define CUB_STRUCTS_H
 
+# include "cub.h"
+# include "line.h"
+
 # ifndef WIDTH
-#  define WIDTH 400
+#  define WIDTH 2400
 # endif
 # ifndef HEIGHT
-#  define HEIGHT 400
+#  define HEIGHT 1200
 # endif
-# ifndef mapS
-#  define mapS 16
+# ifndef MMS
+#  define MMS 16
+# endif
+# ifndef FOV
+#  define FOV 70
+# endif
+# ifndef DOF
+#  define DOF 32
 # endif
 
 /*	wall side parameters	*/
@@ -43,8 +52,8 @@ typedef enum e_eplane
 /*	coordinate	*/
 typedef struct s_co
 {
-	int			x;
-	int			y;
+	int		x;
+	int		y;
 }		t_co;
 
 /*	plane: floor or ceiling	*/
@@ -66,8 +75,9 @@ typedef struct s_player
 {
 	int		x;
 	int		y;
+	float	pos_x;
+	float	pos_y;
 	float	direction;
-	t_co	pos;
 }		t_player;
 
 /*	parse data	*/
@@ -80,12 +90,46 @@ typedef struct s_par
 	t_list		*maplst;
 }		t_par;
 
+/*	ray data	*/
+typedef struct s_raymath
+{
+	int		r;
+	int		mx;
+	int		my;
+	int		mp;
+	int		dof;
+	float	vx;
+	float	vy;
+	float	rx;
+	float	ry;
+	float	ra;
+	float	xo;
+	float	yo;
+	float	disv;
+	float	dish;
+}	t_raymath;
+
+typedef struct s_raydata
+{
+	t_raymath	r_math;
+	mlx_image_t	*player;
+	mlx_image_t	*wall;
+	mlx_image_t	*grid;
+	mlx_image_t	*floor;
+	t_line		line;
+	bool		display_rays;
+	float		pdx;
+	float		pdy;
+	float		pa;
+}	t_rays;
+
 /*	general data	*/
 typedef struct s_data
 {
 	mlx_t		*mlx;
+	t_rays		rays;
 	t_co		max;
-	t_par		*par;
+	int			*final_map;
 	t_plane		*planes;
 	t_player	player;
 	t_wall		*walls;

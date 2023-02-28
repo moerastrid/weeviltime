@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/22 19:00:17 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 17:07:56 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/28 18:05:23 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 static int	set_default_values(t_data *data, t_par *par)
 {
 	data->mlx = NULL;
-	data->par = par;
 	data->max.x = 0;
 	data->max.y = 0;
 	data->walls = ft_calloc(4, sizeof(t_wall));
@@ -73,6 +72,7 @@ int	parse(int argc, char **argv, t_data *data)
 		free_par(&parse_data);
 		return (EXIT_FAILURE);
 	}
+	compatibalize_map(data, &parse_data);
 	free_par(&parse_data);
 	return (EXIT_SUCCESS);
 }
