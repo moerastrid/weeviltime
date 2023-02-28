@@ -162,7 +162,7 @@ void	ft_fill(t_img *img, mlx_t *mlx)
 		i = 0;
 		while (i < mlx->width)
 		{
-			ft_pixelputwrap(img, i, j, 0);
+			putpixel(img, i, j, 0);
 			i++;
 		}
 		j++;
@@ -184,8 +184,8 @@ void hook(void* param)
 	ppddyy = rays->pdy * (MMS / 8);
 	mlx = data->mlx;
 	player = rays->player->instances;
-	ft_fill(rays->grid, mlx);
-
+	//ft_fill(rays->grid, mlx);
+	display_background(rays->grid, data);
 
 	// collision
 	int	xo = 0;
@@ -209,8 +209,6 @@ void hook(void* param)
 	int	ipy_sub_yo = ((data->player.pos_y + (MMS / 8)) - yo) / MMS;             //y position and offset
 
 	// keys
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_UP))
 	{
 		if (data->map[ipy * data->max.x + ipx_add_xo] == 0)
@@ -229,20 +227,6 @@ void hook(void* param)
 		player->x = (int)data->player.pos_x;
 		player->y = (int)data->player.pos_y;
 	}
-	//if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-	//{
-	//	rays->pa += 5;
-	//	rays->pa = fix_ang(rays->pa);
-	//	rays->pdx = cos(deg_to_rad(rays->pa));
-	//	rays->pdy = -sin(deg_to_rad(rays->pa));
-	//}
-	//if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-	//{
-	//	rays->pa -= 5;
-	//	rays->pa = fix_ang(rays->pa);
-	//	rays->pdx = cos(deg_to_rad(rays->pa));
-	//	rays->pdy = -sin(deg_to_rad(rays->pa));
-	//}
 	rays->line = set_line_coords(player->x + (MMS / 8), player->y + (MMS / 8), player->x + (MMS / 8) + rays->pdx * 30, player->y + (MMS / 8) + rays->pdy * 30);
 	ft_line(rays->grid, &rays->line, 0xEEEE99FF);
 	draw_rays_2d(data, rays, player, &rays->r_math);

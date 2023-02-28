@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 19:55:40 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/28 21:34:31 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_co
 /*	plane: floor or ceiling	*/
 typedef struct s_plane
 {
-	//mlx_image_t		*img;
+	mlx_image_t		*img;
 	unsigned int	color;
 }		t_plane;
 

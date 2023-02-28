@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/11 18:18:27 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 18:07:32 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/28 21:43:50 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,11 @@ t_line	set_line_coords(int xa, int ya, int xb, int yb)
 	return (line);
 }
 
-void	ft_pixelputwrap(t_img *img, uint32_t x, uint32_t y, uint32_t color)
-{
-	if (x < img->width && y < img->height)
-		mlx_put_pixel(img, x, y, color);
-}
-
 void	updownleftright(t_img *img, t_line *line, float mn[2], uint32_t color)
 {
 	while (line->ya <= line->yb && line->xa <= line->xb)
 	{
-		ft_pixelputwrap(img, line->xa, line->ya, color);
+		putpixel(img, line->xa, line->ya, color);
 		if (line->ya <= (mn[0] * line->xa) + mn[1]
 			&& (line->ya + 1) >= (mn[0] * line->xa) + mn[1])
 			line->xa++;
@@ -47,7 +41,7 @@ void	downupleftright(t_img *img, t_line *line, float mn[2], uint32_t color)
 {
 	while (line->ya >= line->yb && line->xa <= line->xb)
 	{
-		ft_pixelputwrap(img, line->xa, line->ya, color);
+		putpixel(img, line->xa, line->ya, color);
 		if (line->ya <= (mn[0] * line->xa) + mn[1]
 			&& (line->ya + 1) > (mn[0] * line->xa + mn[1]))
 			line->xa++;
@@ -60,7 +54,7 @@ void	updownrightleft(t_img *img, t_line *line, float mn[2], uint32_t color)
 {
 	while (line->ya <= line->yb && line->xa >= line->xb)
 	{
-		ft_pixelputwrap(img, line->xa, line->ya, color);
+		putpixel(img, line->xa, line->ya, color);
 		if (line->ya >= (mn[0] * line->xa) + mn[1]
 			&& (line->ya - 1) <= (mn[0] * line->xa) + mn[1])
 			line->xa--;
@@ -73,7 +67,7 @@ void	downuprightleft(t_img *img, t_line *line, float mn[2], uint32_t color)
 {
 	while (line->ya >= line->yb && line->xa >= line->xb)
 	{
-		ft_pixelputwrap(img, line->xa, line->ya, color);
+		putpixel(img, line->xa, line->ya, color);
 		if (line->ya >= (mn[0] * line->xa) + mn[1]
 			&& (line->ya - 1) <= (mn[0] * line->xa + mn[1]))
 			line->xa--;

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 21:04:54 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/28 21:45:55 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void			print_map(t_par *par);
 
 // graphics
 int				gameloop(t_data *data);
+void			display_background(t_img *img, t_data *data);
 
 // parse
 int				check_map(t_data *data, t_par *par);
@@ -48,7 +49,6 @@ void			draw_player(t_data *data);
 void			drawMap2D(t_data *data);
 void			draw_rays_2d(t_data *data, t_rays *rays, mlx_instance_t *player, t_raymath *r_math);
 void			hook(void *param);
-void			move_hook(void *param);
 
 // utils
 float			deg_to_rad(int a);
