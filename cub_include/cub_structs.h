@@ -6,70 +6,89 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/20 15:11:01 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/28 17:07:19 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_STRUCTS_H
 # define CUB_STRUCTS_H
 
+# ifndef WIDTH
+#  define WIDTH 400
+# endif
+# ifndef HEIGHT
+#  define HEIGHT 400
+# endif
+# ifndef mapS
+#  define mapS 16
+# endif
+
+/*	wall side parameters	*/
 typedef enum e_wall_side
 {
 	NO,
 	SO,
 	WE,
 	EA,
-}	t_wall_side;
+}		t_wall_e;
 
-typedef enum e_plane
+/*	C: ceiling
+	F: floor	*/
+typedef enum e_eplane
 {
 	C,
 	F,
-}	t_planes;	// betere naam geven om verwarring te voorkomen
+}		t_plane_e;
 
-// direction in rad please :) 
-// NO = 0 rad, SO = pi rad, EA = 0,5pi rad, WE = 1,5pi rad
-typedef struct s_player
-{
-	int	x;
-	int	y;
-	float	direction;
-}	t_player;
-
-typedef struct s_plane
-{
-	mlx_image_t		*img;
-	unsigned int	color;
-}	t_plane;
-
-typedef struct s_wall
-{
-	mlx_image_t	*wall_north;
-	mlx_image_t	*wall_south;
-	mlx_image_t	*wall_east;
-	mlx_image_t	*wall_west;
-}	t_wall;
-
+/*	coordinate	*/
 typedef struct s_co
 {
-	float	x;
-	float	y;
+	int			x;
+	int			y;
 }		t_co;
 
+/*	plane: floor or ceiling	*/
+typedef struct s_plane
+{
+	//mlx_image_t		*img;
+	unsigned int	color;
+}		t_plane;
+
+/*	wall: NO, SO, WE or EA	*/
+typedef struct s_wall
+{
+	//mlx_image_t		*img;
+	char		*path;
+}		t_wall;
+
+/* player data */
+typedef struct s_player
+{
+	int		x;
+	int		y;
+	float	direction;
+	t_co	pos;
+}		t_player;
+
+/*	parse data	*/
+typedef struct s_par
+{
+	bool		*wall_check;
+	bool		*color_check;
+	char		**maparray;
+	int			fd_cub;
+	t_list		*maplst;
+}		t_par;
+
+/*	general data	*/
 typedef struct s_data
 {
-	int				map_y;
-	char			**map_array;
-	mlx_t			*mlx;
-	mlx_image_t		*wall;
-	t_wall			walls;
-	t_plane			ceiling;
-	t_plane			floor;
-	t_co			cam;
-	t_list			*map_lines;
-	bool			*wall_check;
-	bool			*color_check;
-	t_player		player;
-}	t_data;
+	mlx_t		*mlx;
+	t_co		max;
+	t_par		*par;
+	t_plane		*planes;
+	t_player	player;
+	t_wall		*walls;
+}		t_data;
 
 #endif
