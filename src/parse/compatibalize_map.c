@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/27 14:08:51 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/27 17:40:03 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/28 13:58:34 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,16 @@ int	compatibalize_map(t_data *data)
 			else
 				data->final_map[j + (data->map_x * i)]
 					= data->map_array[i][j] - '0';
+			if (data->map_array[i][j + 1] == '\0')
+			{
+				j++;
+				while (j < data->map_x)
+				{
+					data->final_map[(j + (data->map_x * i))] = 0;
+					j++;
+				}
+				break ;
+			}
 			j++;
 		}
 		i++;
