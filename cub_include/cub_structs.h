@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 16:51:36 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/28 17:07:19 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # ifndef HEIGHT
 #  define HEIGHT 400
 # endif
-# ifndef MINIMAPSIZE
-#  define MINIMAPSIZE 16
+# ifndef mapS
+#  define mapS 16
 # endif
 
 /*	wall side parameters	*/

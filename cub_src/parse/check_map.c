@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/06 15:22:19 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/28 16:51:58 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/28 17:07:11 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ static int	check_spaces(t_data *data, t_par *par)
 					return (EXIT_FAILURE);
 				data->player.x = j;
 				data->player.y = i;
-				data->player.pos.x = (float)j * MINIMAPSIZE + (MINIMAPSIZE / 4);
-				data->player.pos.y = (float)i * MINIMAPSIZE + (MINIMAPSIZE / 4);
+				data->player.pos.x = (float)j * mapS + (mapS / 4);
+				data->player.pos.y = (float)i * mapS + (mapS / 4);
 				player_count++;
 			}
 			j++;
