@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/09 14:39:38 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/20 12:50:44 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/28 15:15:40 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	convert_map(t_data *data)
 	int		y;
 	char	**map_array;
 	t_list	*map_lines;
+
 	map_lines = data->map_lines;
 	rows = ft_lstsize(map_lines);
 	map_array = malloc(((size_t)rows + 1) * sizeof(char *));
@@ -54,8 +55,6 @@ int	convert_map(t_data *data)
 	data->map_array = map_array;
 	return (EXIT_SUCCESS);
 }
-
-
 
 // static void	free_map_array(char **map_array)
 // {

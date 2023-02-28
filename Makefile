@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/02/27 19:52:26 by ageels        ########   odam.nl          #
+#    Updated: 2023/02/28 15:40:48 by ageels        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,9 @@ SRC = cub_src/main.c\
 	cub_src/parse/get_elem.c\
 	cub_src/parse/get_map.c\
 	cub_src/parse/parse.c\
-	cub_src/parse/save_map_list.c\
-	cub_src/utils/libft_extra.c\
+	cub_src/utils/frees.c\
 	cub_src/utils/get_next_line.c\
+	cub_src/utils/libft_extra.c\
 	cub_src/utils/single_alloc_split.c\
 	cub_src/utils/wraps.c\
 

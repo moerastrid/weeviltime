@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/22 19:00:17 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/27 20:39:46 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/28 15:33:38 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ static int	set_default_values(t_data *data, t_par *par)
 		return (print_error("malloc error"));
 	}
 	// parse data:
-	par->map_lst = NULL;
+	par->maplst = NULL;
+	par->maparray = NULL;
 	par->wall_check = ft_calloc(4, sizeof(bool));
 	if (par->wall_check == NULL)
 	{
@@ -46,20 +47,6 @@ static int	set_default_values(t_data *data, t_par *par)
 		return (print_error("malloc error"));
 	}
 	return (EXIT_SUCCESS);
-}
-
-static void	clean_par(t_par *par)
-{
-	t_list	*nxt;
-
-	while (par->map_lst != NULL)
-	{
-		nxt = par->map_lst->next;
-		free (par->map_lst);
-		par->map_lst = nxt;
-	}
-	free(par->wall_check);
-	free(par->color_check);
 }
 
 static int	check_arguments(int argc, char **argv, t_par *parse_data)
@@ -90,9 +77,9 @@ int	parse(int argc, char **argv, t_data *data)
 		return (EXIT_FAILURE);
 	if (get_data(data, &parse_data))
 	{
-		clean_par(&parse_data);
+		free_par(&parse_data);
 		return (EXIT_FAILURE);
 	}
-	clean_par(&parse_data);
+	free_par(&parse_data);
 	return (EXIT_SUCCESS);
 }

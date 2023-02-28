@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/27 20:27:06 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/28 15:34:27 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,21 @@ typedef struct s_wall
 /*	parse data	*/
 typedef struct s_par
 {
-	int		fd_cub;
 	bool	*wall_check;
 	bool	*color_check;
-	t_list	*map_lst;
+	char	**maparray;
+	int		fd_cub;
+	t_list	*maplst;
 }		t_par;
 
 /*	general data	*/
 typedef struct s_data
 {
-	t_par	*par;
 	mlx_t	*mlx;
+	t_co	max;
+	t_par	*par;
 	t_plane	*planes;
 	t_wall	*walls;
-	t_co	max;
 }		t_data;
 
 #endif

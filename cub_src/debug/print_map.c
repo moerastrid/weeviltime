@@ -6,20 +6,20 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/09 14:43:10 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/27 17:19:24 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/28 15:43:09 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub_include/cub.h"
 
-void	print_map(t_data *data)
+void	print_map(t_par *par)
 {
 	int	i;
 
 	i = 0;
-	while (i < data->max.y)
+	while (par->maparray[i])
 	{
-		//printf("%s\n", data->map_array[i]);
+		printf("%s\n", par->maparray[i]);
 		i++;
 	}
 }
