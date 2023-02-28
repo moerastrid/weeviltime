@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/22 19:58:10 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 16:59:21 by ageels        ########   odam.nl         */
+/*   Updated: 2023/02/28 20:14:08 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,5 @@ int	get_elem(t_data *data, t_par *par, char *line)
 	if (retval != 0)
 		return (retval);
 	retval = init_wall(data, par, line);
-	//if (retval != 0)			// voor als er nog meer onder komt
-	//	return (retval)
 	return (retval);
 }

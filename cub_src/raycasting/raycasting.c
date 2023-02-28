@@ -57,7 +57,7 @@ void	drawRays2D(t_data *data, t_rays *rays, mlx_instance_t *player, t_raymath *r
 			r_math->mx = (int)(r_math->rx) / MMS;
 			r_math->my = (int)(r_math->ry) / MMS;
 			r_math->mp = r_math->my * data->max.x + r_math->mx;
-			if (r_math->mp > 0 && r_math->mp < data->max.x * data->max.y && data->final_map[r_math->mp] == 1)		//hit
+			if (r_math->mp > 0 && r_math->mp < data->max.x * data->max.y && data->map[r_math->mp] == 1)		//hit
 			{
 				r_math->dof = DOF;
 				r_math->disv = cos(degToRad(r_math->ra)) * (r_math->rx - (float)(player->x + (MMS / 8))) - sin(degToRad(r_math->ra)) * (r_math->ry - (float)(player->y + (MMS / 8)));
@@ -102,7 +102,7 @@ void	drawRays2D(t_data *data, t_rays *rays, mlx_instance_t *player, t_raymath *r
 			r_math->mx = (int)(r_math->rx) / MMS;
 			r_math->my = (int)(r_math->ry) / MMS;
 			r_math->mp = r_math->my * data->max.x + r_math->mx;
-			if (r_math->mp > 0 && r_math->mp < data->max.x * data->max.y && data->final_map[r_math->mp] == 1)		//hit
+			if (r_math->mp > 0 && r_math->mp < data->max.x * data->max.y && data->map[r_math->mp] == 1)		//hit
 			{
 				r_math->dof = DOF;
 				r_math->dish = cos(degToRad(r_math->ra)) * (r_math->rx - (float)(player->x + (MMS / 8))) - sin(degToRad(r_math->ra)) * (r_math->ry - (float)(player->y + (MMS / 8)));
@@ -213,18 +213,18 @@ void hook(void* param)
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_UP))
 	{
-		if (data->final_map[ipy * data->max.x + ipx_add_xo] == 0)
+		if (data->map[ipy * data->max.x + ipx_add_xo] == 0)
 			data->player.pos_x += ppddxx;
-		if (data->final_map[ipy_add_yo * data->max.x + ipx] == 0)
+		if (data->map[ipy_add_yo * data->max.x + ipx] == 0)
 			data->player.pos_y += ppddyy;
 		player->x = (int)data->player.pos_x;
 		player->y = (int)data->player.pos_y;
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
 	{
-		if (data->final_map[ipy * data->max.x + ipx_sub_xo] == 0)
+		if (data->map[ipy * data->max.x + ipx_sub_xo] == 0)
 			data->player.pos_x -= ppddxx;
-		if (data->final_map[ipy_sub_yo * data->max.x + ipx] == 0)
+		if (data->map[ipy_sub_yo * data->max.x + ipx] == 0)
 			data->player.pos_y -= ppddyy;
 		player->x = (int)data->player.pos_x;
 		player->y = (int)data->player.pos_y;
@@ -272,7 +272,7 @@ void drawMap2D(t_data *data)
 		x = 0;
 		while (x < data->max.x)
 		{
-			if (data->final_map[y * data->max.x + x] == 1)
+			if (data->map[y * data->max.x + x] == 1)
 				img = data->rays.wall;
 			else
 				img = data->rays.floor;

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/22 19:00:17 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 18:05:23 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/28 20:13:49 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 	sets default values & allocates memory (if possible)
 	first general data, then parse data.
 */
-static int	set_default_values(t_data *data, t_par *par)
+static int	set_default(t_data *data, t_par *par)
 {
 	data->mlx = NULL;
 	data->max.x = 0;
@@ -38,7 +38,10 @@ static int	set_default_values(t_data *data, t_par *par)
 	return (EXIT_SUCCESS);
 }
 
-static int	check_arguments(int argc, char **argv, t_par *parse_data)
+/*
+	check if arguments are valid
+*/
+static int	check_args(int argc, char **argv, t_par *parse_data)
 {
 	int		len;
 
@@ -56,23 +59,24 @@ static int	check_arguments(int argc, char **argv, t_par *parse_data)
 	return (EXIT_SUCCESS);
 }
 
+static int	exit_par(t_par *par, int status)
+{
+	free_par(par);
+	return (status);
+}
+
 int	parse(int argc, char **argv, t_data *data)
 {
 	t_par	parse_data;
 
-	if (check_arguments(argc, argv, &parse_data))
+	ft_bzero(&parse_data, sizeof(t_par));
+	if (check_args(argc, argv, &parse_data))
 		return (EXIT_FAILURE);
-	if (set_default_values(data, &parse_data))
-	{
-		free_par(&parse_data);
-		return (EXIT_FAILURE);
-	}
+	if (set_default(data, &parse_data))
+		return (exit_par(&parse_data, EXIT_FAILURE));
 	if (get_data(data, &parse_data))
-	{
-		free_par(&parse_data);
-		return (EXIT_FAILURE);
-	}
-	compatibalize_map(data, &parse_data);
-	free_par(&parse_data);
-	return (EXIT_SUCCESS);
+		return (exit_par(&parse_data, EXIT_FAILURE));
+	if (set_map(data, &parse_data))
+		return (exit_par(&parse_data, EXIT_FAILURE));
+	return (exit_par(&parse_data, EXIT_SUCCESS));
 }

@@ -6,7 +6,7 @@
 #    By: mforstho <mforstho@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/10/12 16:16:58 by mforstho      #+#    #+#                  #
-#    Updated: 2022/08/09 16:34:16 by mforstho      ########   odam.nl          #
+#    Updated: 2023/02/28 19:38:44 by ageels        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,7 +96,7 @@ $(NAME) : $(OBJECTS)
 
 $(OBJDIR)/%.o : %.c $(HEADERS)
 	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
 	rm -rf $(OBJDIR)

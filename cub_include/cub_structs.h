@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 18:22:27 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/02/28 19:55:40 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ typedef struct s_data
 	mlx_t		*mlx;
 	t_rays		rays;
 	t_co		max;
-	int			*final_map;
+	int			*map;
 	t_plane		*planes;
 	t_player	player;
 	t_wall		*walls;
