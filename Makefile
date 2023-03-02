@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/02/28 21:35:52 by ageels        ########   odam.nl          #
+#    Updated: 2023/03/02 14:40:25 by mforstho      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,8 @@ LFLAG =  -I . -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 CC = clang
 
 SRC = cub_src/main.c\
-	cub_src/debug/display_rays.c\
 	cub_src/debug/print_map.c\
 	cub_src/graphics/background.c\
-	cub_src/graphics/gameloop.c\
 	cub_src/graphics/line.c\
 	cub_src/parse/check_map.c\
 	cub_src/parse/get_data.c\
@@ -28,6 +26,9 @@ SRC = cub_src/main.c\
 	cub_src/parse/get_map.c\
 	cub_src/parse/parse.c\
 	cub_src/parse/set_map.c\
+	cub_src/raycasting/degree_calc.c\
+	cub_src/raycasting/display_rays.c\
+	cub_src/raycasting/gameloop.c\
 	cub_src/raycasting/raycasting.c\
 	cub_src/utils/frees.c\
 	cub_src/utils/get_next_line.c\

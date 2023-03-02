@@ -6,11 +6,13 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/28 21:03:29 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 21:05:07 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/02 12:46:38 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub_include/cub.h"
+
+//	debug
 
 void	display_rays(mlx_key_data_t keydata, void *param)
 {

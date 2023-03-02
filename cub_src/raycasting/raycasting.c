@@ -4,20 +4,6 @@
 #include "./MLX42/include/MLX42/MLX42.h"
 #include "cub_include/cub.h"
 
-float	deg_to_rad(int a)
-{
-	return (a * M_PI / 180.0);
-}
-
-float	fix_ang(float a)
-{
-	if (a > 359)
-		a -= 360;
-	if (a < 0)
-		a += 360;
-	return (a);
-}
-
 void	draw_rays_2d(t_data *data, t_rays *rays, mlx_instance_t *player, t_raymath *r_math)
 {
 	// int rays_per_degree = 10;
@@ -135,9 +121,9 @@ void	draw_rays_2d(t_data *data, t_rays *rays, mlx_instance_t *player, t_raymath 
 		while (i < 4)
 		{
 			rays->line = set_line_coords(r_math->r * 8 + 1000 - i, lineOff, r_math->r * 8 + 1000 - i, lineOff + lineH);
-			int a = (float)lineH / 320 * 255;
-			// ft_line(rays->grid, &rays->line, 0xFFFFFFFF);
-			ft_line(rays->grid, &rays->line, 0xFFFFFF00 | a);
+			ft_line(rays->grid, &rays->line, 0xFFFFFFFF);
+			// int a = (float)lineH / 320 * 255;
+			// ft_line(rays->grid, &rays->line, 0xFFFFFF00 | a);
 			i++;
 		}
 
@@ -153,8 +139,8 @@ void	draw_rays_2d(t_data *data, t_rays *rays, mlx_instance_t *player, t_raymath 
 
 void	ft_fill(t_img *img, mlx_t *mlx)
 {
-	int				i;
-	int				j;
+	int	i;
+	int	j;
 
 	j = 0;
 	while (j < mlx->height)
@@ -173,60 +159,15 @@ void hook(void* param)
 {
 	t_data			*data;
 	t_rays			*rays;
-	mlx_t			*mlx;
 	mlx_instance_t	*player;
-	float			ppddxx;
-	float 			ppddyy;
 
 	data = param;
 	rays = &data->rays;
-	ppddxx = rays->pdx * (MMS / 8);
-	ppddyy = rays->pdy * (MMS / 8);
-	mlx = data->mlx;
 	player = rays->player->instances;
 	//ft_fill(rays->grid, mlx);
 	display_background(rays->grid, data);
 
-	// collision
-	int	xo = 0;
-	if (rays->pdx < 0)
-		xo = -(MMS / 3);
-	else
-		xo = (MMS / 3);                                  //x offset to check map
-
-	int yo = 0;
-	if (rays->pdy < 0)
-		yo=-(MMS / 3);
-	else
-		yo=(MMS / 3);                                  //y offset to check map
-
-	int ipx = (data->player.pos_x + (MMS / 8)) / MMS;
-	int	ipx_add_xo = ((data->player.pos_x + (MMS / 8)) + xo) / MMS;
-	int	ipx_sub_xo = ((data->player.pos_x + (MMS / 8)) - xo) / MMS;             //x position and offset
-
-	int ipy = (data->player.pos_y + (MMS / 8)) / MMS;
-	int	ipy_add_yo = ((data->player.pos_y + (MMS / 8)) + yo) / MMS;
-	int	ipy_sub_yo = ((data->player.pos_y + (MMS / 8)) - yo) / MMS;             //y position and offset
-
-	// keys
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-	{
-		if (data->map[ipy * data->max.x + ipx_add_xo] == 0)
-			data->player.pos_x += ppddxx;
-		if (data->map[ipy_add_yo * data->max.x + ipx] == 0)
-			data->player.pos_y += ppddyy;
-		player->x = (int)data->player.pos_x;
-		player->y = (int)data->player.pos_y;
-	}
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-	{
-		if (data->map[ipy * data->max.x + ipx_sub_xo] == 0)
-			data->player.pos_x -= ppddxx;
-		if (data->map[ipy_sub_yo * data->max.x + ipx] == 0)
-			data->player.pos_y -= ppddyy;
-		player->x = (int)data->player.pos_x;
-		player->y = (int)data->player.pos_y;
-	}
+	//	draws line to indicate player camera direction
 	rays->line = set_line_coords(player->x + (MMS / 8), player->y + (MMS / 8), player->x + (MMS / 8) + rays->pdx * 30, player->y + (MMS / 8) + rays->pdy * 30);
 	ft_line(rays->grid, &rays->line, 0xEEEE99FF);
 	draw_rays_2d(data, rays, player, &rays->r_math);

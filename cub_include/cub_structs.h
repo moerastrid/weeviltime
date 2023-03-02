@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 21:34:31 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/02 14:41:31 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,14 +120,30 @@ typedef struct s_raydata
 	bool		display_rays;
 	float		pdx;
 	float		pdy;
+	float		ppddxx;
+	float		ppddyy;
 	float		pa;
 }	t_rays;
+
+/*	collision	*/
+typedef struct s_collision
+{
+	int	xo;
+	int	yo;
+	int	ipx;
+	int	ipx_add_xo;
+	int	ipx_sub_xo;
+	int	ipy;
+	int	ipy_add_yo;
+	int	ipy_sub_yo;
+}	t_collision;
 
 /*	general data	*/
 typedef struct s_data
 {
 	mlx_t		*mlx;
 	t_rays		rays;
+	t_collision	coll;
 	t_co		max;
 	int			*map;
 	t_plane		*planes;
