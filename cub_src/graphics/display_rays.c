@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/28 21:03:29 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/02 16:14:36 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/03 14:20:56 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 //	debug
 
-void	display_rays(mlx_key_data_t keydata, void *param)
-{
-	t_data	*data;
-	mlx_t	*mlx;
+//void	display_rays(mlx_key_data_t keydata, void *param)
+//{
+//	t_data	*data;
+//	mlx_t	*mlx;
 
-	data = param;
-	mlx = data->mlx;
-	if (keydata.action == MLX_PRESS)
-	{
-		if (keydata.key == MLX_KEY_R)
-			data->rays.display_rays = !data->rays.display_rays;
-	}
-}
+//	data = param;
+//	mlx = data->mlx;
+//	if (keydata.action == MLX_PRESS)
+//	{
+//		if (keydata.key == MLX_KEY_R)
+//			data->rays.display_rays = !data->rays.display_rays;
+//	}
+//}

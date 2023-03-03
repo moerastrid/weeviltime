@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/06 15:22:19 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/28 20:39:53 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/03 17:31:08 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ static int	set_player(t_data *data, t_par *par, int i, int j)
 			return (print_error("set_player error"));
 		data->player.x = j;
 		data->player.y = i;
-		data->player.pos_x = ((float)j * MMS) + ((MMS / 2) - (MMS / 8));
-		data->player.pos_y = ((float)i * MMS) + ((MMS / 2) - (MMS / 8));
 	}
 	if (c == 'N')
 		data->player.direction = 90;

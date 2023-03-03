@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/22 19:58:10 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 20:14:08 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/03 14:47:33 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	init_wall(t_data *data, t_par *par, char *line)
 	return (0);
 }
 
-static int	get_plane(t_par *par, char *line, t_plane_e n, t_plane *plane)
+static int	get_plane(t_par *par, char *line, t_plane_e n, unsigned int	*plane)
 {
 	int		i;
 	int		rgb[3];
@@ -85,7 +85,7 @@ static int	get_plane(t_par *par, char *line, t_plane_e n, t_plane *plane)
 			print_error("wrong color format");
 			return (-1);
 		}
-		plane->color = make_color(rgb[0], rgb[1], rgb[2]);
+		*plane = make_color(rgb[0], rgb[1], rgb[2]);
 		free(temp_arr);
 		return (1);
 	}

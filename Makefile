@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/03/02 16:17:33 by mforstho      ########   odam.nl          #
+#    Updated: 2023/03/03 16:34:02 by ageels        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,11 @@ CC = clang
 
 SRC = cub_src/main.c\
 	cub_src/debug/print_map.c\
-	cub_src/graphics/background.c\
+	cub_src/graphics/display_rays.c\
+	cub_src/graphics/gameloop.c\
 	cub_src/graphics/line.c\
+	cub_src/graphics/minimap.c\
+	cub_src/graphics/world.c\
 	cub_src/parse/check_map.c\
 	cub_src/parse/get_data.c\
 	cub_src/parse/get_elem.c\
@@ -28,8 +31,6 @@ SRC = cub_src/main.c\
 	cub_src/parse/parse.c\
 	cub_src/parse/set_map.c\
 	cub_src/raycasting/degree_calc.c\
-	cub_src/raycasting/display_rays.c\
-	cub_src/raycasting/gameloop.c\
 	cub_src/raycasting/raycasting.c\
 	cub_src/utils/frees.c\
 	cub_src/utils/get_next_line.c\

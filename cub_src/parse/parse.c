@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/22 19:00:17 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 20:38:33 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/03 14:47:43 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	set_default(t_data *data, t_par *par)
 	data->walls = ft_calloc(4, sizeof(t_wall));
 	if (data->walls == NULL)
 		return (print_error("malloc error"));
-	data->planes = ft_calloc(2, sizeof(t_plane));
+	data->planes = ft_calloc(2, sizeof(unsigned int));
 	if (data->planes == NULL)
 		return (print_error("malloc error"));
 	par->maplst = NULL;

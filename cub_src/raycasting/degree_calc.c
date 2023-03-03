@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/28 20:53:40 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/02 12:46:33 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/03 13:59:34 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //	utils
 
-float	deg_to_rad(int a)
+float	deg_to_rad(float a)
 {
 	return (a * M_PI / 180.0);
 }
