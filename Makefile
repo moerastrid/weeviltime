@@ -6,14 +6,15 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/03/02 14:40:25 by mforstho      ########   odam.nl          #
+#    Updated: 2023/03/02 16:17:33 by mforstho      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := cub3D
 OBJ_DIR = ./cub_obj
 CFLAG = -Wall -Werror -Wextra #-fsanitize=address
-LFLAG =  -I . -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
+IFLAG = -I . -I ./MLX42/include
+LFLAG = -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 CC = clang
 
 SRC = cub_src/main.c\
@@ -40,7 +41,8 @@ ifdef DEBUG
 CFLAG += -fsanitize=address -g
 endif
 
-OBJ = $(patsubst src/%.c,obj/%.o,$(SRC))
+OBJ = $(patsubst cub_src/%.c,cub_obj/%.o,$(SRC))
+# $(error $(OBJ))
 #Colors:
 GREEN		=	\e[38;5;118m
 YELLOW		=	\e[38;5;226m
@@ -67,11 +69,11 @@ obj_folder :
 	mkdir -p $(OBJ_DIR)/utils
 
 $(NAME): obj_folder $(OBJ)
-	$(CC) $(CFLAG) -o $(NAME) $(OBJ) ./libft/libft.a libmlx42.a $(LFLAG)
+	$(CC) $(CFLAG) $(IFLAG) -o $(NAME) $(OBJ) ./libft/libft.a libmlx42.a $(LFLAG)
 	printf "$(_SUCCESS) cub3D ready.\n"
 
 cub_obj/%.o : cub_src/%.c
-	$(CC) $(CFLAG) -o $@ -c $^
+	$(CC) $(CFLAG) $(IFLAG) -o $@ -c $<
 
 clean :
 	test -e $(OBJ_DIR) && rm -fr $(OBJ_DIR) || printf "$(_INFO) No objects to clean \n"
@@ -85,8 +87,4 @@ fclean : clean
 
 re : fclean all
 
-# malloc_test: fclean obj_folder mylibft libmlx $(OBJ)
-# 	$(CC) $(CFLAG) -fsanitize=undefined -rdynamic -o malloc_test $(OBJ) ./libft/libft.a ./libmlx42.a $(LFLAG) -L. -lmallocator
-
 .PHONY: all clean fclean re libmlx
-

@@ -1,17 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
-#include "./MLX42/include/MLX42/MLX42.h"
+#include "MLX42/MLX42.h"
 #include "cub_include/cub.h"
 
 void	draw_rays_2d(t_data *data, t_rays *rays, mlx_instance_t *player, t_raymath *r_math)
 {
-	// int rays_per_degree = 10;
+	float rays_per_degree = 1;
+	static uint32_t color = 0x770000FF;
+	color = 0x770000FF;
 
 	r_math->ra = fix_ang(rays->pa + FOV / 2);              //ray set back 30 degrees
 
 	r_math->r = 0;
-	while (r_math->r < FOV)
+	while (r_math->r < FOV * rays_per_degree)
 	{
 		//---Vertical---
 		r_math->dof = 0;
@@ -85,11 +87,12 @@ void	draw_rays_2d(t_data *data, t_rays *rays, mlx_instance_t *player, t_raymath 
 
 		while (r_math->dof < DOF)
 		{
-			r_math->mx = (int)(r_math->rx) / MMS;
-			r_math->my = (int)(r_math->ry) / MMS;
+			r_math->mx = r_math->rx / MMS;
+			r_math->my = r_math->ry / MMS;
 			r_math->mp = r_math->my * data->max.x + r_math->mx;
 			if (r_math->mp > 0 && r_math->mp < data->max.x * data->max.y && data->map[r_math->mp] == 1)		//hit
 			{
+				// printf("foo\n");
 				r_math->dof = DOF;
 				r_math->dish = cos(deg_to_rad(r_math->ra)) * (r_math->rx - (float)(player->x + (MMS / 8))) - sin(deg_to_rad(r_math->ra)) * (r_math->ry - (float)(player->y + (MMS / 8)));
 			}
@@ -103,36 +106,51 @@ void	draw_rays_2d(t_data *data, t_rays *rays, mlx_instance_t *player, t_raymath 
 
 		if (r_math->disv < r_math->dish)			 //horizontal hit first
 		{
+			// printf("bar\n");
 			r_math->rx = r_math->vx;
 			r_math->ry = r_math->vy;
 			r_math->dish = r_math->disv;
 		}
 
-		int ca = fix_ang(rays->pa - r_math->ra);
-		r_math->dish = r_math->dish * cos(deg_to_rad(ca));                            //fix fisheye
+		// float ca = fix_ang(rays->pa - r_math->ra);
+		// r_math->dish = r_math->dish * cos(deg_to_rad(ca));                            //fix fisheye
 
-		int lineH = (MMS * 320) / (r_math->dish);
-		if (lineH > 320)
-			lineH = 320;                     //line height and limit
 
-		int lineOff = 160 - (lineH >> 1);                               //line offset
+		// int lineH = (MMS * HEIGHT) / (r_math->dish);
+		// int lineH = lineH * (WIDTH / FOV / 8); // rescale for correct aspect ratio
+		float lineH = (1.0 / r_math->dish) * ((float)WIDTH / FOV * 500); // rescale for correct aspect ratio
+		if (lineH > HEIGHT)
+			lineH = HEIGHT;                     //line height and limit
 
-		int	i = -4;
-		while (i < 4)
+		float lineOff = ((float)HEIGHT / 2) - (lineH / 2);                               //line offset
+		// printf("%f\n", r_math->dish);
+		float bar_width = (float)WIDTH / FOV / rays_per_degree;
+
+
+		int	i = 0;
+		while (i < bar_width)
 		{
-			rays->line = set_line_coords(r_math->r * 8 + 1000 - i, lineOff, r_math->r * 8 + 1000 - i, lineOff + lineH);
-			ft_line(rays->grid, &rays->line, 0xFFFFFFFF);
+			rays->line = set_line_coords((float)r_math->r * bar_width + i, lineOff, (float)r_math->r * bar_width + i, lineOff + lineH);
+			// ft_line(rays->grid, &rays->line, 0xFFFFFFFF);
+			ft_line(rays->grid, &rays->line, color);
 			// int a = (float)lineH / 320 * 255;
 			// ft_line(rays->grid, &rays->line, 0xFFFFFF00 | a);
 			i++;
 		}
+
+		if (color == 0x770000FF)
+			color = 0x007700FF;
+		else if (color == 0x007700FF)
+			color = 0x000077FF;
+		else if (color == 0x000077FF)
+			color = 0x770000FF;
 
 		if (rays->display_rays)
 		{
 			rays->line = set_line_coords(player->x + (MMS / 8), player->y + (MMS / 8), r_math->rx, r_math->ry);
 			ft_line(rays->grid, &rays->line, 0xEEEE99FF);
 		}
-		r_math->ra = fix_ang(r_math->ra - 1);                                                              //go to next ray
+		r_math->ra = fix_ang(r_math->ra - 1.0f / rays_per_degree);                                                              //go to next ray
 		r_math->r++;
 	}
 }
@@ -164,8 +182,8 @@ void hook(void* param)
 	data = param;
 	rays = &data->rays;
 	player = rays->player->instances;
-	//ft_fill(rays->grid, mlx);
-	display_background(rays->grid, data);
+	ft_fill(rays->grid, data->mlx);
+	// display_background(rays->grid, data);
 
 	//	draws line to indicate player camera direction
 	rays->line = set_line_coords(player->x + (MMS / 8), player->y + (MMS / 8), player->x + (MMS / 8) + rays->pdx * 30, player->y + (MMS / 8) + rays->pdy * 30);

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/02 14:41:31 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/03 13:10:46 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 # include "line.h"
 
 # ifndef WIDTH
-#  define WIDTH 2400
+#  define WIDTH 1920
 # endif
 # ifndef HEIGHT
-#  define HEIGHT 1200
+#  define HEIGHT 1080
 # endif
 # ifndef MMS
 #  define MMS 16
