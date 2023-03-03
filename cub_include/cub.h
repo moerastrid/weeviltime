@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/03 16:32:12 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/03 22:21:20 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,13 @@ void			display_rays(mlx_key_data_t keydata, void *param);
 void			print_map(t_par *par);
 
 // graphics
-int				gameloop(t_data *data);
-int				draw_minimap(t_data *data);
-int				draw_world(t_data *data);
+void			exit_hook(void *param);
+void			turn_hook(void *param);
+void			gameloop(void *param);
+int				graphics(t_data *data);
+void			draw_nose(t_data *data);
+void			draw_world(t_data *data);
+void			fill_square(t_img *img, int height, int width, unsigned int color);
 void			ft_line(t_img *img, t_line *line, uint32_t color);
 
 // parse
@@ -49,13 +53,6 @@ int				set_map(t_data *data, t_par *par);
 float			deg_to_rad(float a);
 float			fix_ang(float a);
 
-//// raycasting
-//void			init_raydata(t_data *data, t_rays *rays);
-//void			init_textures(t_data *data);
-//void			draw_player(t_data *data);
-//void			drawMap2D(t_data *data);
-//void			draw_rays_2d(t_data *data, t_rays *rays, mlx_instance_t *player, t_raymath *r_math);
-//void			hook(void *param);
 
 // utils
 void			free_array(char **array);

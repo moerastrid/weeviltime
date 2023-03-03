@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/03 17:24:21 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/03 20:45:28 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,15 @@ typedef struct s_par
 /*	general data	*/
 typedef struct s_data
 {
-	mlx_t		*mlx;
+	mlx_t			*mlx;
 	t_co			max;
 	int				*map;
+	int				mms;
 	unsigned int	*planes;
 	t_player		player;
 	t_wall			*walls;
-	//t_rays		rays;
-	//t_collision	coll;
+	t_img			*background;
+	t_img			*tile;
 }		t_data;
 
 #endif

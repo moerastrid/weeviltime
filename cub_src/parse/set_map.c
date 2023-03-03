@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/27 14:08:51 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/02/28 21:16:25 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/03 19:40:55 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,9 @@ int	set_map(t_data *data, t_par *par)
 		}
 		i++;
 	}
+	if (((0.25 * WIDTH) / data->max.x) > ((0.25 * HEIGHT) / data->max.y))
+		data->mms = 2 + (0.25 * HEIGHT) / data->max.y;
+	else
+		data->mms = 2 + ((0.25 * WIDTH) / data->max.x);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/22 19:00:17 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/03 14:47:43 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/03 19:32:24 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 static int	set_default(t_data *data, t_par *par)
 {
 	data->mlx = NULL;
+	data->mms = 0;
 	data->max.x = 0;
 	data->max.y = 0;
 	data->walls = ft_calloc(4, sizeof(t_wall));

@@ -6,13 +6,13 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/03/03 16:34:02 by ageels        ########   odam.nl          #
+#    Updated: 2023/03/03 22:08:54 by ageels        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := cub3D
 OBJ_DIR = ./cub_obj
-CFLAG = -Wall -Werror -Wextra #-fsanitize=address
+CFLAG = -Wall -Werror -Wextra -g #-fsanitize=address
 IFLAG = -I . -I ./MLX42/include
 LFLAG = -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 CC = clang
@@ -20,10 +20,11 @@ CC = clang
 SRC = cub_src/main.c\
 	cub_src/debug/print_map.c\
 	cub_src/graphics/display_rays.c\
+	cub_src/graphics/draw.c\
 	cub_src/graphics/gameloop.c\
+	cub_src/graphics/graphics.c\
+	cub_src/graphics/hooks.c\
 	cub_src/graphics/line.c\
-	cub_src/graphics/minimap.c\
-	cub_src/graphics/world.c\
 	cub_src/parse/check_map.c\
 	cub_src/parse/get_data.c\
 	cub_src/parse/get_elem.c\
@@ -57,8 +58,8 @@ mylibft :
 	@make -C ./libft
 
 libmlx :
-	cmake -B ./MLX42/build ./MLX42
-	$(MAKE) -C ./MLX42/build -j4
+	cmake -DDEBUG=1 -B ./MLX42/build ./MLX42 
+	$(MAKE) -C ./MLX42/build -j4 
 	ln -sF MLX42/build/libmlx42.a
 
 obj_folder :
