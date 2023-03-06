@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/22 19:58:10 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/06 13:39:09 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/06 14:28:59 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int	get_wall(t_par *par, char *line, t_wall_e n, t_wall *wall)
 	int	i;
 
 	i = 0;
-	(void)wall;
 	if (par->wall_check[n] != true)
 	{
 		par->wall_check[n] = true;

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 22:04:17 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/03 22:12:41 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/06 14:08:39 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,24 @@ void	turn_hook(void *param)
 	{
 		p->direction -= 5;
 		p->direction = fix_ang(p->direction);
+	}
+}
+
+void	move_hook(void *param)
+{
+	t_data		*data;
+	t_player	*p;
+
+	data = param;
+	p = &data->player;
+	if (mlx_is_key_down(data->mlx, MLX_KEY_UP))
+	{
+		p->image->instances->x += 5;
+		p->image->instances->y += 5;
+	}
+	if (mlx_is_key_down(data->mlx, MLX_KEY_DOWN))
+	{
+		p->image->instances->x -= 5;
+		p->image->instances->y -= 5;
 	}
 }

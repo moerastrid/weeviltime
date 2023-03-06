@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/28 20:44:57 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/03 22:21:59 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/06 14:22:08 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@ void	gameloop(void *param)
 	t_data	*data;
 
 	data = param;
-	draw_world(data);
 	draw_nose(data);
 }
-
 
 //	data->mlx = mlx_init(WIDTH, HEIGHT, "~Weevil time~", false);
 //	if (!data->mlx)
@@ -39,4 +37,3 @@ void	gameloop(void *param)
 //	mlx_loop(data->mlx);
 //	mlx_terminate(data->mlx);
 //	return (EXIT_SUCCESS);
-

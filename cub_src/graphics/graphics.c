@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 21:51:10 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/03 22:20:11 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/06 14:25:55 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,14 @@ static int	create_images(t_data *data)
 	data->background = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	if (!data->background)
 		return (print_error("MLX error"));
+	data->grid = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	if (!data->grid)
+		return (print_error("MLX error"));
 	data->tile = mlx_new_image(data->mlx, data->mms - 1, data->mms - 1);
 	if (!data->tile)
 		return (print_error("MLX error"));
-	data->player.self = mlx_new_image(data->mlx, data->mms / 4, data->mms / 4);
-	if (!data->player.self)
+	data->player.image = mlx_new_image(data->mlx, data->mms / 4, data->mms / 4);
+	if (!data->player.image)
 		return (print_error("MLX error"));
 	return (EXIT_SUCCESS);
 }
@@ -55,15 +58,18 @@ static int	display_images(t_data *data)
 	t_player	*p;
 
 	p = &data->player;
+	fill_background(data);
 	if (mlx_image_to_window(data->mlx, data->background, 0, 0))
 		return (print_error("MLX error"));
-	fill_square(p->self, data->mms / 4, data->mms / 4, COP);
-	if (mlx_image_to_window(data->mlx, p->self, \
+	if (mlx_image_to_window(data->mlx, data->grid, 0, 0))
+		return (print_error("MLX error"));
+	fill_square(p->image, data->mms / 4, data->mms / 4, COP);
+	if (mlx_image_to_window(data->mlx, p->image, \
 		p->x * data->mms + data->mms / 4 * 1.5, \
-		p->y * data->mms + data->mms / 4 * 1.5) == -10)
+		p->y * data->mms + data->mms / 4 * 1.5) == -1)
 		return (print_error("MLX error"));
 	if (display_minimap(data))
-		return (print_error("MLX error"));
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
@@ -77,6 +83,7 @@ int	graphics(t_data *data)
 	mlx_loop_hook(data->mlx, &exit_hook, data);
 	mlx_loop_hook(data->mlx, &gameloop, data);
 	mlx_loop_hook(data->mlx, &turn_hook, data);
+	mlx_loop_hook(data->mlx, &move_hook, data);
 	if (display_images(data))
 		return (EXIT_FAILURE);
 	mlx_loop(data->mlx);

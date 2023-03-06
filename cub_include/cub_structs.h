@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/03 20:45:28 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/06 14:14:07 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ typedef struct s_wall
 /* player data */
 typedef struct s_player
 {
-	float		x;
-	float		y;
-	float		direction;
-	t_img		*self;
-	t_img		*grid;
+	float			x;
+	float			y;
+	float			direction;
+	t_img			*image;
+	//mlx_instance_t	*instance;
 }		t_player;
 
 /*	parse data	*/
@@ -81,6 +81,7 @@ typedef struct s_data
 	t_wall			*walls;
 	t_img			*background;
 	t_img			*tile;
+	t_img			*grid;
 }		t_data;
 
 #endif
