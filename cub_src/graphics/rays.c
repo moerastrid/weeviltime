@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 15:14:45 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/06 16:53:28 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/06 16:58:29 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,10 @@ void	draw_nose(t_data *data)
 	ft_fill(data->grid, data->mlx, 0);
 	p = &data->player;
 	height = data->mms / 4;
-	nose.xa = p->x * data->mms + height * 2;
-	nose.ya = p->y * data->mms + height * 2;
-	nose.xb = p->x * data->mms + height * 2 + \
-		cos(deg_to_rad(p->direction)) * height * 2;
-	nose.yb = p->y * data->mms + height * 2 - \
-		sin(deg_to_rad(p->direction)) * height * 2;
+	nose.xa = p->x;
+	nose.ya = p->y;
+	nose.xb = p->x + p->dirx * height * 2;
+	nose.yb = p->y + p->diry * height * 2;
 	ft_line(data->grid, &nose, 0xF0F0F0FF);
 }
 
