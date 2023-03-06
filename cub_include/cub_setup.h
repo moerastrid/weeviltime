@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 16:22:33 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/03 22:19:33 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/06 15:21:45 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,14 @@
 // FOV : field of view (in degrees)
 # ifndef FOV
 #  define FOV 72
+# endif
+// FOV : field of view (in degrees)
+# ifndef FOV
+#  define FOV 72
+# endif
+// RPD : rays per degree (in degrees)
+# ifndef RPD
+#  define RPD 2
 # endif
 //// DOF : depth of field (?)
 //# ifndef DOF

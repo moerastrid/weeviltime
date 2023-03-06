@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/28 20:44:57 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/06 14:22:08 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/06 16:24:13 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	gameloop(void *param)
 	t_data	*data;
 
 	data = param;
+	draw_rays(data);
 	draw_nose(data);
 }
 

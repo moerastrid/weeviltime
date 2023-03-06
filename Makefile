@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/03/03 22:08:54 by ageels        ########   odam.nl          #
+#    Updated: 2023/03/06 16:34:03 by ageels        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC = cub_src/main.c\
 	cub_src/graphics/graphics.c\
 	cub_src/graphics/hooks.c\
 	cub_src/graphics/line.c\
+	cub_src/graphics/rays.c\
 	cub_src/parse/check_map.c\
 	cub_src/parse/get_data.c\
 	cub_src/parse/get_elem.c\
@@ -58,7 +59,7 @@ mylibft :
 	@make -C ./libft
 
 libmlx :
-	cmake -DDEBUG=1 -B ./MLX42/build ./MLX42 
+	cmake -B ./MLX42/build ./MLX42  # -DDEBUG=1
 	$(MAKE) -C ./MLX42/build -j4 
 	ln -sF MLX42/build/libmlx42.a
 

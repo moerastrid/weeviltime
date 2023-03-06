@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/06 14:27:29 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/06 16:22:36 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ void			move_hook(void *param);
 void			gameloop(void *param);
 int				graphics(t_data *data);
 void			draw_nose(t_data *data);
+int				draw_rays(t_data	*data);
 void			fill_background(t_data *data);
 void			fill_square(t_img *img, int height, int width, unsigned int c);
+void			ft_fill(t_img *img, mlx_t *mlx, unsigned int color);
 void			ft_line(t_img *img, t_line *line, uint32_t color);
 
 // parse
