@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/06 14:14:07 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/06 16:44:23 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ typedef struct s_player
 {
 	float			x;
 	float			y;
+	float			dirx;
+	float			diry;
 	float			direction;
 	t_img			*image;
 	//mlx_instance_t	*instance;
@@ -68,6 +70,19 @@ typedef struct s_par
 	int			fd_cub;
 	t_list		*maplst;
 }		t_par;
+
+/*	collision	*/
+typedef struct s_collision
+{
+	int	xo;
+	int	yo;
+	int	ipx;
+	int	ipx_add_xo;
+	int	ipx_sub_xo;
+	int	ipy;
+	int	ipy_add_yo;
+	int	ipy_sub_yo;
+}	t_collision;
 
 /*	general data	*/
 typedef struct s_data
@@ -85,9 +100,6 @@ typedef struct s_data
 }		t_data;
 
 #endif
-
-
-
 
 ///*	ray data	*/
 //typedef struct s_raymath
@@ -124,15 +136,3 @@ typedef struct s_data
 //	float		pa;
 //}	t_rays;
 
-///*	collision	*/
-//typedef struct s_collision
-//{
-//	int	xo;
-//	int	yo;
-//	int	ipx;
-//	int	ipx_add_xo;
-//	int	ipx_sub_xo;
-//	int	ipy;
-//	int	ipy_add_yo;
-//	int	ipy_sub_yo;
-//}	t_collision;

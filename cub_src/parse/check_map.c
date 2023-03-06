@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/06 15:22:19 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/03/03 17:31:08 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/06 16:51:26 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static int	set_player(t_data *data, t_par *par, int i, int j)
 		player_count += 1;
 		if (check_tile(data, par, i, j) == EXIT_FAILURE || player_count > 1)
 			return (print_error("set_player error"));
-		data->player.x = j;
-		data->player.y = i;
+		data->player.x = j * data->mms + data->mms / 2;
+		data->player.y = i * data->mms + data->mms / 2;
 	}
 	if (c == 'N')
 		data->player.direction = 90;
@@ -54,6 +54,8 @@ static int	set_player(t_data *data, t_par *par, int i, int j)
 		data->player.direction = 180;
 	if (c == 'E')
 		data->player.direction = 0;
+	data->player.dirx = cos(deg_to_rad(data->player.direction));
+	data->player.diry = -sin(deg_to_rad(data->player.direction));
 	return (EXIT_SUCCESS);
 }
 
