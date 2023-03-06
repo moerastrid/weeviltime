@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:33 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/03 21:51:02 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/06 15:40:22 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ int32_t	main(int argc, char **argv)
 	}
 	ret = graphics(&data);
 	free_data(&data);
-	return (EXIT_SUCCESS);
+	return (ret);
 }
