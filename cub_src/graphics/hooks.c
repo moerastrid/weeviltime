@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 22:04:17 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/06 18:19:53 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/06 18:31:19 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,10 @@ void	exit_hook(void *param)
 		mlx_close_window(data->mlx);
 }
 
-void	turn_hook(void *param)
+void	turn_hook(t_data *data)
 {
-	t_data		*data;
 	t_player	*p;
 
-	data = param;
 	p = &data->player;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
 	{
@@ -44,24 +42,22 @@ void	turn_hook(void *param)
 	}
 }
 
-void	move_hook(void *param)
+void	move_hook(t_data *data)
 {
-	t_data		*data;
 	t_player	*p;
 
-	data = param;
 	p = &data->player;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_UP))
 	{
-		p->x += 0.2 * p->dirx;
-		p->y += 0.2 * p->diry;
+		p->x += (0.01 * SPEED) * p->dirx;
+		p->y += (0.01 * SPEED) * p->diry;
 		p->image->instances->x = p->x * data->mms - data->mms / 8;
 		p->image->instances->y = p->y * data->mms - data->mms / 8;
 	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_DOWN))
 	{
-		p->x -= 0.2 * p->dirx;
-		p->y -= 0.2 * p->diry;
+		p->x -= (0.01 * SPEED) * p->dirx;
+		p->y -= (0.01 * SPEED) * p->diry;
 		p->image->instances->x = p->x * data->mms - data->mms / 8;
 		p->image->instances->y = p->y * data->mms - data->mms / 8;
 	}

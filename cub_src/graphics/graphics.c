@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 21:51:10 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/06 18:14:59 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/06 18:29:12 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,6 @@ int	graphics(t_data *data)
 		return (EXIT_FAILURE);
 	mlx_loop_hook(data->mlx, &exit_hook, data);
 	mlx_loop_hook(data->mlx, &gameloop, data);
-	// mlx_loop_hook(data->mlx, &turn_hook, data);
-	// mlx_loop_hook(data->mlx, &move_hook, data);
 	if (display_images(data))
 		return (EXIT_FAILURE);
 	mlx_loop(data->mlx);
