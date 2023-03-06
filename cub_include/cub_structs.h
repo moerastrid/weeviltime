@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/06 18:07:59 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/06 21:44:18 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,14 @@ typedef struct s_player
 	t_img			*image;
 	//mlx_instance_t	*instance;
 }		t_player;
+
+/*	ray data	*/
+typedef struct s_ray
+{
+	t_line	line;
+	t_co	step_dir;
+	t_co	next_pos;
+}		t_ray;
 
 /*	parse data	*/
 typedef struct s_par

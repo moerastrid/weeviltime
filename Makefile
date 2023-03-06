@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/03/06 16:34:03 by ageels        ########   odam.nl          #
+#    Updated: 2023/03/06 19:53:55 by ageels        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ mylibft :
 	@make -C ./libft
 
 libmlx :
-	cmake -B ./MLX42/build ./MLX42  # -DDEBUG=1
+	cmake -B ./MLX42/build ./MLX42
 	$(MAKE) -C ./MLX42/build -j4 
 	ln -sF MLX42/build/libmlx42.a
 

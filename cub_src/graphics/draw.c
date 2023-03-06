@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 22:02:35 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/06 16:58:26 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/06 21:45:27 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,3 +69,18 @@ void	fill_background(t_data *data)
 	}
 }
 
+void	draw_nose(t_data *data)
+{
+	int			height;
+	t_player	*p;
+	t_line		nose;
+
+	ft_fill(data->grid, data->mlx, 0);
+	p = &data->player;
+	height = data->mms / 4;
+	nose.xa = p->x * data->mms;
+	nose.ya = p->y * data->mms;
+	nose.xb = p->x * data->mms + p->dirx * height * 2;
+	nose.yb = p->y * data->mms + p->diry * height * 2;
+	ft_line(data->grid, &nose, 0xF0F0F0FF);
+}

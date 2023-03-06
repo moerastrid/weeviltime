@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 21:51:10 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/06 18:29:12 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/06 20:11:01 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	display_minimap(t_data *data)
 		x = 0;
 		while (x < data->max.x)
 		{
-			if (data->map[y * data->max.x + x] == 1)
+			if (data->map[y * (int)data->max.x + x] == 1)
 			{
 				if (mlx_image_to_window(data->mlx, data->tile, x * data->mms, y * data->mms) == -1)
 					return (print_error("MLX error"));

@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/22 12:44:50 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/03/03 16:28:10 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/06 20:17:21 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ typedef mlx_image_t	t_img;
 
 typedef struct s_line
 {
-	int		xa;
-	int		ya;
-	int		xb;
-	int		yb;
+	float	xa;
+	float	ya;
+	float	xb;
+	float	yb;
 }	t_line;
 
 t_line	set_line_coords(int xa, int ya, int xb, int yb);

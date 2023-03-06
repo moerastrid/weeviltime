@@ -6,91 +6,155 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 15:14:45 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/06 18:21:43 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/06 22:32:34 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub_include/cub.h"
 
-void	draw_nose(t_data *data)
+void	check_direction(t_data	*data, t_ray *ray, float angle)
 {
-	int			height;
-	t_player	*p;
-	t_line		nose;
-
-	ft_fill(data->grid, data->mlx, 0);
-	p = &data->player;
-	height = data->mms / 4;
-	nose.xa = p->x * data->mms;
-	nose.ya = p->y * data->mms;
-	nose.xb = p->x * data->mms + p->dirx * height * 2;
-	nose.yb = p->y * data->mms + p->diry * height * 2;
-	ft_line(data->grid, &nose, 0xF0F0F0FF);
+	ray->step_dir.x = 0;
+	ray->step_dir.y = 0;
+	ray->next_pos.x = 0;
+	ray->next_pos.y = 0;
+	if (angle == 90 || angle == 270)
+		ray->step_dir.x = 0;
+	else if (angle > 90 && angle < 270)
+		ray->step_dir.x = -1;
+	else
+		ray->step_dir.x = 1;
+	if (angle == 0 || angle == 180)
+		ray->step_dir.y = 0;
+	else if (angle > 0 && angle < 180)
+		ray->step_dir.y = -1;
+	else
+		ray->step_dir.y = 1;
+	ray->next_pos.x = data->player.x;
+	if (ray->step_dir.x == 1)
+		ray->next_pos.x += 1;
+	ray->next_pos.y = data->player.y;
+	if (ray->step_dir.y == 1)
+		ray->next_pos.y += 1;
 }
 
-void	check_direction(t_data	*data, int *x_step_dir, int *y_step_dir)
+static void	scale_line(t_data *data, t_line *line)
 {
-	float	dir;
+	if (line->xa != 0)
+		line->xa *= data->mms;
+	if (line->ya != 0)
+		line->ya *= data->mms;
+	if (line->xb != 0)
+		line->xb *= data->mms;
+	if (line->yb != 0)
+		line->yb *= data->mms;
+}
 
-	dir = data->player.direction;
-	if (dir == 90 || dir == 270)
-		*x_step_dir = 0;
-	else if (dir > 90 && dir < 270)
-		*x_step_dir = -1;
+void	ninety_degree_angle(t_data *data, t_ray *ray)
+{
+	if (ray->step_dir.x == 0)
+	{
+		ray->line.xb = ray->next_pos.x;
+		while (data->map[(data->max.x * ray->next_pos.y + ray->next_pos.x)] != 1)
+			ray->next_pos.y += ray->step_dir.y;
+		ray->line.yb = ray->next_pos.y;
+		if (ray->step_dir.y == -1)
+			ray->line.yb++;
+	}
+	if (ray->step_dir.y == 0)
+	{
+		ray->line.yb = ray->next_pos.y;
+		while (data->map[(data->max.x * ray->next_pos.y + ray->next_pos.x)] != 1)
+			ray->next_pos.x += ray->step_dir.x;
+		ray->line.xb = ray->next_pos.x;
+		if (ray->step_dir.x == -1)
+			ray->line.xb++;
+	}
+}
+
+void	compare_dist(t_data *data, t_ray *ray, float angle)
+{
+	float	dist_to_hor_wall;
+	float	hor_x;
+	float	hor_y;
+	float	hor_b;
+	float	hor_dx;
+	float	hor_dy;
+	float	ver_x = 0;
+	float	ver_y = 0;
+	//float	ver_b = 0;
+	//float	ver_dx = 0;
+	//float	ver_dy = 0;
+	float	dist_to_ver_wall;
+
+	dist_to_hor_wall = INT_MAX;
+	dist_to_ver_wall = INT_MAX;
+	hor_y = 0;
+	hor_b = (data->player.y - (deg_to_rad(tan(angle)) * data->player.x));
+	while (ray->next_pos.x >= 0 && ray->next_pos.x <= data->max.x)
+	{
+		hor_x = ray->next_pos.x;
+		hor_y = tan(deg_to_rad(angle)) * ray->next_pos.x + hor_b;
+		if (data->map[(int)(hor_y * data->max.x + ray->next_pos.x)] == 1)
+			break ;
+		ray->next_pos.x += ray->step_dir.x;
+	}
+	hor_dx = data->player.x - ray->next_pos.x;
+	hor_dy = data->player.y - hor_y;
+	dist_to_hor_wall = (hor_dy * hor_dy) + (hor_dx * hor_dx);
+	printf("hor_y %f,\t  dist_to_hor_wall: %f \n", hor_y, sqrt(dist_to_hor_wall));
+	if (dist_to_hor_wall < dist_to_ver_wall)
+	{
+		ray->line.xb = hor_x; // = ray->next_pos.x
+		ray->line.yb = hor_y;
+	}
 	else
-		*x_step_dir = 1;
-	if (dir == 0 || dir == 180)
-		*y_step_dir = 0;
-	else if (dir > 0 && dir < 180)
-		*y_step_dir = -1;
+	{
+		ray->line.xb = ver_x;
+		ray->line.yb = ver_y;
+	}
+}
+
+void	draw_one_ray(t_data *data, float angle)
+{
+	t_ray	ray;
+
+	ray.line.xa = data->player.x;
+	ray.line.ya = data->player.y;
+	ray.line.xb = 0;
+	ray.line.yb = 0;
+	check_direction(data, &ray, angle);
+	printf("step dir\tx %d\ty %d\n", ray.step_dir.x, ray.step_dir.y);
+	if (ray.step_dir.x == 0 || ray.step_dir.y == 0)
+		ninety_degree_angle(data, &ray);
 	else
-		*y_step_dir = 1;
+		compare_dist(data, &ray, angle);
+	//	printf("step dir\tx:%d\ty:%d\nnext pos\tx:%d\ty:%d\n", ray.step_dir.x, ray.step_dir.y, ray.next_pos.x, ray.next_pos.y);
+	if (ray.line.xb != 0 && ray.line.yb != 0)
+		printf("ray begin\tx:%f\ty:%f\nray end \tx:%f\ty:%f\nangle: %f \n", ray.line.xa, ray.line.ya, ray.line.xb, ray.line.yb, angle);
+	scale_line(data, &ray.line);
+	ft_line(data->grid, &ray.line, 0x5588FFFF);
 }
 
 int	draw_rays(t_data	*data)
 {
 	int		amount_of_rays;
-	t_line	ray;
-	int		x_step_dir;
-	int		y_step_dir;
-	int		next_line_x;
-	int		next_line_y;
+	int		i;
+	float	angle;
+	float	float_rpd;
 
-	//printf("drawing rays \n");
-	amount_of_rays = RPD * FOV;
+	float_rpd = RPD;
+	amount_of_rays = FOV * float_rpd;
 	if (amount_of_rays <= 0)
 		return (EXIT_FAILURE);
-	ray.xa = data->player.x;
-	ray.ya = data->player.y;
-	x_step_dir = 0;
-	y_step_dir = 0;
-	next_line_x = 0;
-	next_line_y = 0;
-	check_direction(data, &x_step_dir, &y_step_dir);
-	//printf("step dir\tx:%d\ty:%d\n", x_step_dir, y_step_dir);
-	if (x_step_dir == 0)
-		ray.xb = ray.xa;
-	if (y_step_dir == 0)
-		ray.yb = ray.ya;
-
-	next_line_x = (int)data->player.x;
-	if (x_step_dir == 1)
-		next_line_x += 1;
-	next_line_y = (int)data->player.y;
-	if (y_step_dir == 1)
-		next_line_y += 1;
-
-	while (next_line_x >= 0 && next_line_x <= data->max.x && x_step_dir != 0)
+	i = 0;
+	angle = fix_ang(data->player.direction - (FOV / 2));
+	while (i < amount_of_rays)
 	{
-		if (data->map[next_line_y * data->max.x + next_line_x] == 1)
-			printf("hey\n");
-		next_line_x += x_step_dir;
+		angle = data->player.direction - (FOV / 2) + (i / float_rpd);
+		draw_one_ray(data, angle);
+		i++;
 	}
-	while (next_line_y >= 0 && next_line_y <= data->max.y && x_step_dir != 0)
-	{
-		if (data->map[next_line_y * data->max.x + next_line_x] == 1)
-			printf("hoi\n");
-		next_line_y += y_step_dir;
-	}
+	//draw_one_ray(data, data->player.direction);
 	return (EXIT_SUCCESS);
 }
