@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 22:04:17 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/06 16:56:00 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/06 18:19:53 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,28 +44,6 @@ void	turn_hook(void *param)
 	}
 }
 
-// static void	get_collision(t_data *data, t_rays *rays, t_collision *coll)
-// {
-// 	//	x offset to check map
-// 	if (rays->pdx < 0)
-// 		coll->xo = -(MMS / 3);
-// 	else
-// 		coll->xo = (MMS / 3);
-// 	//	y offset to check map
-// 	if (rays->pdy < 0)
-// 		coll->yo = -(MMS / 3);
-// 	else
-// 		coll->yo = (MMS / 3);
-// 	//	x position and offset
-// 	coll->ipx = (data->player.x + (MMS / 8)) / MMS;
-// 	coll->ipx_add_xo = ((data->player.x + (MMS / 8)) + coll->xo) / MMS;
-// 	coll->ipx_sub_xo = ((data->player.x + (MMS / 8)) - coll->xo) / MMS;
-// 	//	y position and offset
-// 	coll->ipy = (data->player.y + (MMS / 8)) / MMS;
-// 	coll->ipy_add_yo = ((data->player.y + (MMS / 8)) + coll->yo) / MMS;
-// 	coll->ipy_sub_yo = ((data->player.y + (MMS / 8)) - coll->yo) / MMS;
-// }
-
 void	move_hook(void *param)
 {
 	t_data		*data;
@@ -75,16 +53,16 @@ void	move_hook(void *param)
 	p = &data->player;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_UP))
 	{
-		p->x += p->dirx * (data->mms / 8);
-		p->y += p->diry * (data->mms / 8);
-		p->image->instances->x = (int)p->x - data->mms / 8;
-		p->image->instances->y = (int)p->y - data->mms / 8;
+		p->x += 0.2 * p->dirx;
+		p->y += 0.2 * p->diry;
+		p->image->instances->x = p->x * data->mms - data->mms / 8;
+		p->image->instances->y = p->y * data->mms - data->mms / 8;
 	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_DOWN))
 	{
-		p->x -= p->dirx * (data->mms / 8);
-		p->y -= p->diry * (data->mms / 8);
-		p->image->instances->x = (int)p->x - data->mms / 8;
-		p->image->instances->y = (int)p->y - data->mms / 8;
+		p->x -= 0.2 * p->dirx;
+		p->y -= 0.2 * p->diry;
+		p->image->instances->x = p->x * data->mms - data->mms / 8;
+		p->image->instances->y = p->y * data->mms - data->mms / 8;
 	}
 }

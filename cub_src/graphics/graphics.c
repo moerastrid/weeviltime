@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 21:51:10 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/06 16:39:24 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/06 18:14:59 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ static int	display_images(t_data *data)
 		return (print_error("MLX error"));
 	fill_square(p->image, data->mms / 4, data->mms / 4, COP);
 	if (mlx_image_to_window(data->mlx, p->image, \
-		p->x - data->mms / 8, \
-		p->y - data->mms / 8) == -1)
+		p->x * data->mms - data->mms / 8, \
+		p->y * data->mms - data->mms / 8) == -1)
 		return (print_error("MLX error"));
 	if (display_minimap(data))
 		return (EXIT_FAILURE);
