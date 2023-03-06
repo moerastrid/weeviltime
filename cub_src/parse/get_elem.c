@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/22 19:58:10 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/03 14:47:33 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/06 13:39:09 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,34 +62,27 @@ static int	get_plane(t_par *par, char *line, t_plane_e n, unsigned int	*plane)
 	int		rgb[3];
 	char	**temp_arr;
 
-	if (par->color_check[n] != true)
+	if (par->color_check[n] == true)
+		return (-1);
+	par->color_check[n] = true;
+	temp_arr = ft_single_split(&line[2], ',');
+	i = 0;
+	while (temp_arr[i])
 	{
-		par->color_check[n] = true;
-		temp_arr = ft_single_split(&line[2], ',');
-		i = 0;
-		while (temp_arr[i])
-		{
-			if (i < 3 && stringisdigit(temp_arr[i]))
-				rgb[i] = ft_atoi(temp_arr[i]);
-			else
-			{
-				free (temp_arr);
-				print_error("wrong color format");
-				return (-1);
-			}
-			i++;
-		}
-		if (i != 3)
+		if (i < 3 && stringisdigit(temp_arr[i]))
+			rgb[i] = ft_atoi(temp_arr[i]);
+		else
 		{
 			free (temp_arr);
-			print_error("wrong color format");
 			return (-1);
 		}
-		*plane = make_color(rgb[0], rgb[1], rgb[2]);
-		free(temp_arr);
-		return (1);
+		i++;
 	}
-	return (-1);
+	free (temp_arr);
+	if (i != 3)
+		return (-1);
+	*plane = make_color(rgb[0], rgb[1], rgb[2]);
+	return (1);
 }
 
 static int	init_plane(t_data *data, t_par *par, char *line)
@@ -108,7 +101,11 @@ int	get_elem(t_data *data, t_par *par, char *line)
 	retval = 0;
 	retval = init_plane(data, par, line);
 	if (retval != 0)
+	{
+		if (retval == -1)
+			print_error("wrong color format");
 		return (retval);
+	}
 	retval = init_wall(data, par, line);
 	return (retval);
 }
