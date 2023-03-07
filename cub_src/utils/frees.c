@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/28 15:23:16 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 19:58:41 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/07 13:07:27 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,23 @@ void	free_par(t_par *par)
 		free_array(par->maparray);
 }
 
+static void	free_int_array(t_data *data)
+{
+	int	i;
+
+	if (!data)
+		return ;
+	if (!data->map)
+		return ;
+	i = 0;
+	while (i < data->max.y)
+	{
+		free(data->map[i]);
+		i++;
+	}
+	free(data->map);
+}
+
 void	free_data(t_data	*data)
 {
 	if (!data)
@@ -59,6 +76,5 @@ void	free_data(t_data	*data)
 	}
 	if (data->planes)
 		free(data->planes);
-	if (data->map)
-		free(data->map);
+	free_int_array(data);
 }

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/06 18:31:10 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/07 13:07:33 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@
 
 // debug
 void			display_rays(mlx_key_data_t keydata, void *param);
-void			print_map(t_par *par);
+void			print_par_map(t_par *par);
+void			print_integer_map(t_data *data);
 
 // graphics
 void			exit_hook(void *param);
@@ -55,7 +56,6 @@ int				set_map(t_data *data, t_par *par);
 // raycasting
 float			deg_to_rad(float a);
 float			fix_ang(float a);
-
 
 // utils
 void			free_array(char **array);

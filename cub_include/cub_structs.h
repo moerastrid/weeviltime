@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/06 21:44:18 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/07 11:39:07 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ typedef struct s_data
 {
 	mlx_t			*mlx;
 	t_co			max;
-	int				*map;
+	int				**map;
 	int				mms;
 	unsigned int	*planes;
 	t_player		player;

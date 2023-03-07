@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/03/06 19:53:55 by ageels        ########   odam.nl          #
+#    Updated: 2023/03/07 13:08:31 by mforstho      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ mylibft :
 
 libmlx :
 	cmake -B ./MLX42/build ./MLX42
-	$(MAKE) -C ./MLX42/build -j4 
+	$(MAKE) -C ./MLX42/build -j4
 	ln -sF MLX42/build/libmlx42.a
 
 obj_folder :
