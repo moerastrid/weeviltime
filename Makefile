@@ -6,13 +6,13 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/03/07 13:08:31 by mforstho      ########   odam.nl          #
+#    Updated: 2023/03/07 16:44:58 by mforstho      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := cub3D
 OBJ_DIR = ./cub_obj
-CFLAG = -Wall -Werror -Wextra -g #-fsanitize=address
+CFLAG = #-Wall -Werror -Wextra -g #-fsanitize=address
 IFLAG = -I . -I ./MLX42/include
 LFLAG = -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 CC = clang
@@ -40,6 +40,12 @@ SRC = cub_src/main.c\
 	cub_src/utils/single_alloc_split.c\
 	cub_src/utils/wraps.c\
 
+HEADERS = cub_include/cub_setup.h\
+	cub_include/cub_structs.h\
+	cub_include/cub.h\
+	cub_include/get_next_line.h\
+	cub_include/line.h\
+
 ifdef DEBUG
 CFLAG += -fsanitize=address -g
 endif
@@ -53,29 +59,22 @@ RESET		=	\e[0m
 _SUCCESS	=	[$(GREEN)SUCCESS$(RESET)]
 _INFO		=	[$(YELLOW)INFO$(RESET)]
 
-all : mylibft libmlx $(NAME)
+all : $(NAME)
 
-mylibft :
+libft/libft.a :
 	@make -C ./libft
 
-libmlx :
+libmlx42.a :
 	cmake -B ./MLX42/build ./MLX42
 	$(MAKE) -C ./MLX42/build -j4
 	ln -sF MLX42/build/libmlx42.a
 
-obj_folder :
-	mkdir -p $(OBJ_DIR)
-	mkdir -p $(OBJ_DIR)/debug
-	mkdir -p $(OBJ_DIR)/graphics
-	mkdir -p $(OBJ_DIR)/parse
-	mkdir -p $(OBJ_DIR)/raycasting
-	mkdir -p $(OBJ_DIR)/utils
-
-$(NAME): obj_folder $(OBJ)
+$(NAME): libft/libft.a libmlx42.a $(OBJ)
 	$(CC) $(CFLAG) $(IFLAG) -o $(NAME) $(OBJ) ./libft/libft.a libmlx42.a $(LFLAG)
 	printf "$(_SUCCESS) cub3D ready.\n"
 
-cub_obj/%.o : cub_src/%.c
+cub_obj/%.o : cub_src/%.c $(HEADERS)
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAG) $(IFLAG) -o $@ -c $<
 
 clean :
