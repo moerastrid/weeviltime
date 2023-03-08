@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 13:52:34 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/03/08 15:31:19 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/08 15:56:24 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	*check_invalid_line(t_par *par, char *line)
 		free(temp_line);
 		temp_line = get_next_line(par->fd_cub);
 	}
-	while (temp_line[i] != ' ')
+	while (temp_line[i] == ' ')
 		i++;
 	if (temp_line[i] != '1')
 	{
