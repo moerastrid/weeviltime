@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 22:04:17 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/06 18:31:19 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/08 14:51:13 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,17 @@ void	turn_hook(t_data *data)
 	p = &data->player;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
 	{
-		p->direction += 5;
-		p->direction = fix_ang(p->direction);
-		p->dirx = cos(deg_to_rad(p->direction));
-		p->diry = -sin(deg_to_rad(p->direction));
+		p->angle += 5;
+		p->angle = fix_ang(p->angle);
+		p->dirx = cos(deg_to_rad(p->angle));
+		p->diry = -sin(deg_to_rad(p->angle));
 	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 	{
-		p->direction -= 5;
-		p->direction = fix_ang(p->direction);
-		p->dirx = cos(deg_to_rad(p->direction));
-		p->diry = -sin(deg_to_rad(p->direction));
+		p->angle -= 5;
+		p->angle = fix_ang(p->angle);
+		p->dirx = cos(deg_to_rad(p->angle));
+		p->diry = -sin(deg_to_rad(p->angle));
 	}
 }
 

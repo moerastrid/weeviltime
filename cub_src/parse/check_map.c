@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/06 15:22:19 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/03/06 18:13:57 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/08 14:51:34 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,15 @@ static int	set_player(t_data *data, t_par *par, int i, int j)
 		data->player.y = i + 0.5;
 	}
 	if (c == 'N')
-		data->player.direction = 90;
+		data->player.angle = 90;
 	if (c == 'S')
-		data->player.direction = 270;
+		data->player.angle = 270;
 	if (c == 'W')
-		data->player.direction = 180;
+		data->player.angle = 180;
 	if (c == 'E')
-		data->player.direction = 0;
-	data->player.dirx = cos(deg_to_rad(data->player.direction));
-	data->player.diry = -sin(deg_to_rad(data->player.direction));
+		data->player.angle = 0;
+	data->player.dirx = cos(deg_to_rad(data->player.angle));
+	data->player.diry = -sin(deg_to_rad(data->player.angle));
 	return (EXIT_SUCCESS);
 }
 
