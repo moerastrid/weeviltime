@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/27 17:46:24 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/06 17:35:14 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/08 15:00:31 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	save_max_length(t_data *data, char *line)
 	data->max.y++;
 }
 
-char	*skip_empty_line(t_par *par, char *line)
+static char	*skip_empty_line(t_par *par, char *line)
 {
 	char	*temp_line;
 
@@ -82,7 +82,7 @@ int	get_map(t_data *data, t_par *par, char *line)
 	if (temp != NULL || data->max.y < 1)
 	{
 		free(temp);
-		return (print_error("wrong amount of MMS"));
+		return (print_error("can only have one map"));
 	}
 	return (convert_map(data, par));
 }

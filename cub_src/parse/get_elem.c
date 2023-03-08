@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/22 19:58:10 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/06 14:28:59 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/08 14:53:30 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ static int	get_wall(t_par *par, char *line, t_wall_e n, t_wall *wall)
 		par->wall_check[n] = true;
 		while (line[i] != '\0' && line[i] != '\n')
 		{
-			if (i < 3)
-				i++;
-			else if (line[i] == ' ')
+			if (i < 3 || line[i] == ' ')
 				i++;
 			else
 			{
@@ -52,6 +50,11 @@ static int	init_wall(t_data *data, t_par *par, char *line)
 		return (get_wall(par, line, WE, &data->walls[WE]));
 	else if (ft_strncmp(line, "EA ", 3) == 0)
 		return (get_wall(par, line, EA, &data->walls[EA]));
+	else if (line[0] != '\n')
+	{
+		print_error("non empty line between textures");
+		return (-1);
+	}
 	return (0);
 }
 
@@ -97,7 +100,6 @@ int	get_elem(t_data *data, t_par *par, char *line)
 {
 	int	retval;
 
-	retval = 0;
 	retval = init_plane(data, par, line);
 	if (retval != 0)
 	{
@@ -105,6 +107,5 @@ int	get_elem(t_data *data, t_par *par, char *line)
 			print_error("wrong color format");
 		return (retval);
 	}
-	retval = init_wall(data, par, line);
-	return (retval);
+	return (init_wall(data, par, line));
 }
