@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 15:14:45 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/08 20:51:52 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/08 20:57:49 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ float	find_pwr_distance_to_x_axis(t_data *data, t_ray *ray, float angle)
 	if (ray->dir.x == 1 && ray->dir.y == 1)
 	{
 		ray->end_x = (int)ray->end_x + 1;
-		while(ray->end_x >= 0 && ray->end_x <= data->max.x)
+		while(ray->end_x >= 0 && ray->end_x < data->max.x)
 		{
 			ray->end_y = (ray->end_x - ray->start_x) * -tan(deg_to_rad(angle)) + ray->start_y;
 			if (ray->end_y < 0 || ray->end_y > data->max.y)
@@ -95,7 +95,7 @@ float	find_pwr_distance_to_y_axis(t_data *data, t_ray *ray, float angle)
 	if (ray->dir.x == 1 && ray->dir.y == 1)
 	{
 		ray->end_y = (int)ray->end_y + 1;
-		while (ray->end_y >= 0 && ray->end_y <= data->max.y)
+		while (ray->end_y >= 0 && ray->end_y < data->max.y)
 		{
 			ray->end_x = (ray->end_y - ray->start_y) / -tan(deg_to_rad(angle)) + ray->start_x;
 			if (ray->end_x < 0 || ray->end_x > data->max.x)
@@ -132,7 +132,7 @@ void	make_one_ray(t_data *data, float angle)
 		else
 			find_pwr_distance_to_y_axis(data, &ray_final, angle);
 	}
-	printf("final coords: %f, %f\n", ray_final.end_x, ray_final.end_y);
+	//printf("final coords: %f, %f\n", ray_final.end_x, ray_final.end_y);
 	draw_one_ray(data, &ray_final, 0xFF88FFFF);
 }
 
