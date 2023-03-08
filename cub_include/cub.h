@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/07 13:07:33 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/08 15:10:22 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB_H
 
 # include <fcntl.h>
+# include <float.h>
 # include <math.h>
 # include <memory.h>
 # include <stdio.h>
@@ -39,11 +40,11 @@ void			move_hook(t_data *data);
 void			gameloop(void *param);
 int				graphics(t_data *data);
 void			draw_nose(t_data *data);
-int				draw_rays(t_data	*data);
+void			draw_rays(t_data	*data);
 void			fill_background(t_data *data);
 void			fill_square(t_img *img, int height, int width, unsigned int c);
 void			ft_fill(t_img *img, mlx_t *mlx, unsigned int color);
-void			ft_line(t_img *img, t_line *line, uint32_t color);
+void			ft_line(t_img *img, t_line *line, unsigned int color);
 
 // parse
 int				check_map(t_data *data, t_par *par);

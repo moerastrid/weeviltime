@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/07 11:39:07 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/08 14:52:37 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_player
 	float			y;
 	float			dirx;
 	float			diry;
-	float			direction;
+	float			angle;
 	t_img			*image;
 	//mlx_instance_t	*instance;
 }		t_player;
@@ -65,8 +65,11 @@ typedef struct s_player
 typedef struct s_ray
 {
 	t_line	line;
-	t_co	step_dir;
-	t_co	next_pos;
+	t_co	dir;
+	float	start_x;
+	float	start_y;
+	float	end_x;
+	float	end_y;
 }		t_ray;
 
 /*	parse data	*/

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 16:22:33 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/06 21:28:58 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/08 14:25:57 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # endif
 // RPD : rays per degree (in degrees)
 # ifndef RPD
-#  define RPD 6
+#  define RPD 3
 # endif
 // SPEED : player movement speed
 # ifndef SPEED
