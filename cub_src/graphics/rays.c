@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 15:14:45 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/09 19:05:25 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/09 20:16:09 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static float	find_powdist_to_x_axis(t_data *data, t_ray *ray, float angle)
 	ray->bx = (int)ray->bx;
 	if (ray->dir.x == 1)
 		ray->bx++;
-	while (ray->bx >= 0 && ray->bx < data->max.x)
+	while (ray->bx > 0 && ray->bx < data->max.x)
 	{
 		ray->by = (ray->bx - ray->ax) * -tan(deg_to_rad(angle)) + ray->ay;
 		if (ray->by < 0 || ray->by > data->max.y)
@@ -91,7 +91,7 @@ static float	find_powdist_to_y_axis(t_data *data, t_ray *ray, float angle)
 	ray->by = (int)ray->by;
 	if (ray->dir.y == 1)
 		ray->by ++;
-	while (ray->by >= 0 && ray->by < data->max.y)
+	while (ray->by > 0 && ray->by < data->max.y)
 	{
 		ray->bx = (ray->by - ray->ay) / -tan(deg_to_rad(angle)) + ray->ax;
 		if (ray->bx < 0 || ray->bx > data->max.x)
@@ -112,6 +112,7 @@ static void	make_one_ray(t_data *data, float angle, int raynbr)
 	t_ray	*ray_final;
 	float	powdist_x;
 	float	powdist_y;
+	int		side;
 
 	check_dir(data, &ray_x, angle);
 	check_dir(data, &ray_y, angle);
@@ -119,20 +120,40 @@ static void	make_one_ray(t_data *data, float angle, int raynbr)
 	{
 		ninety_degree_angle(data, &ray_x);
 		ray_final = &ray_x;
+		if (angle == 0)
+			side = EA;
+		if (angle == 90)
+			side = SO;
+		if (angle == 180)
+			side = WE;
+		if (angle == 270)
+			side = NO;
 	}
 	else
 	{
 		powdist_x = find_powdist_to_x_axis(data, &ray_x, angle);
 		powdist_y = find_powdist_to_y_axis(data, &ray_y, angle);
 		if (powdist_x < powdist_y)
+		{
+			if (ray_x.dir.x == -1)
+				side = WE;
+			if (ray_x.dir.x == 1)
+				side = EA;
 			ray_final = &ray_x;
+		}
 		else
+		{
+			if (ray_y.dir.y == -1)
+				side = SO;
+			if (ray_y.dir.y == 1)
+				side = NO;
 			ray_final = &ray_y;
+		}
 	}
 	draw_one_ray(data, ray_final, 0xFF88FFFF);
 	if (powdist_y < powdist_x)
 			powdist_x = powdist_y;
-	draw_wall_line(data, raynbr, angle, sqrt(powdist_x));
+	draw_wall_line(data, raynbr, angle, sqrt(powdist_x), side);
 }
 
 void	draw_rays(t_data *data)
