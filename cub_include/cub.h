@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/08 15:10:22 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/09 13:45:19 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ char			*get_next_line(int fd);
 bool			stringisdigit(char *s);
 char			**ft_single_split(char const *s, char c);
 unsigned int	make_color(int r, int g, int b);
-int				print_error(char *s);
+int				print_error(char *s, int retval);
 void			putpixel(t_img *i, uint32_t x, uint32_t y, uint32_t c);
+char			*trim_newline(char *s);
 
 #endif

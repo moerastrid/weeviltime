@@ -1,6 +1,6 @@
-NO ./include/textures/dungeonTexture.png
-SO ./include/textures/dungeonTexture.png
-WE ./include/textures/dungeonTexture.png
+NO ./cub_include/textures/dungeonTexture.png
+SO ./cub_include/textures/dungeonTexture.png
+WE ./cub_include/textures/dungeonTexture.png
 
 C 93,142,193
 F 231,230,230
