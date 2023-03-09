@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/09 14:56:34 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/09 17:53:25 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ typedef struct s_ray
 {
 	t_line	line;
 	t_co	dir;
-	float	start_x;
-	float	start_y;
-	float	end_x;
-	float	end_y;
+	float	ax;
+	float	ay;
+	float	bx;
+	float	by;
 }		t_ray;
 
 /*	parse data	*/
