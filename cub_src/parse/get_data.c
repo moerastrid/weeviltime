@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 13:52:34 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/03/09 13:47:12 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/09 14:08:03 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	get_data(t_data *data, t_par *par)
 			else if (check_elem == -1)
 			{
 				free(line);
-				return (EXIT_FAILURE);
+				return (print_error("invalid setup args", EXIT_FAILURE));
 			}
 		}
 		else
