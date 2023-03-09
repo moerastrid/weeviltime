@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/06 15:22:19 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/03/09 13:46:53 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/09 15:01:59 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ static int	set_player(t_data *data, t_par *par, int i, int j)
 		data->player.angle = 0;
 	data->player.dirx = cos(deg_to_rad(data->player.angle));
 	data->player.diry = -sin(deg_to_rad(data->player.angle));
+	data->player.lrx = cos(deg_to_rad(fix_ang(data->player.angle + 90.0)));
+	data->player.lry = -sin(deg_to_rad(fix_ang(data->player.angle + 90.0)));
 	return (EXIT_SUCCESS);
 }
 
