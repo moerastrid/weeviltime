@@ -6,13 +6,13 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 15:14:45 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/09 17:54:42 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/09 17:59:53 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub_include/cub.h"
 
-void	check_dir(t_data	*data, t_ray *ray, float angle)
+static  void	check_dir(t_data	*data, t_ray *ray, float angle)
 {
 	ray->dir.x = 0;
 	ray->dir.y = 0;
@@ -34,7 +34,7 @@ void	check_dir(t_data	*data, t_ray *ray, float angle)
 	ray->by = data->player.y;
 }
 
-void	draw_one_ray(t_data *data, t_ray *ray, unsigned int color)
+static void	draw_one_ray(t_data *data, t_ray *ray, unsigned int color)
 {
 	ray->line.xa = (int)(ray->ax * data->mms);
 	ray->line.ya = (int)(ray->ay * data->mms);
@@ -43,7 +43,7 @@ void	draw_one_ray(t_data *data, t_ray *ray, unsigned int color)
 	ft_line(data->grid, &ray->line, color);
 }
 
-void	ninety_degree_angle(t_data *data, t_ray *ray)
+static void	ninety_degree_angle(t_data *data, t_ray *ray)
 {
 	if (ray->dir.x == 0)
 	{
@@ -63,11 +63,9 @@ void	ninety_degree_angle(t_data *data, t_ray *ray)
 		ray->bx += 1;
 }
 
-float	find_pwr_distance_to_x_axis(t_data *data, t_ray *ray, float angle)
+static float	find_powdist_to_x_axis(t_data *data, t_ray *ray, float angle)
 {
-	float	pwr_distance;
-	float	delta_x;
-	float	delta_y;
+	float	powdist;
 
 	ray->bx = (int)ray->bx;
 	if (ray->dir.x == 1)
@@ -82,19 +80,17 @@ float	find_pwr_distance_to_x_axis(t_data *data, t_ray *ray, float angle)
 			break ;
 		ray->bx += ray->dir.x;
 	}
-	pwr_distance = pow(ray->bx - ray->ax, 2) + pow(ray->by - ray->ay, 2);
-	return (pwr_distance);
+	powdist = pow(ray->bx - ray->ax, 2) + pow(ray->by - ray->ay, 2);
+	return (powdist);
 }
 
-float	find_pwr_distance_to_y_axis(t_data *data, t_ray *ray, float angle)
+static float	find_powdist_to_y_axis(t_data *data, t_ray *ray, float angle)
 {
-	float	pwr_distance;
-	float	delta_x;
-	float	delta_y;
+	float	powdist;
 
 	ray->by = (int)ray->by;
 	if (ray->dir.y == 1)
-		ray->by += 1;
+		ray->by ++;
 	while (ray->by >= 0 && ray->by < data->max.y)
 	{
 		ray->bx = (ray->by - ray->ay) / -tan(deg_to_rad(angle)) + ray->ax;
@@ -105,17 +101,17 @@ float	find_pwr_distance_to_y_axis(t_data *data, t_ray *ray, float angle)
 			break ;
 		ray->by += ray->dir.y;
 	}
-	pwr_distance = pow(ray->bx - ray->ax, 2) + pow(ray->by - ray->ay, 2);
-	return (pwr_distance);
+	powdist = pow(ray->bx - ray->ax, 2) + pow(ray->by - ray->ay, 2);
+	return (powdist);
 }
 
-void	make_one_ray(t_data *data, float angle)
+static void	make_one_ray(t_data *data, float angle)
 {
 	t_ray	ray_x;
 	t_ray	ray_y;
 	t_ray	*ray_final;
-	float	pwr_distance_x;
-	float	pwr_distance_y;
+	float	powdist_x;
+	float	powdist_y;
 
 	check_dir(data, &ray_x, angle);
 	check_dir(data, &ray_y, angle);
@@ -126,9 +122,9 @@ void	make_one_ray(t_data *data, float angle)
 	}
 	else
 	{
-		pwr_distance_x = find_pwr_distance_to_x_axis(data, &ray_x, angle);
-		pwr_distance_y = find_pwr_distance_to_y_axis(data, &ray_y, angle);
-		if (pwr_distance_x < pwr_distance_y)
+		powdist_x = find_powdist_to_x_axis(data, &ray_x, angle);
+		powdist_y = find_powdist_to_y_axis(data, &ray_y, angle);
+		if (powdist_x < powdist_y)
 			ray_final = &ray_x;
 		else
 			ray_final = &ray_y;
