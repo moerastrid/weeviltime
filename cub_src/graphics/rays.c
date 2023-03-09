@@ -6,11 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 15:14:45 by ageels        #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2023/03/08 20:57:49 by ageels        ########   odam.nl         */
-=======
-/*   Updated: 2023/03/09 15:45:32 by mforstho      ########   odam.nl         */
->>>>>>> d0c73e6d0580b9d0df0155a106690b41dab6d0dd
+/*   Updated: 2023/03/09 15:49:06 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
