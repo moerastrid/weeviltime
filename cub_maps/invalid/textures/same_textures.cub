@@ -1,7 +1,7 @@
-NO ./include/textures/dungeonTexture.png
-NO ./include/textures/dungeonTexture.png
-WE ./include/textures/dungeonTexture.png
-EA ./include/textures/dungeonTexture.png
+NO ./cub_include/textures/dungeonTexture.png
+NO ./cub_include/textures/dungeonTexture.png
+WE ./cub_include/textures/dungeonTexture.png
+EA ./cub_include/textures/dungeonTexture.png
 
 C 203,225,20
 F 94,9,0

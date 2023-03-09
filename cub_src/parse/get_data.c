@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 13:52:34 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/03/08 15:56:24 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/09 13:47:12 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	get_mapdata(t_data *data, t_par *par, char *line)
 
 	temp = check_invalid_line(par, line);
 	if (temp == NULL)
-		return (print_error("invalid line in map"));
+		return (print_error("invalid line in map", EXIT_FAILURE));
 	if (get_map(data, par, temp))
 		return (EXIT_FAILURE);
 	if (set_map(data, par) == EXIT_FAILURE)

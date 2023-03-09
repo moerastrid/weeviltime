@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/06 15:22:19 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/03/08 14:51:34 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/09 13:46:53 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,20 @@
 static int	check_tile(t_data *data, t_par *par, int i, int j)
 {
 	if (i == 0 || i == (data->max.y - 1))
-		return (print_error("First or last line"));
+		return (print_error("First or last line", EXIT_FAILURE));
 	if (j == 0 || par->maparray[i][j + 1] == '\0')
-		return (print_error("left or right edge"));
+		return (print_error("left or right edge", EXIT_FAILURE));
 	if (i != 0 && (ft_strlen(par->maparray[i - 1]) < 1
 			|| (size_t)j > ft_strlen(par->maparray[i - 1]) - 1))
-		return (print_error("Above line too short"));
+		return (print_error("Above line too short", EXIT_FAILURE));
 	if (i != data->max.y - 1 && (ft_strlen(par->maparray[i + 1]) < 1
 			|| (size_t)j > ft_strlen(par->maparray[i + 1]) - 1))
-		return (print_error("Below line too short"));
+		return (print_error("Below line too short", EXIT_FAILURE));
 	if (par->maparray[i - 1][j] == ' '
 		|| par->maparray[i + 1][j] == ' '
 		|| par->maparray[i][j - 1] == ' '
 		|| par->maparray[i][j + 1] == ' ')
-		return (print_error("Bordering character"));
+		return (print_error("Bordering character", EXIT_FAILURE));
 	return (EXIT_SUCCESS);
 }
 
@@ -42,7 +42,7 @@ static int	set_player(t_data *data, t_par *par, int i, int j)
 	{
 		player_count += 1;
 		if (check_tile(data, par, i, j) == EXIT_FAILURE || player_count > 1)
-			return (print_error("set_player error"));
+			return (print_error("set_player error", EXIT_FAILURE));
 		data->player.x = j + 0.5;
 		data->player.y = i + 0.5;
 	}
@@ -98,7 +98,7 @@ static int	check_tabs(t_data *data, t_par *par)
 		while (par->maparray[i][j] != '\0')
 		{
 			if (par->maparray[i][j] == '\t')
-				return (print_error("NO TABS!!!"));
+				return (print_error("NO TABS!!!", EXIT_FAILURE));
 			j++;
 		}
 		i++;

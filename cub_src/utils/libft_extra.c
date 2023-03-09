@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/22 20:31:38 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 17:00:42 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/09 13:44:09 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,20 @@ bool	stringisdigit(char *s)
 		i++;
 	}
 	return (digit);
+}
+
+char	*trim_newline(char *s)
+{
+	int		i;
+	char	*trimmed;
+
+	trimmed = s;
+	i = 0;
+	while (trimmed[i] != '\0')
+	{
+		if (trimmed[i] == '\n')
+			trimmed[i] = '\0';
+		i++;
+	}
+	return (trimmed);
 }

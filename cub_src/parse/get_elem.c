@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/22 19:58:10 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/08 14:53:30 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/09 13:48:21 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,15 @@ static int	get_wall(t_par *par, char *line, t_wall_e n, t_wall *wall)
 				i++;
 			else
 			{
+				if (access(trim_newline(&line[i]), F_OK | R_OK) == -1)
+					return (print_error("invalid texture path", -1));
 				wall->path = ft_strdup(&line[i]);
 				if (wall->path == NULL)
-				{
-					print_error("malloc failure");
-					return (-1);
-				}
+					return (print_error("malloc failure", -1));
 				return (1);
 			}
 		}
 	}
-	print_error("Wrong wall texture path");
 	return (-1);
 }
 
@@ -51,10 +49,7 @@ static int	init_wall(t_data *data, t_par *par, char *line)
 	else if (ft_strncmp(line, "EA ", 3) == 0)
 		return (get_wall(par, line, EA, &data->walls[EA]));
 	else if (line[0] != '\n')
-	{
-		print_error("non empty line between textures");
-		return (-1);
-	}
+		return (print_error("non empty line between textures", -1));
 	return (0);
 }
 
@@ -104,7 +99,7 @@ int	get_elem(t_data *data, t_par *par, char *line)
 	if (retval != 0)
 	{
 		if (retval == -1)
-			print_error("wrong color format");
+			print_error("wrong color format", -1);
 		return (retval);
 	}
 	return (init_wall(data, par, line));

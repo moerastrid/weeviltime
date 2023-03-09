@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 15:14:45 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/08 20:51:52 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/09 13:35:02 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void	make_one_ray(t_data *data, float angle)
 		else
 			find_pwr_distance_to_y_axis(data, &ray_final, angle);
 	}
-	printf("final coords: %f, %f\n", ray_final.end_x, ray_final.end_y);
+	// printf("final coords: %f, %f\n", ray_final.end_x, ray_final.end_y);
 	draw_one_ray(data, &ray_final, 0xFF88FFFF);
 }
 
