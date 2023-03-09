@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/09 17:53:25 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/09 18:46:38 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ typedef struct s_data
 	t_img			*background;
 	t_img			*tile;
 	t_img			*grid;
+	t_img			*world;
 }		t_data;
 
 #endif

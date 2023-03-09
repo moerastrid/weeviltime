@@ -6,13 +6,13 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 15:14:45 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/09 18:06:46 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/09 19:05:25 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub_include/cub.h"
 
-static  void	check_dir(t_data	*data, t_ray *ray, float angle)
+static void	check_dir(t_data *data, t_ray *ray, float angle)
 {
 	ray->dir.x = 0;
 	ray->dir.y = 0;
@@ -105,7 +105,7 @@ static float	find_powdist_to_y_axis(t_data *data, t_ray *ray, float angle)
 	return (powdist);
 }
 
-static void	make_one_ray(t_data *data, float angle)
+static void	make_one_ray(t_data *data, float angle, int raynbr)
 {
 	t_ray	ray_x;
 	t_ray	ray_y;
@@ -130,6 +130,9 @@ static void	make_one_ray(t_data *data, float angle)
 			ray_final = &ray_y;
 	}
 	draw_one_ray(data, ray_final, 0xFF88FFFF);
+	if (powdist_y < powdist_x)
+			powdist_x = powdist_y;
+	draw_wall_line(data, raynbr, angle, sqrt(powdist_x));
 }
 
 void	draw_rays(t_data *data)
@@ -144,7 +147,7 @@ void	draw_rays(t_data *data)
 	while (i < total_rays)
 	{
 		angle = fix_ang(data->player.angle - (FOV / 2) + (i / (float)RPD));
-		make_one_ray(data, angle);
+		make_one_ray(data, angle, total_rays - i);
 		i++;
 	}
 }

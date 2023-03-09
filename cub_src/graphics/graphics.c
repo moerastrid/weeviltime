@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 21:51:10 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/09 13:56:04 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/09 18:50:33 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ static int	create_images(t_data *data)
 		return (print_error("MLX error", EXIT_FAILURE));
 	data->grid = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	if (!data->grid)
+		return (print_error("MLX error", EXIT_FAILURE));
+	data->world = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	if (!data->world)
 		return (print_error("MLX error", EXIT_FAILURE));
 	data->tile = mlx_new_image(data->mlx, data->mms - 1, data->mms - 1);
 	if (!data->tile)
@@ -63,6 +66,8 @@ static int	display_images(t_data *data)
 	height = data->mms / 4;
 	fill_background(data);
 	if (mlx_image_to_window(data->mlx, data->background, 0, 0))
+		return (print_error("MLX error", EXIT_FAILURE));
+	if (mlx_image_to_window(data->mlx, data->world, 0, 0))
 		return (print_error("MLX error", EXIT_FAILURE));
 	if (mlx_image_to_window(data->mlx, data->grid, 0, 0))
 		return (print_error("MLX error", EXIT_FAILURE));

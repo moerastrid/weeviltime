@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/03/07 16:44:58 by mforstho      ########   odam.nl          #
+#    Updated: 2023/03/09 18:59:44 by mforstho      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRC = cub_src/main.c\
 	cub_src/graphics/hooks.c\
 	cub_src/graphics/line.c\
 	cub_src/graphics/rays.c\
+	cub_src/graphics/world.c\
 	cub_src/parse/check_map.c\
 	cub_src/parse/get_data.c\
 	cub_src/parse/get_elem.c\
