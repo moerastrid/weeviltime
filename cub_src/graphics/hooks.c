@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 22:04:17 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/09 14:59:37 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/09 15:56:10 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	turn_hook(t_data *data)
 	}
 }
 
-void	move_hook(t_data *data)
+void	forward_back_move_hook(t_data *data)
 {
 	t_player	*p;
 
@@ -65,6 +65,13 @@ void	move_hook(t_data *data)
 		p->image->instances->x = p->x * data->mms - data->mms / 8;
 		p->image->instances->y = p->y * data->mms - data->mms / 8;
 	}
+}
+
+void	left_right_move_hook(t_data *data)
+{
+	t_player	*p;
+
+	p = &data->player;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
 	{
 		p->x += (0.01 * SPEED) * p->lrx;
