@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 16:22:33 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/09 18:11:20 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/10 00:37:40 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 
 // WIDTH of window
 # ifndef WIDTH
-#  define WIDTH 1920
+#  define WIDTH 960
 # endif
 // HEIGHT of window
 # ifndef HEIGHT
-#  define HEIGHT 1080
+#  define HEIGHT 540
 # endif
 // FOV : field of view (in degrees)
 # ifndef FOV

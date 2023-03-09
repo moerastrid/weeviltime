@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/09 18:46:38 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/09 23:47:13 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ typedef struct s_co
 typedef struct s_wall
 {
 	//t_img		*img;
-	char		*path;
+	char			*path;
+	mlx_texture_t	*texture;
 }		t_wall;
 
 /* player data */

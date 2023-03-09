@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 15:14:45 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/09 20:16:09 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/09 23:47:45 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ static void	make_one_ray(t_data *data, float angle, int raynbr)
 	t_ray	*ray_final;
 	float	powdist_x;
 	float	powdist_y;
+	float	horizontal_wall_place;
 	int		side;
 
 	check_dir(data, &ray_x, angle);
@@ -123,11 +124,11 @@ static void	make_one_ray(t_data *data, float angle, int raynbr)
 		if (angle == 0)
 			side = EA;
 		if (angle == 90)
-			side = SO;
+			side = NO;
 		if (angle == 180)
 			side = WE;
 		if (angle == 270)
-			side = NO;
+			side = SO;
 	}
 	else
 	{
@@ -139,21 +140,23 @@ static void	make_one_ray(t_data *data, float angle, int raynbr)
 				side = WE;
 			if (ray_x.dir.x == 1)
 				side = EA;
+			horizontal_wall_place = fabs(ray_x.by - ray_x.ay);
 			ray_final = &ray_x;
 		}
 		else
 		{
 			if (ray_y.dir.y == -1)
-				side = SO;
-			if (ray_y.dir.y == 1)
 				side = NO;
+			if (ray_y.dir.y == 1)
+				side = SO;
+			horizontal_wall_place = fabs(ray_y.bx - ray_y.ax);
 			ray_final = &ray_y;
 		}
 	}
 	draw_one_ray(data, ray_final, 0xFF88FFFF);
 	if (powdist_y < powdist_x)
-			powdist_x = powdist_y;
-	draw_wall_line(data, raynbr, angle, sqrt(powdist_x), side);
+		powdist_x = powdist_y;
+	draw_wall_line(data, raynbr, angle, sqrt(powdist_x), side, horizontal_wall_place);
 }
 
 void	draw_rays(t_data *data)

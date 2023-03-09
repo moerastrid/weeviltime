@@ -6,29 +6,16 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/09 18:53:25 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/03/09 20:12:43 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/10 00:36:47 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub_include/cub.h"
 
-void	draw_wall_line(t_data *data, int raynbr, float angle, float dist, int side)
+unsigned int	find_color(int side)
 {
-	t_line	line;
-	float	p;
-	float	height;
-	float	offset;
-	unsigned int color;
+	unsigned int	color;
 
-	p = dist * cos(deg_to_rad(fix_ang(angle - data->player.angle)));
-	height = (((float)WIDTH / FOV * 27.0) / p);
-	if (height > HEIGHT)
-		height = HEIGHT;
-	offset = ((float)HEIGHT / 2) - (height / 2);
-	line.xa = (float)raynbr;
-	line.ya = offset;
-	line.xb = (float)raynbr;
-	line.yb = offset + height;
 	color = 0xFFFFFFFF;
 	if (side == NO)
 		color = 0xBB2222FF;
@@ -38,5 +25,41 @@ void	draw_wall_line(t_data *data, int raynbr, float angle, float dist, int side)
 		color = 0x2222BBFF;
 	if (side == EA)
 		color = 0x22BBBBFF;
-	ft_line(data->world, &line, color);
+	return (color);
+}
+
+/*
+horizontal_wall_place and vertical_wall_place are the location of the pixel on the wall
+divided on a scale from 0 to 1
+so we can use it to read the correct pixel from the texture :)
+
+PROBLEEM : hij maakt way te veel images als je het zo doet en loopt dan helemaal vast haha wat stom
+*/
+
+void	draw_wall_line(t_data *data, int raynbr, float angle, float dist, int side, float horizontal_wall_place)
+{
+	float			p;
+	float			height;
+	float			offset;
+	float			vertical_wall_place;
+	unsigned int	color;
+	int				i;
+	//mlx_image_t		*temp;
+
+	p = dist * cos(deg_to_rad(fix_ang(angle - data->player.angle)));
+	height = (((float)WIDTH / FOV * 27.0) / p);
+	if (height > HEIGHT)
+		height = HEIGHT;
+	offset = ((float)HEIGHT / 2) - (height / 2);
+	color = find_color(side);
+	//horizontal_wall_place *= data->walls[side].texture->width; //  (?)
+	i = 0;
+	while (i < height)
+	{
+		vertical_wall_place = i / height * data->walls[side].texture->height; // (?)
+		//temp = mlx_texture_area_to_image(data->mlx, data->walls[side].texture, (uint32_t[2]){horizontal_wall_place, vertical_wall_place}, (uint32_t[2]){1, 1}); //
+		putpixel(data->world, raynbr, offset + i, color);
+		//printf("vertical %f\thorizontal %f\n", vertical_wall_place, horizontal_wall_place);
+		i++;
+	}
 }
