@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 15:14:45 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/09 15:49:06 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/09 16:34:44 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,17 @@ void	ninety_degree_angle(t_data *data, t_ray *ray)
 		ray->end_y = (int)ray->end_y;
 		while (data->map[(int)(ray->end_y)][(int)(ray->end_x)] != 1)
 			ray->end_y += ray->dir.y;
-		if (ray->dir.y == -1)
-			ray->end_y += 1;
 	}
 	if (ray->dir.y == 0)
 	{
 		ray->end_x = (int)ray->end_x;
 		while (data->map[(int)(ray->end_y)][(int)(ray->end_x)] != 1)
 			ray->end_x += ray->dir.x;
-		if (ray->dir.x == -1)
-			ray->end_x += 1;
 	}
+	if (ray->dir.y == -1)
+		ray->end_y += 1;
+	if (ray->dir.x == -1)
+		ray->end_x += 1;
 }
 
 float	find_pwr_distance_to_x_axis(t_data *data, t_ray *ray, float angle)
@@ -69,7 +69,7 @@ float	find_pwr_distance_to_x_axis(t_data *data, t_ray *ray, float angle)
 	float	delta_x;
 	float	delta_y;
 
-	if (ray->dir.x == 1 && ray->dir.y == 1)
+	if (ray->dir.x == 1)
 	{
 		ray->end_x = (int)ray->end_x + 1;
 		while(ray->end_x >= 0 && ray->end_x < data->max.x)
@@ -82,6 +82,20 @@ float	find_pwr_distance_to_x_axis(t_data *data, t_ray *ray, float angle)
 			ray->end_x += ray->dir.x;
 		}
 	}
+	else if (ray->dir.x == -1)
+	{
+		ray->end_x = (int)ray->end_x;
+		while(ray->end_x >= 0 && ray->end_x < data->max.x)
+		{
+			ray->end_y = (ray->end_x - ray->start_x) * -tan(deg_to_rad(angle)) + ray->start_y;
+			if (ray->end_y < 0 || ray->end_y > data->max.y)
+				return (FLT_MAX);
+			if (data->map[(int)ray->end_y][(int)ray->end_x] == 1)
+				break ;
+			ray->end_x += ray->dir.x;
+		}
+	}
+	printf("x-axis coords: %f, %f\n", ray->end_x, ray->end_y);
 	pwr_distance = ray->end_x * ray->end_x + ray->end_y * ray->end_y;
 	return (pwr_distance);
 }
@@ -92,7 +106,7 @@ float	find_pwr_distance_to_y_axis(t_data *data, t_ray *ray, float angle)
 	float	delta_x;
 	float	delta_y;
 
-	if (ray->dir.x == 1 && ray->dir.y == 1)
+	if (ray->dir.y == 1)
 	{
 		ray->end_y = (int)ray->end_y + 1;
 		while (ray->end_y >= 0 && ray->end_y < data->max.y)
@@ -105,6 +119,20 @@ float	find_pwr_distance_to_y_axis(t_data *data, t_ray *ray, float angle)
 			ray->end_y += ray->dir.y;
 		}
 	}
+	else if (ray->dir.y == -1)
+	{
+		ray->end_y = (int)ray->end_y ;
+		while (ray->end_y >= 0 && ray->end_y < data->max.y)
+		{
+			ray->end_x = (ray->end_y - ray->start_y) / -tan(deg_to_rad(angle)) + ray->start_x;
+			if (ray->end_x < 0 || ray->end_x > data->max.x)
+				return (FLT_MAX);
+			if (data->map[(int)ray->end_y][(int)ray->end_x] == 1)
+				break ;
+			ray->end_y += ray->dir.y;
+		}
+	}
+	printf("y-axis coords: %f, %f\n", ray->end_x, ray->end_y);
 	pwr_distance = ray->end_x * ray->end_x + ray->end_y * ray->end_y;
 	return (pwr_distance);
 }
@@ -132,24 +160,24 @@ void	make_one_ray(t_data *data, float angle)
 		else
 			find_pwr_distance_to_y_axis(data, &ray_final, angle);
 	}
-	//printf("final coords: %f, %f\n", ray_final.end_x, ray_final.end_y);
+	printf("final coords: %f, %f\n", ray_final.end_x, ray_final.end_y);
 	draw_one_ray(data, &ray_final, 0xFF88FFFF);
 }
 
 void	draw_rays(t_data *data)
 {
-	float	angle;
-	int		total_rays;
-	int		i;
+	//float	angle;
+	//int		total_rays;
+	//int		i;
 
-	angle = 0;
-	total_rays = FOV * RPD;
-	i = 0;
-	while (i < total_rays)
-	{
-		angle = fix_ang(data->player.angle - (FOV / 2) + (i / (float)RPD));
-		make_one_ray(data, angle);
-		i++;
-	}
-	//make_one_ray(data, data->player.angle);
+	//angle = 0;
+	//total_rays = FOV * RPD;
+	//i = 0;
+	//while (i < total_rays)
+	//{
+	//	angle = fix_ang(data->player.angle - (FOV / 2) + (i / (float)RPD));
+	//	make_one_ray(data, angle);
+	//	i++;
+	//}
+	make_one_ray(data, data->player.angle);
 }
