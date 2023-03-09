@@ -6,22 +6,11 @@
 /*   By: ageels <ageels@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/11 18:18:27 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 21:43:50 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/03 16:46:11 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub_include/cub.h"
-
-t_line	set_line_coords(int xa, int ya, int xb, int yb)
-{
-	t_line	line;
-
-	line.xa = xa;
-	line.ya = ya;
-	line.xb = xb;
-	line.yb = yb;
-	return (line);
-}
 
 void	updownleftright(t_img *img, t_line *line, float mn[2], uint32_t color)
 {

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/27 17:46:24 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 18:22:27 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/09 13:48:59 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ static int	convert_map(t_data *data, t_par *par)
 	lst = par->maplst;
 	par->maparray = ft_calloc(((size_t)data->max.y + 1), sizeof(char *));
 	if (!par->maparray)
-		return (print_error("malloc error"));
+		return (print_error("malloc error", EXIT_FAILURE));
 	i = 0;
 	while (i < data->max.y)
 	{
 		par->maparray[i] = strdup(lst->content);
 		if (par->maparray[i] == NULL)
-			return (print_error("malloc error"));
+			return (print_error("malloc error", EXIT_FAILURE));
 		lst = lst->next;
 		i++;
 	}
@@ -44,7 +44,7 @@ static void	save_max_length(t_data *data, char *line)
 	data->max.y++;
 }
 
-char	*skip_empty_line(t_par *par, char *line)
+static char	*skip_empty_line(t_par *par, char *line)
 {
 	char	*temp_line;
 
@@ -73,7 +73,7 @@ int	get_map(t_data *data, t_par *par, char *line)
 		{
 			ft_lstclear(&par->maplst, &free);
 			free(temp);
-			return (print_error("ft_lstnew_back error"));
+			return (print_error("ft_lstnew_back error", EXIT_FAILURE));
 		}
 		save_max_length(data, temp);
 		temp = get_next_line(par->fd_cub);
@@ -82,7 +82,7 @@ int	get_map(t_data *data, t_par *par, char *line)
 	if (temp != NULL || data->max.y < 1)
 	{
 		free(temp);
-		return (print_error("wrong amount of MMS"));
+		return (print_error("can only have one map", EXIT_FAILURE));
 	}
 	return (convert_map(data, par));
 }

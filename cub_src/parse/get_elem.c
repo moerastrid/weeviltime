@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/22 19:58:10 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 20:14:08 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/09 14:10:16 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,24 @@ static int	get_wall(t_par *par, char *line, t_wall_e n, t_wall *wall)
 	int	i;
 
 	i = 0;
-	(void)wall;
 	if (par->wall_check[n] != true)
 	{
 		par->wall_check[n] = true;
 		while (line[i] != '\0' && line[i] != '\n')
 		{
-			if (i < 3)
-				i++;
-			else if (line[i] == ' ')
+			if (i < 3 || line[i] == ' ')
 				i++;
 			else
 			{
+				if (access(trim_newline(&line[i]), F_OK | R_OK) == -1)
+					return (print_error("invalid texture path", -1));
 				wall->path = ft_strdup(&line[i]);
 				if (wall->path == NULL)
-				{
-					print_error("malloc failure");
-					return (-1);
-				}
+					return (print_error("malloc failure", -1));
 				return (1);
 			}
 		}
 	}
-	print_error("Wrong wall texture path");
 	return (-1);
 }
 
@@ -53,43 +48,38 @@ static int	init_wall(t_data *data, t_par *par, char *line)
 		return (get_wall(par, line, WE, &data->walls[WE]));
 	else if (ft_strncmp(line, "EA ", 3) == 0)
 		return (get_wall(par, line, EA, &data->walls[EA]));
+	else if (line[0] != '\n')
+		return (print_error("non empty line between textures", -1));
 	return (0);
 }
 
-static int	get_plane(t_par *par, char *line, t_plane_e n, t_plane *plane)
+static int	get_plane(t_par *par, char *line, t_plane_e n, unsigned int	*plane)
 {
 	int		i;
 	int		rgb[3];
 	char	**temp_arr;
 
-	if (par->color_check[n] != true)
+	if (par->color_check[n] == true)
+		return (-1);
+	par->color_check[n] = true;
+	temp_arr = ft_single_split(&line[2], ',');
+	i = 0;
+	while (temp_arr[i])
 	{
-		par->color_check[n] = true;
-		temp_arr = ft_single_split(&line[2], ',');
-		i = 0;
-		while (temp_arr[i])
-		{
-			if (i < 3 && stringisdigit(temp_arr[i]))
-				rgb[i] = ft_atoi(temp_arr[i]);
-			else
-			{
-				free (temp_arr);
-				print_error("wrong color format");
-				return (-1);
-			}
-			i++;
-		}
-		if (i != 3)
+		if (i < 3 && stringisdigit(temp_arr[i]))
+			rgb[i] = ft_atoi(temp_arr[i]);
+		else
 		{
 			free (temp_arr);
-			print_error("wrong color format");
 			return (-1);
 		}
-		plane->color = make_color(rgb[0], rgb[1], rgb[2]);
-		free(temp_arr);
-		return (1);
+		i++;
 	}
-	return (-1);
+	free (temp_arr);
+	if (i != 3)
+		return (-1);
+	*plane = make_color(rgb[0], rgb[1], rgb[2]);
+	return (1);
 }
 
 static int	init_plane(t_data *data, t_par *par, char *line)
@@ -105,10 +95,12 @@ int	get_elem(t_data *data, t_par *par, char *line)
 {
 	int	retval;
 
-	retval = 0;
 	retval = init_plane(data, par, line);
 	if (retval != 0)
+	{
+		if (retval == -1)
+			print_error("wrong color format", -1);
 		return (retval);
-	retval = init_wall(data, par, line);
-	return (retval);
+	}
+	return (init_wall(data, par, line));
 }

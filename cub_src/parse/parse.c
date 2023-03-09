@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/22 19:00:17 by ageels        #+#    #+#                 */
-/*   Updated: 2023/02/28 20:38:33 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/09 13:49:22 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,23 @@
 static int	set_default(t_data *data, t_par *par)
 {
 	data->mlx = NULL;
+	data->mms = 0;
 	data->max.x = 0;
 	data->max.y = 0;
 	data->walls = ft_calloc(4, sizeof(t_wall));
 	if (data->walls == NULL)
-		return (print_error("malloc error"));
-	data->planes = ft_calloc(2, sizeof(t_plane));
+		return (print_error("malloc error", EXIT_FAILURE));
+	data->planes = ft_calloc(2, sizeof(unsigned int));
 	if (data->planes == NULL)
-		return (print_error("malloc error"));
+		return (print_error("malloc error", EXIT_FAILURE));
 	par->maplst = NULL;
 	par->maparray = NULL;
 	par->wall_check = ft_calloc(4, sizeof(bool));
 	if (par->wall_check == NULL)
-		return (print_error("malloc error"));
+		return (print_error("malloc error", EXIT_FAILURE));
 	par->color_check = ft_calloc(2, sizeof(bool));
 	if (par->color_check == NULL)
-		return (print_error("malloc error"));
+		return (print_error("malloc error", EXIT_FAILURE));
 	return (EXIT_SUCCESS);
 }
 
@@ -46,16 +47,16 @@ static int	check_args(int argc, char **argv, t_par *parse_data)
 	int		len;
 
 	if (argc <= 1)
-		return (print_error("Need map"));
+		return (print_error("Need map", EXIT_FAILURE));
 	if (ft_strlen(argv[1]) <= ft_strlen(".cub"))
-		return (print_error("invalid map name"));
+		return (print_error("invalid map name", EXIT_FAILURE));
 	len = ft_strlen(argv[1]);
 	if (argv[1][len - 1] != 'b' || argv[1][len - 2] != 'u' \
 		|| argv[1][len - 3] != 'c' || argv[1][len - 4] != '.')
-		return (print_error("invalid map name"));
+		return (print_error("invalid map name", EXIT_FAILURE));
 	parse_data->fd_cub = open(argv[1], O_RDONLY);
 	if (parse_data->fd_cub < 0)
-		return (print_error("map no access"));
+		return (print_error("map no access", EXIT_FAILURE));
 	return (EXIT_SUCCESS);
 }
 
