@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/28 20:44:57 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/09 23:41:16 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 15:22:26 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 void	gameloop(void *param)
 {
 	t_data	*data;
+	t_coll	*coll;
 
 	data = param;
+	coll = &data->collision;
 	ft_fill(data->world, data->mlx, 0);
-	forward_back_move_hook(data);
-	left_right_move_hook(data);
+	forward_back_move_hook(data, coll);
+	left_right_move_hook(data, coll);
 	draw_nose(data);
 	draw_rays(data);
 	turn_hook(data);

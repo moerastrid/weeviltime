@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 13:29:15 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 15:22:31 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,17 @@ typedef struct s_par
 	t_list		*maplst;
 }		t_par;
 
+/*	collision	*/
+typedef struct s_coll
+{
+	float	ipx;
+	float	ipy;
+	float	ipx_add_xo;
+	float	ipx_sub_xo;
+	float	ipy_add_yo;
+	float	ipy_sub_yo;
+}	t_coll;
+
 /*	general data	*/
 typedef struct s_data
 {
@@ -102,6 +113,7 @@ typedef struct s_data
 	t_img			*tile;
 	t_img			*grid;
 	t_img			*world;
+	t_coll			collision;
 }		t_data;
 
 #endif
