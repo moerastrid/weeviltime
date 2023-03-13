@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 22:04:17 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 16:47:24 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/13 20:12:26 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,11 @@ void	forward_back_move_hook(t_data *data, t_coll *coll)
 			p->x += (0.01 * SPEED) * p->dirx;
 		if (data->map[(int)coll->ipy_add_yo][(int)coll->ipx] == 0)
 			p->y += (0.01 * SPEED) * p->diry;
-		p->image->instances->x = p->x * data->mms - data->mms / 8;
-		p->image->instances->y = p->y * data->mms - data->mms / 8;
+		if (data->minimap == true)
+		{
+			p->small_img->instances->x = p->x * data->mms - data->mms / 8;
+			p->small_img->instances->y = p->y * data->mms - data->mms / 8;
+		}
 	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
 	{
@@ -88,8 +91,11 @@ void	forward_back_move_hook(t_data *data, t_coll *coll)
 			p->x -= (0.01 * SPEED) * p->dirx;
 		if (data->map[(int)coll->ipy_sub_yo][(int)coll->ipx] == 0)
 			p->y -= (0.01 * SPEED) * p->diry;
-		p->image->instances->x = p->x * data->mms - data->mms / 8;
-		p->image->instances->y = p->y * data->mms - data->mms / 8;
+		if (data->minimap == true)
+		{
+			p->small_img->instances->x = p->x * data->mms - data->mms / 8;
+			p->small_img->instances->y = p->y * data->mms - data->mms / 8;
+		}
 	}
 }
 
@@ -105,8 +111,11 @@ void	left_right_move_hook(t_data *data, t_coll *coll)
 			p->x += (0.01 * SPEED) * p->lrx;
 		if (data->map[(int)coll->ipy_add_yo][(int)coll->ipx] == 0)
 			p->y += (0.01 * SPEED) * p->lry;
-		p->image->instances->x = p->x * data->mms - data->mms / 8;
-		p->image->instances->y = p->y * data->mms - data->mms / 8;
+		if (data->minimap == true)
+		{
+			p->small_img->instances->x = p->x * data->mms - data->mms / 8;
+			p->small_img->instances->y = p->y * data->mms - data->mms / 8;
+		}
 	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
 	{
@@ -114,7 +123,10 @@ void	left_right_move_hook(t_data *data, t_coll *coll)
 			p->x -= (0.01 * SPEED) * p->lrx;
 		if (data->map[(int)coll->ipy_sub_yo][(int)coll->ipx] == 0)
 			p->y -= (0.01 * SPEED) * p->lry;
-		p->image->instances->x = p->x * data->mms - data->mms / 8;
-		p->image->instances->y = p->y * data->mms - data->mms / 8;
+		if (data->minimap == true)
+		{
+			p->small_img->instances->x = p->x * data->mms - data->mms / 8;
+			p->small_img->instances->y = p->y * data->mms - data->mms / 8;
+		}
 	}
 }

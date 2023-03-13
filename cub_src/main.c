@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:33 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 16:46:16 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/13 19:41:22 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void	delete_textures(t_data *data)
 	}
 }
 
-static void	leakfunc(void)
-{
-	system("leaks -q cub3D");
-}
+//static void	leakfunc(void)
+//{
+//	system("leaks -q cub3D");
+//}
 
 int32_t	main(int argc, char **argv)
 {

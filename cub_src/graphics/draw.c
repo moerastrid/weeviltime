@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 22:02:35 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 18:05:30 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 20:21:42 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,9 @@ void	draw_nose(t_data *data)
 	display_nose = false;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_N))
 		display_nose = true;
-	ft_fill(data->grid, data->mlx, 0);
-	if (display_nose == true)
+	if (data->minimap == true)
+		ft_fill(data->raygrid, data->mlx, 0);
+	if (display_nose == true && data->minimap == true)
 	{
 		p = &data->player;
 		height = data->mms / 4;
@@ -88,7 +89,7 @@ void	draw_nose(t_data *data)
 		nose.ya = p->y * data->mms;
 		nose.xb = p->x * data->mms + p->dirx * height * 2;
 		nose.yb = p->y * data->mms + p->diry * height * 2;
-		ft_line(data->grid, &nose, COP);
+		ft_line(data->raygrid, &nose, COP);
 	}
 }
 

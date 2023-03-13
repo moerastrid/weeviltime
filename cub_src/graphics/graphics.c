@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 21:51:10 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/09 23:41:13 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 20:22:49 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,25 @@ static int	create_images(t_data *data)
 	data->background = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	if (!data->background)
 		return (print_error("MLX error", EXIT_FAILURE));
-	data->grid = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-	if (!data->grid)
-		return (print_error("MLX error", EXIT_FAILURE));
 	data->world = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	if (!data->world)
 		return (print_error("MLX error", EXIT_FAILURE));
-	data->tile = mlx_new_image(data->mlx, data->mms - 1, data->mms - 1);
-	if (!data->tile)
-		return (print_error("MLX error", EXIT_FAILURE));
-	data->player.image = mlx_new_image(data->mlx, data->mms / 4, data->mms / 4);
-	if (!data->player.image)
-		return (print_error("MLX error", EXIT_FAILURE));
+	if (data->mms > 5)
+	{
+		data->raygrid = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+		if (!data->raygrid)
+			return (print_error("MLX error", EXIT_FAILURE));
+		data->minimap = true;
+		data->tile = mlx_new_image(data->mlx, data->mms - 1, data->mms - 1);
+		if (!data->tile)
+			return (print_error("MLX error", EXIT_FAILURE));
+		printf("data->mms: %d\n", data->mms);
+		data->player.small_img = mlx_new_image(data->mlx, data->mms / 4, data->mms / 4);
+		if (!data->player.small_img)
+			return (print_error("MLX error", EXIT_FAILURE));
+	}
+	else
+		data->minimap = false;
 	return (EXIT_SUCCESS);
 }
 
@@ -69,15 +76,18 @@ static int	display_images(t_data *data)
 		return (print_error("MLX error", EXIT_FAILURE));
 	if (mlx_image_to_window(data->mlx, data->world, 0, 0))
 		return (print_error("MLX error", EXIT_FAILURE));
-	if (mlx_image_to_window(data->mlx, data->grid, 0, 0))
-		return (print_error("MLX error", EXIT_FAILURE));
-	fill_square(p->image, data->mms / 4, data->mms / 4, COP);
-	if (mlx_image_to_window(data->mlx, p->image, \
-		p->x * data->mms - data->mms / 8, \
-		p->y * data->mms - data->mms / 8) == -1)
-		return (print_error("MLX error", EXIT_FAILURE));
-	if (display_minimap(data))
-		return (EXIT_FAILURE);
+	if (data->minimap == true)
+	{
+		if (mlx_image_to_window(data->mlx, data->raygrid, 0, 0))
+			return (print_error("MLX error", EXIT_FAILURE));
+		fill_square(p->small_img, data->mms / 4, data->mms / 4, COP);
+		if (mlx_image_to_window(data->mlx, p->small_img, \
+			p->x * data->mms - data->mms / 8, \
+			p->y * data->mms - data->mms / 8) == -1)
+			return (print_error("MLX error", EXIT_FAILURE));
+		if (display_minimap(data))
+			return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 

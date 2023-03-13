@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/28 20:44:57 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 18:09:28 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 20:22:06 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	draw_one_ray(t_data *data, t_ray *ray, unsigned int color)
 	display_ray = false;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_R))
 		display_ray = true;
-	if (display_ray == true)
+	if (display_ray == true && data->minimap == true)
 	{
 		ray->line.xa = (int)(ray->ax * data->mms);
 		ray->line.ya = (int)(ray->ay * data->mms);
 		ray->line.xb = (int)(ray->bx * data->mms);
 		ray->line.yb = (int)(ray->by * data->mms);
-		ft_line(data->grid, &ray->line, color);
+		ft_line(data->raygrid, &ray->line, color);
 	}
 }
 

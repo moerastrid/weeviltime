@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 15:14:45 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 18:31:58 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 19:50:02 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,23 @@ static void	check_dir(t_data *data, t_ray *ray, float angle)
 	ray->by = data->player.y;
 }
 
-static void	ninety_degree_angle(t_data *data, t_ray *ray, float angle)
+static float	ninety_degree_angle(t_data *data, t_ray *ray, float angle)
 {
+	float	dist;
+
 	if (ray->dir.x == 0)
 	{
 		ray->by = (int)ray->by;
 		while (data->map[(int)(ray->by)][(int)(ray->bx)] != 1)
 			ray->by += ray->dir.y;
+		dist = ray->by - ray->ay;
 	}
 	if (ray->dir.y == 0)
 	{
 		ray->bx = (int)ray->bx;
 		while (data->map[(int)(ray->by)][(int)(ray->bx)] != 1)
 			ray->bx += ray->dir.x;
+		dist = ray->bx - ray->ax;
 	}
 	if (ray->dir.y == -1)
 		ray->by += 1;
@@ -60,6 +64,7 @@ static void	ninety_degree_angle(t_data *data, t_ray *ray, float angle)
 		ray->side = WE;
 	if (angle == 270)
 		ray->side = SO;
+	return (pow(dist, 2));
 }
 
 static float	find_powdist_to_x_axis(t_data *data, t_ray *ray, float angle)
@@ -121,11 +126,13 @@ void	make_one_ray(t_data *data, float angle, int ray_nbr, t_ray *ray_final)
 	float	powdist_x;
 	float	powdist_y;
 
+	powdist_x = FLT_MAX;
+	powdist_y = FLT_MAX;
 	check_dir(data, &ray_x, angle);
 	check_dir(data, &ray_y, angle);
 	if (ray_x.dir.x == 0 || ray_x.dir.y == 0)
 	{
-		ninety_degree_angle(data, &ray_x, angle);
+		powdist_x = ninety_degree_angle(data, &ray_x, angle);
 		ray_final = &ray_x;
 	}
 	else

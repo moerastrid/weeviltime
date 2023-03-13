@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 16:54:12 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 20:20:24 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_player
 	float			lrx;
 	float			lry;
 	float			angle;
-	t_img			*image;
+	t_img			*small_img;
 }		t_player;
 
 /*	ray data	*/
@@ -104,12 +104,13 @@ typedef struct s_data
 	t_co			max;
 	int				**map;
 	int				mms;
+	bool			minimap;
 	unsigned int	*planes;
 	t_player		player;
 	t_wall			*walls;
 	t_img			*background;
 	t_img			*tile;
-	t_img			*grid;
+	t_img			*raygrid;
 	t_img			*world;
 	t_coll			collision;
 }		t_data;

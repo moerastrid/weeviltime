@@ -6,13 +6,13 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/03/13 18:18:52 by ageels        ########   odam.nl          #
+#    Updated: 2023/03/13 19:41:00 by ageels        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := cub3D
 OBJ_DIR = ./cub_obj
-CFLAG = #-Wall -Werror -Wextra -g #-fsanitize=address
+CFLAG = -Wall -Werror -Wextra -g #-fsanitize=address
 IFLAG = -I . -I ./MLX42/include
 LFLAG = -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 CC = clang
