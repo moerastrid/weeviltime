@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 15:14:45 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 16:49:41 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 18:31:58 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,7 @@ static void	check_dir(t_data *data, t_ray *ray, float angle)
 	ray->by = data->player.y;
 }
 
-static void	draw_one_ray(t_data *data, t_ray *ray, unsigned int color)
-{
-	ray->line.xa = (int)(ray->ax * data->mms);
-	ray->line.ya = (int)(ray->ay * data->mms);
-	ray->line.xb = (int)(ray->bx * data->mms);
-	ray->line.yb = (int)(ray->by * data->mms);
-	ft_line(data->grid, &ray->line, color);
-}
-
-static void	ninety_degree_angle(t_data *data, t_ray *ray)
+static void	ninety_degree_angle(t_data *data, t_ray *ray, float angle)
 {
 	if (ray->dir.x == 0)
 	{
@@ -61,6 +52,14 @@ static void	ninety_degree_angle(t_data *data, t_ray *ray)
 		ray->by += 1;
 	if (ray->dir.x == -1)
 		ray->bx += 1;
+	if (angle == 0)
+		ray->side = EA;
+	if (angle == 90)
+		ray->side = NO;
+	if (angle == 180)
+		ray->side = WE;
+	if (angle == 270)
+		ray->side = SO;
 }
 
 static float	find_powdist_to_x_axis(t_data *data, t_ray *ray, float angle)
@@ -76,11 +75,16 @@ static float	find_powdist_to_x_axis(t_data *data, t_ray *ray, float angle)
 		if (ray->by < 0 || ray->by > data->max.y)
 			return (FLT_MAX);
 		if ((ray->dir.x == 1 && data->map[(int)ray->by][(int)ray->bx] == 1) || \
-			(ray->dir.x == -1 && data->map[(int)ray->by][(int)ray->bx - 1] == 1))
+			(ray->dir.x == -1 && \
+			data->map[(int)ray->by][(int)ray->bx - 1] == 1))
 			break ;
 		ray->bx += ray->dir.x;
 	}
 	powdist = pow(ray->bx - ray->ax, 2) + pow(ray->by - ray->ay, 2);
+	if (ray->dir.x == -1)
+		ray->side = WE;
+	if (ray->dir.x == 1)
+		ray->side = EA;
 	return (powdist);
 }
 
@@ -97,15 +101,20 @@ static float	find_powdist_to_y_axis(t_data *data, t_ray *ray, float angle)
 		if (ray->bx < 0 || ray->bx > data->max.x)
 			return (FLT_MAX);
 		if ((ray->dir.y == 1 && data->map[(int)ray->by][(int)ray->bx] == 1) || \
-			(ray->dir.y == -1 && data->map[(int)ray->by - 1][(int)ray->bx] == 1))
+			(ray->dir.y == -1 && \
+			data->map[(int)ray->by - 1][(int)ray->bx] == 1))
 			break ;
 		ray->by += ray->dir.y;
 	}
 	powdist = pow(ray->bx - ray->ax, 2) + pow(ray->by - ray->ay, 2);
+	if (ray->dir.y == -1)
+		ray->side = NO;
+	if (ray->dir.y == 1)
+		ray->side = SO;
 	return (powdist);
 }
 
-static void	make_one_ray(t_data *data, float angle, int ray_nbr, t_ray *ray_final)
+void	make_one_ray(t_data *data, float angle, int ray_nbr, t_ray *ray_final)
 {
 	t_ray	ray_x;
 	t_ray	ray_y;
@@ -116,59 +125,20 @@ static void	make_one_ray(t_data *data, float angle, int ray_nbr, t_ray *ray_fina
 	check_dir(data, &ray_y, angle);
 	if (ray_x.dir.x == 0 || ray_x.dir.y == 0)
 	{
-		ninety_degree_angle(data, &ray_x);
+		ninety_degree_angle(data, &ray_x, angle);
 		ray_final = &ray_x;
-		if (angle == 0)
-			ray_final->side = EA;
-		if (angle == 90)
-			ray_final->side = NO;
-		if (angle == 180)
-			ray_final->side = WE;
-		if (angle == 270)
-			ray_final->side = SO;
 	}
 	else
 	{
 		powdist_x = find_powdist_to_x_axis(data, &ray_x, angle);
 		powdist_y = find_powdist_to_y_axis(data, &ray_y, angle);
 		if (powdist_x < powdist_y)
-		{
-			if (ray_x.dir.x == -1)
-				ray_x.side = WE;
-			if (ray_x.dir.x == 1)
-				ray_x.side = EA;
 			ray_final = &ray_x;
-		}
 		else
-		{
-			if (ray_y.dir.y == -1)
-				ray_y.side = NO;
-			if (ray_y.dir.y == 1)
-				ray_y.side = SO;
 			ray_final = &ray_y;
-		}
 	}
-	draw_one_ray(data, ray_final, 0xFF88FFFF);
 	if (powdist_y < powdist_x)
 		powdist_x = powdist_y;
 	ray_final->no = ray_nbr;
 	draw_wall_line(data, ray_final, angle, powdist_x);
-}
-
-void	draw_rays(t_data *data)
-{
-	float	angle;
-	int		i;
-	t_ray	ray;
-	float	rpd;
-
-	angle = 0;
-	i = 0;
-	rpd = (float)WIDTH / (float)FOV;
-	while (i < WIDTH)
-	{
-		angle = fix_ang(data->player.angle - ((float)FOV / 2.0) + (i / rpd));
-		make_one_ray(data, angle, WIDTH - i, &ray);
-		i++;
-	}
 }

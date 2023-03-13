@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/22 20:31:38 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/09 13:44:09 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/13 17:28:34 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,20 @@ bool	stringisdigit(char *s)
 	digit = false;
 	if (!s)
 		return (true);
+	while (s[i] == ' ')
+		i++;
 	while (s[i])
 	{
-		if (ft_isdigit(s[i]) == false && s[i] != ' ')
-			return (false);
 		if (ft_isdigit(s[i]) == true)
 			digit = true;
+		else
+			break ;
 		i++;
 	}
+	while (s[i] == ' ')
+		i++;
+	if (s[i] != '\0' && s[i] != '\n')
+		return (false);
 	return (digit);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/22 19:58:10 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 16:56:26 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 18:07:23 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,17 @@ static int	get_wall(t_par *par, char *line, t_wall_e n, t_wall *wall)
 	return (-1);
 }
 
-static int	init_wall(t_data *data, t_par *par, char *line)
+static int	set_to_rgb(int i, char **temp_arr, int *rgb)
 {
-	if (ft_strncmp(line, "NO ", 3) == 0)
-		return (get_wall(par, line, NO, &data->walls[NO]));
-	else if (ft_strncmp(line, "SO ", 3) == 0)
-		return (get_wall(par, line, SO, &data->walls[SO]));
-	else if (ft_strncmp(line, "WE ", 3) == 0)
-		return (get_wall(par, line, WE, &data->walls[WE]));
-	else if (ft_strncmp(line, "EA ", 3) == 0)
-		return (get_wall(par, line, EA, &data->walls[EA]));
-	else if (line[0] != '\n')
-		return (print_error("non empty line between textures", -1));
-	return (0);
+	if (i < 3 && stringisdigit(temp_arr[i]) == true)
+	{
+		rgb[i] = ft_atoi(temp_arr[i]);
+		if (rgb[i] < 0 || rgb[i] > 255)
+			return (EXIT_FAILURE);
+	}
+	else
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 static int	get_plane(t_par *par, char *line, t_plane_e n, unsigned int	*plane)
@@ -66,16 +64,7 @@ static int	get_plane(t_par *par, char *line, t_plane_e n, unsigned int	*plane)
 	i = 0;
 	while (temp_arr[i])
 	{
-		if (i < 3 && stringisdigit(temp_arr[i]))
-		{
-			rgb[i] = ft_atoi(temp_arr[i]);
-			if (rgb[i] < 0 || rgb[i] > 255)
-			{
-				free (temp_arr);
-				return (-1);
-			}
-		}
-		else
+		if (set_to_rgb(i, temp_arr, rgb))
 		{
 			free (temp_arr);
 			return (-1);
@@ -109,5 +98,15 @@ int	get_elem(t_data *data, t_par *par, char *line)
 			print_error("wrong color format", -1);
 		return (retval);
 	}
-	return (init_wall(data, par, line));
+	if (ft_strncmp(line, "NO ", 3) == 0)
+		return (get_wall(par, line, NO, &data->walls[NO]));
+	else if (ft_strncmp(line, "SO ", 3) == 0)
+		return (get_wall(par, line, SO, &data->walls[SO]));
+	else if (ft_strncmp(line, "WE ", 3) == 0)
+		return (get_wall(par, line, WE, &data->walls[WE]));
+	else if (ft_strncmp(line, "EA ", 3) == 0)
+		return (get_wall(par, line, EA, &data->walls[EA]));
+	else if (line[0] != '\n')
+		return (print_error("non empty line between textures", -1));
+	return (0);
 }

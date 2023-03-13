@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/03/13 16:01:33 by ageels        ########   odam.nl          #
+#    Updated: 2023/03/13 18:18:52 by ageels        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,6 @@ CC = clang
 
 SRC = cub_src/main.c\
 	cub_src/debug/print_map.c\
-	cub_src/graphics/display_rays.c\
 	cub_src/graphics/draw.c\
 	cub_src/graphics/gameloop.c\
 	cub_src/graphics/graphics.c\

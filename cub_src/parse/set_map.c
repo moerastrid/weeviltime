@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/27 14:08:51 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/03/13 16:51:29 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/13 17:19:25 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,8 @@ void	set_tile(t_data *data, t_par *par, int i, int j)
 		data->map[i][j] = 0;
 	else
 	{
-		printf("char: %c\n", par->maparray[i][j]);
 		data->map[i][j] = par->maparray[i][j] - '0';
-		printf("c: %c\n", c);
 	}
-	printf("i: %i\n", data->map[i][j]);
 	if (par->maparray[i][j + 1] == '\0')
 	{
 		(j)++;

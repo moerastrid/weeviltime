@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 16:22:33 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 16:36:37 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 17:58:46 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 // WIDTH of window
 # ifndef WIDTH
-#  define WIDTH 1080
+#  define WIDTH 1920
 # endif
 // HEIGHT of window
 # ifndef HEIGHT
@@ -34,7 +34,7 @@
 # endif
 // SPEED : player movement speed
 # ifndef SPEED
-#  define SPEED 5
+#  define SPEED 10
 # endif
 // COP : colour of player
 # ifndef COP

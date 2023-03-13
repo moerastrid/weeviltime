@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 16:39:23 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 18:09:40 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ void			fill_background(t_data *data);
 void			fill_square(t_img *img, int height, int width, unsigned int c);
 void			ft_fill(t_img *img, mlx_t *mlx, unsigned int color);
 void			ft_line(t_img *img, t_line *line, unsigned int color);
-void			draw_wall_line(t_data *data, t_ray *ray, float angle, float dist);
+void			make_one_ray(t_data *data, float a, int n, t_ray *ray_final);
+void			draw_wall_line(t_data *data, t_ray *ray, float a, float dist);
+void			draw_one_ray(t_data *data, t_ray *ray, unsigned int color);
 
 // parse
 int				check_map(t_data *data, t_par *par);

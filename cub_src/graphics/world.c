@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/09 18:53:25 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/03/13 17:02:03 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 18:31:46 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	draw_wall_line(t_data *data, t_ray *ray, float angle, float dist)
 	int				i;
 	mlx_texture_t	*t;
 
+	draw_one_ray(data, ray, COP);
 	t = data->walls[ray->side].texture;
 	height = (2.0001 * (WIDTH / FOV) * (HEIGHT / FOV)) / \
 		((sqrt(dist) * cos(deg_to_rad(fix_ang(angle - data->player.angle)))));
