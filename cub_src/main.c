@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:33 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/10 00:07:52 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 12:53:12 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	set_textures(t_data *data)
 	while (i < 4)
 	{
 		data->walls[i].texture = mlx_load_png(data->walls[i].path);
-		if (data->walls[i].texture == -1)
+		if (data->walls[i].texture == NULL)
 			return (EXIT_FAILURE);
 		i++;
 	}
