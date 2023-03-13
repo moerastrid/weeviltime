@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 15:22:31 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/13 15:32:16 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef struct s_player
 	float			lry;
 	float			angle;
 	t_img			*image;
-	//mlx_instance_t	*instance;
 }		t_player;
 
 /*	ray data	*/
@@ -75,7 +74,6 @@ typedef struct s_ray
 	float	bx;
 	float	by;
 	int		side;
-	float	hor_hitp;
 }		t_ray;
 
 /*	parse data	*/

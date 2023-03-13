@@ -1,7 +1,7 @@
-NO ./cub_include/textures/blue_square.png
-SO ./cub_include/textures/green_square.png
-WE ./cub_include/textures/orange_square.png
-EA ./cub_include/textures/purple_square.png
+NO ./cub_include/textures/brown_weevil.png
+SO ./cub_include/textures/happy_weevil.png
+WE ./cub_include/textures/glitter_weevil.png
+EA ./cub_include/textures/smol_weevil.png
 
 C 93,142,103
 F 231,230,230

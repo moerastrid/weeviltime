@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 15:14:45 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 13:25:38 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 14:44:12 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ static void	make_one_ray(t_data *data, float angle, int ray_nbr, t_ray *ray_fina
 			ray_final->side = WE;
 		if (angle == 270)
 			ray_final->side = SO;
-		//ray_final.hor_hitp = ?;
 	}
 	else
 	{
@@ -139,7 +138,6 @@ static void	make_one_ray(t_data *data, float angle, int ray_nbr, t_ray *ray_fina
 			if (ray_x.dir.x == 1)
 				ray_x.side = EA;
 			ray_final = &ray_x;
-			//ray_final.hor_hitp = ?;
 		}
 		else
 		{
@@ -148,7 +146,6 @@ static void	make_one_ray(t_data *data, float angle, int ray_nbr, t_ray *ray_fina
 			if (ray_y.dir.y == 1)
 				ray_y.side = SO;
 			ray_final = &ray_y;
-			//ray_final.hor_hitp = ??;
 		}
 	}
 	draw_one_ray(data, ray_final, 0xFF88FFFF);
@@ -174,4 +171,5 @@ void	draw_rays(t_data *data)
 		make_one_ray(data, angle, total_rays - i, &ray);
 		i++;
 	}
+	//make_one_ray(data, data->player.angle, (FOV * RPD / 2), &ray);
 }
