@@ -6,7 +6,7 @@
 #    By: ageels <ageels@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/02 14:10:31 by ageels        #+#    #+#                  #
-#    Updated: 2023/03/09 18:59:44 by mforstho      ########   odam.nl          #
+#    Updated: 2023/03/13 16:01:33 by ageels        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,6 @@ SRC = cub_src/main.c\
 	cub_src/parse/get_map.c\
 	cub_src/parse/parse.c\
 	cub_src/parse/set_map.c\
-	cub_src/raycasting/degree_calc.c\
-	cub_src/raycasting/raycasting.c\
 	cub_src/utils/frees.c\
 	cub_src/utils/get_next_line.c\
 	cub_src/utils/libft_extra.c\

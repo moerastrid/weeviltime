@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/22 19:58:10 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/09 14:10:16 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/13 16:04:28 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,14 @@ static int	get_plane(t_par *par, char *line, t_plane_e n, unsigned int	*plane)
 	while (temp_arr[i])
 	{
 		if (i < 3 && stringisdigit(temp_arr[i]))
+		{
 			rgb[i] = ft_atoi(temp_arr[i]);
+			if (rgb[i] < 0 || rgb[i] > 225)
+			{
+				free (temp_arr);
+				return (-1);
+			}
+		}
 		else
 		{
 			free (temp_arr);
