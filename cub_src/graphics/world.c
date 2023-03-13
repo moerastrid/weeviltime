@@ -6,11 +6,34 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/09 18:53:25 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/03/13 18:31:46 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 21:07:21 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub_include/cub.h"
+
+void	get_direction(t_data *data, t_ray *ray, float angle, int ray_nbr)
+{
+	ray->dir.x = 0;
+	ray->dir.y = 0;
+	ray->no = ray_nbr;
+	ray->ax = data->player.x;
+	ray->ay = data->player.y;
+	if (angle == 90 || angle == 270)
+		ray->dir.x = 0;
+	else if (angle > 90 && angle < 270)
+		ray->dir.x = -1;
+	else
+		ray->dir.x = 1;
+	if (angle == 0 || angle == 180)
+		ray->dir.y = 0;
+	else if (angle > 0 && angle < 180)
+		ray->dir.y = -1;
+	else
+		ray->dir.y = 1;
+	ray->bx = data->player.x;
+	ray->by = data->player.y;
+}
 
 static int	get_hor_hitp(mlx_texture_t	*t, t_ray *ray)
 {

@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 21:51:10 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 20:22:49 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 20:49:20 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ static int	create_images(t_data *data)
 		data->tile = mlx_new_image(data->mlx, data->mms - 1, data->mms - 1);
 		if (!data->tile)
 			return (print_error("MLX error", EXIT_FAILURE));
-		printf("data->mms: %d\n", data->mms);
-		data->player.small_img = mlx_new_image(data->mlx, data->mms / 4, data->mms / 4);
-		if (!data->player.small_img)
+		data->player.img = mlx_new_image(data->mlx, \
+			data->mms / 4, data->mms / 4);
+		if (!data->player.img)
 			return (print_error("MLX error", EXIT_FAILURE));
 	}
 	else
@@ -80,8 +80,8 @@ static int	display_images(t_data *data)
 	{
 		if (mlx_image_to_window(data->mlx, data->raygrid, 0, 0))
 			return (print_error("MLX error", EXIT_FAILURE));
-		fill_square(p->small_img, data->mms / 4, data->mms / 4, COP);
-		if (mlx_image_to_window(data->mlx, p->small_img, \
+		fill_square(p->img, data->mms / 4, data->mms / 4, COP);
+		if (mlx_image_to_window(data->mlx, p->img, \
 			p->x * data->mms - data->mms / 8, \
 			p->y * data->mms - data->mms / 8) == -1)
 			return (print_error("MLX error", EXIT_FAILURE));
@@ -91,6 +91,7 @@ static int	display_images(t_data *data)
 	return (EXIT_SUCCESS);
 }
 
+// for debuggin: print_integer_map(data);
 int	graphics(t_data *data)
 {
 	data->mlx = mlx_init(WIDTH, HEIGHT, "~Weevil time~", false);
@@ -98,7 +99,6 @@ int	graphics(t_data *data)
 		return (print_error("No MLX", EXIT_FAILURE));
 	if (create_images(data))
 		return (EXIT_FAILURE);
-	print_integer_map(data);
 	mlx_loop_hook(data->mlx, &exit_hook, data);
 	mlx_loop_hook(data->mlx, &gameloop, data);
 	if (display_images(data))

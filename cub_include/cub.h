@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:36 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 18:09:40 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 21:07:07 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,16 @@
 # include "line.h"
 
 // debug
-void			display_rays(mlx_key_data_t keydata, void *param);
-void			print_par_map(t_par *par);
-void			print_integer_map(t_data *data);
+//void			print_integer_map(t_data *data);
 
 // graphics
 void			exit_hook(void *param);
 void			turn_hook(t_data *data);
-void			forward_back_move_hook(t_data *data, t_coll *coll);
-void			left_right_move_hook(t_data *data, t_coll *coll);
+void			forward_move_hook(t_data *data, t_coll *coll);
+void			back_move_hook(t_data *data, t_coll *coll);
+void			right_move_hook(t_data *data, t_coll *coll);
+void			left_move_hook(t_data *data, t_coll *coll);
+void			get_direction(t_data *data, t_ray *ray, float angle, int n);
 void			gameloop(void *param);
 int				graphics(t_data *data);
 void			draw_nose(t_data *data);

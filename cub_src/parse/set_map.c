@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/27 14:08:51 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/03/13 17:19:25 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 20:25:18 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	set_tile(t_data *data, t_par *par, int i, int j)
 {
 	char	c;
 
-	print_par_map(par);
 	c = par->maparray[i][j];
 	if (c == ' ' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		data->map[i][j] = 0;

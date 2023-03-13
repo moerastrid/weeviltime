@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 20:20:24 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 20:43:52 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_player
 	float			lrx;
 	float			lry;
 	float			angle;
-	t_img			*small_img;
+	t_img			*img;
 }		t_player;
 
 /*	ray data	*/
