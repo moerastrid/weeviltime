@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/09 14:43:10 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/03/07 11:50:33 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/13 16:46:04 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,4 @@ void	print_integer_map(t_data *data)
 		printf("\n");
 		i++;
 	}
-	// printf("\n");
 }

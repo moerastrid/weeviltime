@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/02 14:10:33 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 12:53:12 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 16:46:16 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int32_t	main(int argc, char **argv)
 	int		ret;
 
 	ft_bzero(&data, sizeof(t_data));
-	atexit(leakfunc);
 	if (parse(argc, argv, &data))
 	{
 		free_data(&data);

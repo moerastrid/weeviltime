@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 22:04:17 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 15:35:11 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/13 16:47:24 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	turn_hook(t_data *data)
 	}
 }
 
-static void	get_collision_new(t_data *data, t_coll *coll, float dirx, float diry)
+static void	get_collision(t_data *data, t_coll *coll, float dirx, float diry)
 {
 	float	xo;
 	float	yo;
@@ -72,7 +72,7 @@ void	forward_back_move_hook(t_data *data, t_coll *coll)
 	t_player	*p;
 
 	p = &data->player;
-	get_collision_new(data, coll, data->player.dirx, data->player.diry);
+	get_collision(data, coll, data->player.dirx, data->player.diry);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
 	{
 		if (data->map[(int)coll->ipy][(int)coll->ipx_add_xo] == 0)
@@ -98,7 +98,7 @@ void	left_right_move_hook(t_data *data, t_coll *coll)
 	t_player	*p;
 
 	p = &data->player;
-	get_collision_new(data, coll, data->player.lrx, data->player.lry);
+	get_collision(data, coll, data->player.lrx, data->player.lry);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
 	{
 		if (data->map[(int)coll->ipy][(int)coll->ipx_add_xo] == 0)

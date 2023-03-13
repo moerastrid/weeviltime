@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/27 14:08:51 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/03/09 13:50:08 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/13 16:51:29 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,30 @@ int	allocate_int_map(t_data *data)
 	return (EXIT_SUCCESS);
 }
 
+static void	fill_map(t_data *data, t_par *par, int i, int *j)
+{
+	char	c;
+
+	c = par->maparray[i][*j];
+	if (c == ' ' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		data->map[i][*j] = 0;
+	else
+		data->map[i][*j] = par->maparray[i][*j] - '0';
+	if (par->maparray[i][*j + 1] == '\0')
+	{
+		(*j)++;
+		while (*j < data->max.x)
+		{
+			data->map[i][*j] = 0;
+			(*j)++;
+		}
+	}
+}
+
 int	set_map(t_data *data, t_par *par)
 {
 	int		i;
 	int		j;
-	char	c;
 
 	allocate_int_map(data);
 	i = 0;
@@ -77,20 +96,7 @@ int	set_map(t_data *data, t_par *par)
 		j = 0;
 		while (j < data->max.x)
 		{
-			c = par->maparray[i][j];
-			if (c == ' ' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
-				data->map[i][j] = 0;
-			else
-				data->map[i][j] = par->maparray[i][j] - '0';
-			if (par->maparray[i][j + 1] == '\0')
-			{
-				(j)++;
-				while (j < data->max.x)
-				{
-					data->map[i][j] = 0;
-					(j)++;
-				}
-			}
+			fill_map(data, par, i, &j);
 			j++;
 		}
 		i++;
