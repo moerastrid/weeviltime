@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 21:51:10 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 20:49:20 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 23:31:57 by astrid        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,8 @@ static int	display_minimap(t_data *data)
 static int	display_images(t_data *data)
 {
 	t_player	*p;
-	int			height;
 
 	p = &data->player;
-	height = data->mms / 4;
 	fill_background(data);
 	if (mlx_image_to_window(data->mlx, data->background, 0, 0))
 		return (print_error("MLX error", EXIT_FAILURE));

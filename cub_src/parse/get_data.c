@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 13:52:34 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/03/13 21:44:56 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 23:32:13 by astrid        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ static char	*check_invalid_line(t_par *par, char *line)
 {
 	char	*temp_line;
 	int		i;
-	bool	map_found;
 
-	map_found = false;
 	temp_line = ft_strdup(line);
 	free(line);
 	i = 0;
