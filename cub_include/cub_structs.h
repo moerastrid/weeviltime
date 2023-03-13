@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 13:29:15 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 13:48:29 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ typedef struct s_ray
 	float	bx;
 	float	by;
 	int		side;
-	float	hor_hitp;
 }		t_ray;
 
 /*	parse data	*/
