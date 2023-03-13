@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/03 16:08:40 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/09 13:45:02 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/13 15:54:14 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ unsigned int	make_color(int r, int g, int b)
 
 int	print_error(char *s, int retval)
 {
-	printf("%s\n", s);
+	printf("Error\n%s\n", s);
 	return (retval);
 }
 

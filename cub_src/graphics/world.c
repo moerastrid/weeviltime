@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/09 18:53:25 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/03/13 15:24:59 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 15:34:15 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	draw_wall_line(t_data *data, t_ray *ray, float angle, float dist)
 	t = data->walls[ray->side].texture;
 	height = (((float)WIDTH / FOV * 27.0) / \
 		(dist * cos(deg_to_rad(fix_ang(angle - data->player.angle)))));
-	if (height > HEIGHT)
-		height = HEIGHT;
+	// if (height > HEIGHT)
+	// 	height = HEIGHT;
 	offset = ((float)HEIGHT / 2) - (height / 2);
 	hitp.x = get_hor_hitp(t, ray);
 	i = 0;

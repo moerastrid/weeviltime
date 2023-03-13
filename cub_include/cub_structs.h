@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 15:32:16 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/13 16:09:09 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_par
 	bool		*color_check;
 	char		**maparray;
 	int			fd_cub;
+	int			p_count;
 	t_list		*maplst;
 }		t_par;
 

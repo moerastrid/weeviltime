@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 22:04:17 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 15:28:44 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/13 15:35:11 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ static void	get_collision_new(t_data *data, t_coll *coll, float dirx, float diry
 	float	yo;
 
 	if (dirx < 0)
-		xo = -0.125;
+		xo = -0.25;
 	else
-		xo = 0.125;
+		xo = 0.25;
 	if (diry < 0)
-		yo = -0.125;
+		yo = -0.25;
 	else
-		yo = 0.125;
+		yo = 0.25;
 	coll->ipx = data->player.x;
 	coll->ipx_add_xo = (data->player.x + xo);
 	coll->ipx_sub_xo = (data->player.x - xo);
