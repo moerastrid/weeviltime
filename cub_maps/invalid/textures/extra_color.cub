@@ -3,8 +3,7 @@ SO ./cub_include/textures/dungeonTexture.png
 WE ./cub_include/textures/dungeonTexture.png
 EA ./cub_include/textures/dungeonTexture.png
 
-C 203,225,20
-C 203,225,20
+C 203,225,20,16
 F 203,225,20
 
         1111111111111111111111111

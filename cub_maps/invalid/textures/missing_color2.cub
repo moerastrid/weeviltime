@@ -2,9 +2,9 @@ NO ./cub_include/textures/dungeonTexture.png
 SO ./cub_include/textures/dungeonTexture.png
 WE ./cub_include/textures/dungeonTexture.png
 EA ./cub_include/textures/dungeonTexture.png
-EA ./cub_include/textures/dungeonTexture.png
 
 F 94,9,0
+C 230,230
 
         1111111111111111111111111
         1000000000110000000000001

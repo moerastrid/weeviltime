@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/22 19:58:10 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 18:07:23 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 21:14:15 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,6 @@ int	get_elem(t_data *data, t_par *par, char *line)
 	else if (ft_strncmp(line, "EA ", 3) == 0)
 		return (get_wall(par, line, EA, &data->walls[EA]));
 	else if (line[0] != '\n')
-		return (print_error("non empty line between textures", -1));
+		return (print_error("color / texture element", -1));
 	return (0);
 }
