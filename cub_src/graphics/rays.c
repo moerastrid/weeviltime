@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 15:14:45 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 16:06:32 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 16:49:41 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,23 +152,23 @@ static void	make_one_ray(t_data *data, float angle, int ray_nbr, t_ray *ray_fina
 	if (powdist_y < powdist_x)
 		powdist_x = powdist_y;
 	ray_final->no = ray_nbr;
-	draw_wall_line(data, ray_final, angle, sqrt(powdist_x));
+	draw_wall_line(data, ray_final, angle, powdist_x);
 }
 
 void	draw_rays(t_data *data)
 {
 	float	angle;
-	int		total_rays;
 	int		i;
 	t_ray	ray;
+	float	rpd;
 
 	angle = 0;
-	total_rays = FOV * RPD;
 	i = 0;
-	while (i < total_rays)
+	rpd = (float)WIDTH / (float)FOV;
+	while (i < WIDTH)
 	{
-		angle = fix_ang(data->player.angle - (FOV / 2) + (i / (float)RPD));
-		make_one_ray(data, angle, total_rays - i, &ray);
+		angle = fix_ang(data->player.angle - ((float)FOV / 2.0) + (i / rpd));
+		make_one_ray(data, angle, WIDTH - i, &ray);
 		i++;
 	}
 }

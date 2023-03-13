@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/16 20:36:31 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 16:09:09 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/13 16:54:12 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ typedef struct s_co
 /*	wall: NO, SO, WE or EA	*/
 typedef struct s_wall
 {
-	//t_img		*img;
 	char			*path;
 	mlx_texture_t	*texture;
 }		t_wall;
@@ -116,39 +115,3 @@ typedef struct s_data
 }		t_data;
 
 #endif
-
-///*	ray data	*/
-//typedef struct s_raymath
-//{
-//	int		r;
-//	int		mx;
-//	int		my;
-//	int		mp;
-//	int		dof;
-//	float	vx;
-//	float	vy;
-//	float	rx;
-//	float	ry;
-//	float	ra;
-//	float	xo;
-//	float	yo;
-//	float	disv;
-//	float	dish;
-//}	t_raymath;
-
-//typedef struct s_raydata
-//{
-//	t_raymath	r_math;
-//	mlx_image_t	*player;
-//	mlx_image_t	*wall;
-//	mlx_image_t	*grid;
-//	mlx_image_t	*floor;
-//	t_line		line;
-//	bool		display_rays;
-//	float		pdx;
-//	float		pdy;
-//	float		ppddxx;
-//	float		ppddyy;
-//	float		pa;
-//}	t_rays;
-

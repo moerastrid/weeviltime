@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 22:02:35 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/08 15:49:52 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/13 16:51:11 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,5 @@ void	draw_nose(t_data *data)
 	nose.ya = p->y * data->mms;
 	nose.xb = p->x * data->mms + p->dirx * height * 2;
 	nose.yb = p->y * data->mms + p->diry * height * 2;
-
-	// if (mlx_is_key_down(data->mlx, MLX_KEY_ENTER))
-	// {
-	// 	printf("xa: %.2f, ya: %.2f, xb: %.2f, yb: %.2f\n", nose.xa, nose.ya, nose.xb, nose.yb);
-	// }
-
 	ft_line(data->grid, &nose, 0xF0F0F0FF);
 }
