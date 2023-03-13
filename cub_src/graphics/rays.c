@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 15:14:45 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 14:44:12 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 16:06:32 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,5 +171,4 @@ void	draw_rays(t_data *data)
 		make_one_ray(data, angle, total_rays - i, &ray);
 		i++;
 	}
-	//make_one_ray(data, data->player.angle, (FOV * RPD / 2), &ray);
 }
