@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/06 15:22:19 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/03/13 16:16:37 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/13 16:23:16 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,11 @@ static int	check_spaces(t_data *data, t_par *par)
 	return (EXIT_SUCCESS);
 }
 
-static int	check_tabs(t_data *data, t_par *par)
+static int	check_tabs_and_chars(t_data *data, t_par *par)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	c;
 
 	i = 0;
 	while (i < data->max.y)
@@ -98,8 +99,10 @@ static int	check_tabs(t_data *data, t_par *par)
 		j = 0;
 		while (par->maparray[i][j] != '\0')
 		{
-			if (par->maparray[i][j] == '\t')
-				return (print_error("NO TABS!!!", EXIT_FAILURE));
+			c = par->maparray[i][j];
+			if (c != 'N' && c != 'S' && c != 'W' && c != 'E'
+				&& c != '0' && c != '1' && c != ' ')
+				return (print_error("invalid character in map", EXIT_FAILURE));
 			j++;
 		}
 		i++;
@@ -109,7 +112,7 @@ static int	check_tabs(t_data *data, t_par *par)
 
 int	check_map(t_data *data, t_par *par)
 {
-	if (check_tabs(data, par) == EXIT_FAILURE)
+	if (check_tabs_and_chars(data, par) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (check_spaces(data, par) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
