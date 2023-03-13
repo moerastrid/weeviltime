@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 15:14:45 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/09 23:47:45 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 13:25:38 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,15 +105,12 @@ static float	find_powdist_to_y_axis(t_data *data, t_ray *ray, float angle)
 	return (powdist);
 }
 
-static void	make_one_ray(t_data *data, float angle, int raynbr)
+static void	make_one_ray(t_data *data, float angle, int ray_nbr, t_ray *ray_final)
 {
 	t_ray	ray_x;
 	t_ray	ray_y;
-	t_ray	*ray_final;
 	float	powdist_x;
 	float	powdist_y;
-	float	horizontal_wall_place;
-	int		side;
 
 	check_dir(data, &ray_x, angle);
 	check_dir(data, &ray_y, angle);
@@ -122,13 +119,14 @@ static void	make_one_ray(t_data *data, float angle, int raynbr)
 		ninety_degree_angle(data, &ray_x);
 		ray_final = &ray_x;
 		if (angle == 0)
-			side = EA;
+			ray_final->side = EA;
 		if (angle == 90)
-			side = NO;
+			ray_final->side = NO;
 		if (angle == 180)
-			side = WE;
+			ray_final->side = WE;
 		if (angle == 270)
-			side = SO;
+			ray_final->side = SO;
+		//ray_final.hor_hitp = ?;
 	}
 	else
 	{
@@ -137,26 +135,27 @@ static void	make_one_ray(t_data *data, float angle, int raynbr)
 		if (powdist_x < powdist_y)
 		{
 			if (ray_x.dir.x == -1)
-				side = WE;
+				ray_x.side = WE;
 			if (ray_x.dir.x == 1)
-				side = EA;
-			horizontal_wall_place = fabs(ray_x.by - ray_x.ay);
+				ray_x.side = EA;
 			ray_final = &ray_x;
+			//ray_final.hor_hitp = ?;
 		}
 		else
 		{
 			if (ray_y.dir.y == -1)
-				side = NO;
+				ray_y.side = NO;
 			if (ray_y.dir.y == 1)
-				side = SO;
-			horizontal_wall_place = fabs(ray_y.bx - ray_y.ax);
+				ray_y.side = SO;
 			ray_final = &ray_y;
+			//ray_final.hor_hitp = ??;
 		}
 	}
 	draw_one_ray(data, ray_final, 0xFF88FFFF);
 	if (powdist_y < powdist_x)
 		powdist_x = powdist_y;
-	draw_wall_line(data, raynbr, angle, sqrt(powdist_x), side, horizontal_wall_place);
+	ray_final->no = ray_nbr;
+	draw_wall_line(data, ray_final, angle, sqrt(powdist_x));
 }
 
 void	draw_rays(t_data *data)
@@ -164,6 +163,7 @@ void	draw_rays(t_data *data)
 	float	angle;
 	int		total_rays;
 	int		i;
+	t_ray	ray;
 
 	angle = 0;
 	total_rays = FOV * RPD;
@@ -171,7 +171,7 @@ void	draw_rays(t_data *data)
 	while (i < total_rays)
 	{
 		angle = fix_ang(data->player.angle - (FOV / 2) + (i / (float)RPD));
-		make_one_ray(data, angle, total_rays - i);
+		make_one_ray(data, angle, total_rays - i, &ray);
 		i++;
 	}
 }

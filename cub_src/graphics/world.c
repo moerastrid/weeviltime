@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/09 18:53:25 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/03/10 00:36:47 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 13:15:58 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ so we can use it to read the correct pixel from the texture :)
 PROBLEEM : hij maakt way te veel images als je het zo doet en loopt dan helemaal vast haha wat stom
 */
 
-void	draw_wall_line(t_data *data, int raynbr, float angle, float dist, int side, float horizontal_wall_place)
+void	draw_wall_line(t_data *data, t_ray *ray, float angle, float dist)
 {
 	float			p;
 	float			height;
@@ -51,14 +51,14 @@ void	draw_wall_line(t_data *data, int raynbr, float angle, float dist, int side,
 	if (height > HEIGHT)
 		height = HEIGHT;
 	offset = ((float)HEIGHT / 2) - (height / 2);
-	color = find_color(side);
+	color = find_color(ray->side);
 	//horizontal_wall_place *= data->walls[side].texture->width; //  (?)
 	i = 0;
 	while (i < height)
 	{
-		vertical_wall_place = i / height * data->walls[side].texture->height; // (?)
+		vertical_wall_place = i / height * data->walls[ray->side].texture->height; // (?)
 		//temp = mlx_texture_area_to_image(data->mlx, data->walls[side].texture, (uint32_t[2]){horizontal_wall_place, vertical_wall_place}, (uint32_t[2]){1, 1}); //
-		putpixel(data->world, raynbr, offset + i, color);
+		putpixel(data->world, ray->no, offset + i, color);
 		//printf("vertical %f\thorizontal %f\n", vertical_wall_place, horizontal_wall_place);
 		i++;
 	}

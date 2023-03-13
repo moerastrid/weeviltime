@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 16:22:33 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 12:52:45 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/13 13:28:53 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 // WIDTH of window
 # ifndef WIDTH
-#  define WIDTH 1980
+#  define WIDTH 1920
 # endif
 // HEIGHT of window
 # ifndef HEIGHT
@@ -34,7 +34,7 @@
 # endif
 // RPD : rays per degree (in degrees)
 # ifndef RPD
-#  define RPD 27
+#  define RPD 26.7
 # endif
 // SPEED : player movement speed
 # ifndef SPEED
