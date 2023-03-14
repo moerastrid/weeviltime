@@ -6,11 +6,32 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/02/28 20:44:57 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 20:56:42 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/14 13:49:02 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub_include/cub.h"
+
+static void	get_collision(t_data *data, t_coll *coll, float dirx, float diry)
+{
+	float	xo;
+	float	yo;
+
+	if (dirx < 0)
+		xo = -0.25;
+	else
+		xo = 0.25;
+	if (diry < 0)
+		yo = -0.25;
+	else
+		yo = 0.25;
+	coll->ipx = data->player.x;
+	coll->ipx_add_xo = (data->player.x + xo);
+	coll->ipx_sub_xo = (data->player.x - xo);
+	coll->ipy = data->player.y;
+	coll->ipy_add_yo = (data->player.y + yo);
+	coll->ipy_sub_yo = (data->player.y - yo);
+}
 
 void	draw_one_ray(t_data *data, t_ray *ray, unsigned int color)
 {
@@ -37,8 +58,10 @@ void	gameloop(void *param)
 	data = param;
 	coll = &data->collision;
 	ft_fill(data->world, data->mlx, 0);
+	get_collision(data, coll, data->player.dirx, data->player.diry);
 	forward_move_hook(data, coll);
 	back_move_hook(data, coll);
+	get_collision(data, coll, data->player.lrx, data->player.lry);
 	left_move_hook(data, coll);
 	right_move_hook(data, coll);
 	draw_nose(data);
@@ -62,7 +85,7 @@ void	turn_hook(t_data *data)
 	p = &data->player;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
 	{
-		p->angle += 5;
+		p->angle += TURN_SPEED;
 		p->angle = fix_ang(p->angle);
 		p->dirx = cos(deg_to_rad(p->angle));
 		p->diry = -sin(deg_to_rad(p->angle));
@@ -71,7 +94,7 @@ void	turn_hook(t_data *data)
 	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 	{
-		p->angle -= 5;
+		p->angle -= TURN_SPEED;
 		p->angle = fix_ang(p->angle);
 		p->dirx = cos(deg_to_rad(p->angle));
 		p->diry = -sin(deg_to_rad(p->angle));

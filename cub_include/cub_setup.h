@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 16:22:33 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 17:58:46 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/14 13:55:14 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@
 # ifndef FOV
 #  define FOV 72
 # endif
-// FOV : field of view (in degrees)
-# ifndef FOV
-#  define FOV 72
-# endif
 // SPEED : player movement speed
 # ifndef SPEED
-#  define SPEED 10
+#  define SPEED 0.1
+# endif
+// TURN_SPEED : player turn speed
+# ifndef TURN_SPEED
+#  define TURN_SPEED 5
 # endif
 // COP : colour of player
 # ifndef COP

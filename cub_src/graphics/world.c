@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/09 18:53:25 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/03/13 21:07:21 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/14 13:28:38 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	get_hor_hitp(mlx_texture_t	*t, t_ray *ray)
 	else if (fmod(ray->by, 1) != 0)
 		hor_hitp = fmod(ray->by, 1) * t->width;
 	if (ray->side == WE || ray->side == SO)
-		hor_hitp = t->width - hor_hitp;
+		hor_hitp = t->width - hor_hitp - 1;
 	return (hor_hitp);
 }
 

@@ -9,7 +9,7 @@
 			"request": "launch",
 			"name": "Debug",
 			"program": "${workspaceFolder}/cub3D",
-			"args": [],
+			"args": ["cub_maps/astrid.cub"],
 			"cwd": "${workspaceFolder}",
 			"preLaunchTask": "Build Debug"
 		}
