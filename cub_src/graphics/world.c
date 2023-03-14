@@ -6,7 +6,7 @@
 /*   By: mforstho <mforstho@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/09 18:53:25 by mforstho      #+#    #+#                 */
-/*   Updated: 2023/03/14 13:28:38 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/14 17:30:43 by ageels        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	draw_wall_line(t_data *data, t_ray *ray, float angle, float dist)
 	offset = ((float)HEIGHT / 2) - (height / 2);
 	hitp.x = get_hor_hitp(t, ray);
 	i = 0;
-	while (i < height)
+	while (i < (int)height)
 	{
 		hitp.y = (i / height) * t->height;
 		putpixel(data->world, ray->no, offset + i, get_color(t, hitp));
