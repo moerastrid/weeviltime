@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 16:22:33 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/14 15:29:45 by mforstho      ########   odam.nl         */
+/*   Updated: 2023/03/14 15:38:43 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@
 # endif
 // SPEED : player movement speed
 # ifndef SPEED
-#  define SPEED 0.1
+#  define SPEED 0.05
 # endif
 // TURN_SPEED : player turn speed
 # ifndef TURN_SPEED
-#  define TURN_SPEED 5
+#  define TURN_SPEED 3
 # endif
 // COP : colour of player
 # ifndef COP
