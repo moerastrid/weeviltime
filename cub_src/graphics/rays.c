@@ -6,7 +6,7 @@
 /*   By: ageels <ageels@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 15:14:45 by ageels        #+#    #+#                 */
-/*   Updated: 2023/03/13 21:07:15 by ageels        ########   odam.nl         */
+/*   Updated: 2023/03/15 13:39:16 by mforstho      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static float	find_powdist_to_x_axis(t_data *data, t_ray *ray, float angle)
 	while (ray->bx > 0 && ray->bx < data->max.x)
 	{
 		ray->by = (ray->bx - ray->ax) * -tan(deg_to_rad(angle)) + ray->ay;
-		if (ray->by < 0 || ray->by > data->max.y)
+		if (ray->by < 0 || ray->by >= data->max.y)
 			return (FLT_MAX);
 		if ((ray->dir.x == 1 && data->map[(int)ray->by][(int)ray->bx] == 1) || \
 			(ray->dir.x == -1 && \
@@ -90,7 +90,7 @@ static float	find_powdist_to_y_axis(t_data *data, t_ray *ray, float angle)
 	while (ray->by > 0 && ray->by < data->max.y)
 	{
 		ray->bx = (ray->by - ray->ay) / -tan(deg_to_rad(angle)) + ray->ax;
-		if (ray->bx < 0 || ray->bx > data->max.x)
+		if (ray->bx < 0 || ray->bx >= data->max.x)
 			return (FLT_MAX);
 		if ((ray->dir.y == 1 && data->map[(int)ray->by][(int)ray->bx] == 1) || \
 			(ray->dir.y == -1 && \
